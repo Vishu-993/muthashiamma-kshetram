@@ -2,21 +2,35 @@ document.addEventListener("DOMContentLoaded", () => {
     // 1. Enable CSS animations by adding a class to the body
     document.body.classList.add('js-ready');
 
-    // 2. Mobile Burger Menu Toggle
+    // 2. Mobile Burger Menu Toggle & Slide-out Drawer
     const burgerBtn = document.getElementById('burgerBtn');
     const navlinks = document.getElementById('navlinks');
     
-    if (burgerBtn && navlinks) {
-        burgerBtn.addEventListener('click', () => {
-            const isOpen = navlinks.classList.toggle('open');
-            burgerBtn.setAttribute('aria-expanded', isOpen);
-        });
+    // Create dark backdrop overlay dynamically
+    const overlay = document.createElement('div');
+    overlay.classList.add('nav-overlay');
+    document.body.appendChild(overlay);
 
-        // Close menu when clicking a link (mobile)
+    function toggleMenu() {
+        const isOpen = navlinks.classList.toggle('open');
+        burgerBtn.classList.toggle('active', isOpen);
+        overlay.classList.toggle('show', isOpen);
+        burgerBtn.setAttribute('aria-expanded', isOpen);
+        
+        // Lock/Unlock body scroll when menu is open
+        document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+
+    if (burgerBtn && navlinks) {
+        burgerBtn.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking any link inside the mobile nav
         navlinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
-                navlinks.classList.remove('open');
-                burgerBtn.setAttribute('aria-expanded', 'false');
+                if (navlinks.classList.contains('open')) {
+                    toggleMenu();
+                }
             });
         });
     }
@@ -76,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     pill.classList.remove('active');
                     if (pill.getAttribute('href') === `#${currentId}`) {
                         pill.classList.add('active');
-                        // Optional: smoothly scroll the subnav container to keep the active pill visible
+                        // Smoothly scroll the subnav container to keep the active pill visible
                         pill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
                     }
                 });
