@@ -106,14 +106,6 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 2
 .nav-overlay.show { opacity: 1; pointer-events: auto; }
 .nav-overlay[hidden]{display:block;}
 
-.drawer-close{
-  display:none; position:absolute; top:18px; right:22px;
-  width:38px; height:38px; border-radius:50%; border:1px solid var(--maroon-line);
-  background:rgba(0,0,0,0.2); color:var(--gold-light); font-size:16px; cursor:pointer;
-  align-items:center; justify-content:center; transition:.2s var(--ease);
-}
-.drawer-close:hover{background:rgba(212,169,74,0.18);border-color:var(--gold);}
-
 .burger { 
   display: none; background: none; border: none; cursor: pointer; 
   width: 40px; height: 40px; padding: 8px; z-index: 52; position: relative;
@@ -125,9 +117,6 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 2
 .burger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .burger.active span:nth-child(2) { opacity: 0; }
 .burger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-@media (max-width:880px){
-  .burger.active{opacity:0;pointer-events:none;transition:opacity .2s var(--ease);}
-}
 
 /* ---------- sub nav (project pills) ---------- */
 .subnav{background:var(--ink);border-bottom:1px solid #4A3624;position:sticky;top:var(--header-h, 64px);z-index:45;}
@@ -140,7 +129,6 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 2
 
 @media (max-width:880px){
   .burger { display: block; }
-  .drawer-close{ display:flex; }
 
   /* Modern slide-out side drawer mobile menu */
   .navlinks {
