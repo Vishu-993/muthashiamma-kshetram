@@ -1,0 +1,12 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "muthashiamma-kshetram",
+  "main": "app.py",
+  "compatibility_date": "2026-08-16",
+  "compatibility_flags": [
+    "python_workers"
+  ],
+  "observability": {
+    "enabled": true
+  }
+}
