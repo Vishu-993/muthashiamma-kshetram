@@ -1,12 +1,20 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
+  "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "muthashiamma-kshetram",
   "main": "app.py",
   "compatibility_date": "2026-08-16",
   "compatibility_flags": [
-    "python_workers"
+    "python_workers" // Required for Python Workers
   ],
-  "observability": {
-    "enabled": true
-  }
+  "assets": {
+    "directory": "./static", // Tells Cloudflare to host your CSS/JS files automatically
+    "binding": "ASSETS"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB", // This will be how you refer to your database in Python
+      "database_name": "muthashiamma-db",
+      "database_id": "REPLACE_WITH_YOUR_D1_ID"
+    }
+  ]
 }
