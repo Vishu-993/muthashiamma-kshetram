@@ -14,7 +14,7 @@
     {
       "binding": "DB", // This will be how you refer to your database in Python
       "database_name": "muthashiamma-db",
-      "database_id": "REPLACE_WITH_YOUR_D1_ID"
+      "database_id": "1c2354a3-ed51-43c8-b97d-cd5e6f97ce37"
     }
   ]
 }
