@@ -1,117 +1,188 @@
-document.addEventListener("DOMContentLoaded", () => {
-    // 1. Enable CSS animations by adding a class to the body
-    document.body.classList.add('js-ready');
+(function () {
+  'use strict';
+  document.documentElement.classList.add('js-ready');
 
-    // 2. Mobile Burger Menu Toggle & Slide-out Drawer
-    const burgerBtn = document.getElementById('burgerBtn');
-    const navlinks = document.getElementById('navlinks');
-    
-    // Create dark backdrop overlay dynamically
-    const overlay = document.createElement('div');
-    overlay.classList.add('nav-overlay');
-    document.body.appendChild(overlay);
+  var header = document.getElementById('siteHeader');
+  var burger = document.getElementById('burgerBtn');
+  var navlinks = document.getElementById('navlinks');
+  var overlay = document.getElementById('navOverlay');
+  var drawerClose = document.getElementById('drawerClose');
+  var progressBar = document.getElementById('progressBar');
+  var topFloat = document.getElementById('topFloat');
+  var toast = document.getElementById('toast');
+  var subnavScroll = document.getElementById('subnav');
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    function toggleMenu() {
-        const isOpen = navlinks.classList.toggle('open');
-        burgerBtn.classList.toggle('active', isOpen);
-        overlay.classList.toggle('show', isOpen);
-        burgerBtn.setAttribute('aria-expanded', isOpen);
-        
-        // Lock/Unlock body scroll when menu is open
-        document.body.style.overflow = isOpen ? 'hidden' : '';
+  /* ---------- header height -> CSS var (keeps sticky subnav from overlapping when topbar wraps) ---------- */
+  function syncHeaderHeight() {
+    if (!header) return;
+    document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
+  }
+  syncHeaderHeight();
+  window.addEventListener('resize', debounce(syncHeaderHeight, 150));
+  if ('ResizeObserver' in window && header) {
+    new ResizeObserver(syncHeaderHeight).observe(header);
+  }
+
+  /* ---------- mobile drawer ---------- */
+  var lastFocused = null;
+
+  function openDrawer() {
+    if (!navlinks) return;
+    lastFocused = document.activeElement;
+    navlinks.classList.add('open');
+    burger.classList.add('active');
+    burger.setAttribute('aria-expanded', 'true');
+    overlay.hidden = false;
+    requestAnimationFrame(function () { overlay.classList.add('show'); });
+    document.documentElement.classList.add('no-scroll');
+    document.body.classList.add('no-scroll');
+    var firstLink = navlinks.querySelector('a, button');
+    if (firstLink) firstLink.focus({ preventScroll: true });
+  }
+
+  function closeDrawer() {
+    if (!navlinks) return;
+    navlinks.classList.remove('open');
+    burger.classList.remove('active');
+    burger.setAttribute('aria-expanded', 'false');
+    overlay.classList.remove('show');
+    document.documentElement.classList.remove('no-scroll');
+    document.body.classList.remove('no-scroll');
+    setTimeout(function () { if (!navlinks.classList.contains('open')) overlay.hidden = true; }, 350);
+    if (lastFocused) lastFocused.focus({ preventScroll: true });
+  }
+
+  function toggleDrawer() {
+    navlinks.classList.contains('open') ? closeDrawer() : openDrawer();
+  }
+
+  if (burger && navlinks && overlay) {
+    burger.addEventListener('click', toggleDrawer);
+    overlay.addEventListener('click', closeDrawer);
+    if (drawerClose) drawerClose.addEventListener('click', closeDrawer);
+
+    navlinks.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', closeDrawer);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && navlinks.classList.contains('open')) closeDrawer();
+    });
+
+    // basic focus trap while drawer open
+    navlinks.addEventListener('keydown', function (e) {
+      if (e.key !== 'Tab' || !navlinks.classList.contains('open')) return;
+      var focusables = navlinks.querySelectorAll('a, button');
+      if (!focusables.length) return;
+      var first = focusables[0], last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+
+    // close drawer automatically if resized to desktop width
+    window.addEventListener('resize', debounce(function () {
+      if (window.innerWidth > 880 && navlinks.classList.contains('open')) closeDrawer();
+    }, 150));
+  }
+
+  /* ---------- scroll-driven UI: progress bar, header shadow, back-to-top, active pill ---------- */
+  var sections = Array.prototype.slice.call(document.querySelectorAll('main [id]'));
+  var pills = Array.prototype.slice.call(document.querySelectorAll('.pill'));
+  var ticking = false;
+
+  function onScroll() {
+    var scrollTop = window.scrollY || document.documentElement.scrollTop;
+    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+
+    if (progressBar) progressBar.style.width = pct + '%';
+    if (header) header.classList.toggle('scrolled', scrollTop > 8);
+    if (topFloat) topFloat.classList.toggle('show', scrollTop > 480);
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      requestAnimationFrame(onScroll);
+      ticking = true;
     }
+  }, { passive: true });
+  onScroll();
 
-    if (burgerBtn && navlinks) {
-        burgerBtn.addEventListener('click', toggleMenu);
-        overlay.addEventListener('click', toggleMenu);
+  /* ---------- active subnav pill + nav link, via IntersectionObserver ---------- */
+  if ('IntersectionObserver' in window && sections.length) {
+    var activeObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var id = entry.target.id;
 
-        // Close menu when clicking any link inside the mobile nav
-        navlinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                if (navlinks.classList.contains('open')) {
-                    toggleMenu();
-                }
-            });
+        pills.forEach(function (p) {
+          p.classList.toggle('active', p.dataset.target === id);
         });
-    }
-
-    // 3. Scroll Progress Bar & Floating Top Button
-    const progressBar = document.getElementById('progressBar');
-    const topFloat = document.getElementById('topFloat');
-
-    window.addEventListener('scroll', () => {
-        let scrollTop = window.scrollY;
-        let docHeight = document.documentElement.scrollHeight;
-        let winHeight = window.innerHeight;
-        
-        // Update Progress Bar
-        if (progressBar) {
-            let scrollPercent = (scrollTop / (docHeight - winHeight)) * 100;
-            progressBar.style.width = scrollPercent + '%';
+        var pillActive = document.querySelector('.pill.active');
+        if (pillActive && subnavScroll) {
+          subnavScroll.scrollTo({
+            left: pillActive.offsetLeft - 24,
+            behavior: reducedMotion ? 'auto' : 'smooth'
+          });
         }
 
-        // Show/Hide Back to Top Button
-        if (topFloat) {
-            if (scrollTop > 400) {
-                topFloat.classList.add('show');
-            } else {
-                topFloat.classList.remove('show');
-            }
+        document.querySelectorAll('.navlinks a[href^="#"]').forEach(function (a) {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+        });
+      });
+    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+
+    sections.forEach(function (s) { activeObserver.observe(s); });
+  }
+
+  /* ---------- reveal / stagger animations ---------- */
+  if ('IntersectionObserver' in window) {
+    var revealObserver = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          obs.unobserve(entry.target);
         }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+
+    document.querySelectorAll('.reveal, .stagger').forEach(function (el) {
+      revealObserver.observe(el);
     });
-
-    // 4. Scroll Reveal Animations (Intersection Observer)
-    const revealElements = document.querySelectorAll('.reveal, .stagger');
-    
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('in');
-                observer.unobserve(entry.target); // Only animate once
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px"
+  } else {
+    document.querySelectorAll('.reveal, .stagger').forEach(function (el) {
+      el.classList.add('in');
     });
+  }
 
-    revealElements.forEach(el => revealObserver.observe(el));
-
-    // 5. Subnav Scroll Spy (Highlight active section)
-    const sections = document.querySelectorAll('section');
-    const pills = document.querySelectorAll('.pill');
-
-    const sectionObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                let currentId = entry.target.getAttribute('id');
-                
-                pills.forEach(pill => {
-                    pill.classList.remove('active');
-                    if (pill.getAttribute('href') === `#${currentId}`) {
-                        pill.classList.add('active');
-                        // Smoothly scroll the subnav container to keep the active pill visible
-                        pill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-                    }
-                });
-            }
-        });
-    }, {
-        // Triggers when a section reaches the middle of the viewport
-        rootMargin: "-20% 0px -70% 0px" 
+  /* ---------- back to top ---------- */
+  if (topFloat) {
+    topFloat.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.getElementById('top').scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
     });
+  }
 
-    sections.forEach(section => sectionObserver.observe(section));
-});
+  /* ---------- toast helper (available for copy-to-clipboard etc.) ---------- */
+  var toastTimer = null;
+  window.showToast = function (msg) {
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 2200);
+  };
 
-// 6. Toast Notification Function (Ready for future use)
-window.showToast = function(message) {
-    const toast = document.getElementById('toast');
-    if (toast) {
-        toast.textContent = message;
-        toast.classList.add('show');
-        setTimeout(() => {
-            toast.classList.remove('show');
-        }, 3000);
-    }
-};
+  /* ---------- utils ---------- */
+  function debounce(fn, wait) {
+    var t;
+    return function () {
+      clearTimeout(t);
+      var args = arguments, ctx = this;
+      t = setTimeout(function () { fn.apply(ctx, args); }, wait);
+    };
+  }
+})();
