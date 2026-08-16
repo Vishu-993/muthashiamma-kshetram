@@ -29,7 +29,7 @@
   </div>
 </div>
 
-<header class="site">
+<header class="site" id="siteHeader">
   <nav class="wrap" aria-label="പ്രധാന നാവിഗേഷൻ">
     <a href="#top" class="brand">
       <svg class="flame-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -42,6 +42,7 @@
       </span>
     </a>
     <div class="navlinks" id="navlinks">
+      <button class="drawer-close" id="drawerClose" aria-label="മെനു അടയ്ക്കുക">✕</button>
       <a href="#top">ഹോം</a>
       <a href="#charithram">ചരിത്രം</a>
       <a href="#punarudharanam">പുനരുദ്ധാരണം</a>
@@ -49,8 +50,11 @@
       <a href="#gallery">ഗാലറി</a>
       <a href="#contact" class="navcta">ബന്ധപ്പെടാം</a>
     </div>
-    <button class="burger" id="burgerBtn" aria-label="മെനു തുറക്കുക" aria-expanded="false" aria-controls="navlinks">☰</button>
+    <button class="burger" id="burgerBtn" aria-label="മെനു തുറക്കുക" aria-expanded="false" aria-controls="navlinks">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+  <div class="nav-overlay" id="navOverlay" hidden></div>
   <div class="subnav">
     <div class="subnav-scroll" id="subnav" aria-label="വിഭാഗങ്ങൾ">
       <a class="pill" data-target="charithram" href="#charithram">ചരിത്രം</a>
@@ -87,7 +91,7 @@
           <div class="priest-card">
             <div class="priest-avatar" aria-hidden="true">
               <!-- ADD THANTRI PHOTO HERE -->
-              <img src="./images/thantri.jpg" alt="തന്ത്രി" class="avatar-img">
+              <img src="./images/thantri.jpg" alt="തന്ത്രി" class="avatar-img" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('avatar-fallback');this.remove();">
             </div>
             <div>
               <div class="role">ക്ഷേത്രം തന്ത്രി</div>
@@ -97,7 +101,7 @@
           <div class="priest-card">
             <div class="priest-avatar" aria-hidden="true">
               <!-- ADD MARGADARSHI PHOTO HERE -->
-              <img src="./images/margadarshi.jpg" alt="മാർഗ്ഗദർശി" class="avatar-img">
+              <img src="./images/margadarshi.jpg" alt="മാർഗ്ഗദർശി" class="avatar-img" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('avatar-fallback');this.remove();">
             </div>
             <div>
               <div class="role">ക്ഷേത്രം മാർഗ്ഗദർശി</div>
@@ -114,7 +118,10 @@
       <div class="hero-art">
         <div class="arch-frame" style="padding: 0; overflow: hidden; border-radius: var(--arch-radius) var(--arch-radius) 18px 18px;">
           <!-- ADD MAIN GODDESS PHOTO HERE -->
-          <img src="./images/main_goddess.jpg" alt="ശ്രീ മുത്തശ്ശ്യമ്മ" style="width: 100%; height: 100%; object-fit: cover;">
+          <img src="./images/main_goddess.jpg" alt="ശ്രീ മുത്തശ്ശ്യമ്മ" class="hero-img" style="width: 100%; height: 100%; object-fit: cover;" loading="eager" fetchpriority="high" onerror="this.closest('.arch-frame').classList.add('img-fallback');this.remove();">
+          <svg class="fallback-emblem" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M20 8c3 4-1 6-1 9a4 4 0 0 0 8 0c0-2-1-3-1-3 2 2 3 5 3 7a9 9 0 1 1-18 0c0-6 5-9 9-13z" fill="#F0D89A"/>
+          </svg>
         </div>
       </div>
     </div>
@@ -163,7 +170,7 @@
         </div>
         <div class="appeal-right">
           <!-- ADD TEMPLE RECONSTRUCTION PHOTO HERE -->
-          <img src="./images/temple_reconstruction.jpg" alt="പുനരുദ്ധാരണം" class="img-fluid" style="border-radius: 50%; width: 200px; height: 200px; border: 4px solid #33080D;">
+          <img src="./images/temple_reconstruction.jpg" alt="പുനരുദ്ധാരണം" class="img-fluid img-skeleton" style="border-radius: 50%; width: 200px; height: 200px; border: 4px solid #33080D;" loading="lazy" decoding="async" onload="this.classList.remove('img-skeleton')" onerror="this.remove();">
         </div>
       </div>
 
@@ -286,7 +293,7 @@
         <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">ക്ഷേത്രത്തിൽ ചെണ്ട, നൃത്തം, സംഗീതം തുടങ്ങിയ കലാരൂപങ്ങളും ആരംഭിച്ചിട്ടുണ്ട്. ഇവയൊക്കെ ശരിയായ രീതിയിലേക്ക് വന്നാൽ ഒരു ദേവീക്ഷേത്രത്തിൽ വേണ്ട എല്ലാ പ്രൗഢിയും ശ്രീ പൂകുന്നത്ത് കാട്ടുമാടം മുത്തശ്ശ്യമ്മ ക്ഷേത്രം കൈവരിക്കും.</p>
         
         <!-- ADD KALARI WEAPONS PHOTO HERE -->
-        <img src="./images/kalari_weapons.jpg" alt="കളരി ആയുധങ്ങൾ" class="img-fluid img-rounded">
+        <img src="./images/kalari_weapons.jpg" alt="കളരി ആയുധങ്ങൾ" class="img-fluid img-rounded img-skeleton" loading="lazy" decoding="async" onload="this.classList.remove('img-skeleton')" onerror="this.closest('.panel').classList.add('no-photo');this.remove();">
       </div>
 
       <!-- POOKUNNATHAKAM -->
@@ -296,7 +303,7 @@
         <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">ഒപ്പം തച്ചോളി ഒതേനനും, ആരോമൽ ചേകവരും ഉണ്ണിയാർച്ചയും തുടങ്ങി നിരവധിയായ വീരന്മാർ അരങ്ങ് വാണ ഈ നാട്ടിൽ കളരിയെന്ന ആയോധന കലയുടെ അനന്ത സാധ്യതകൾ ഒളിമങ്ങാതെ സംരക്ഷിക്കുക എന്ന സുപ്രധാന ദൗത്യവും കാട്ടുമാടം കളരി കലാക്ഷേത്രം ലക്ഷ്യം വെക്കുന്നു.</p>
         
         <!-- ADD KALARI PERFORMANCE PHOTO HERE -->
-        <img src="./images/kalari_performance.jpg" alt="കളരി പയറ്റ്" class="img-fluid img-rounded">
+        <img src="./images/kalari_performance.jpg" alt="കളരി പയറ്റ്" class="img-fluid img-rounded img-skeleton" loading="lazy" decoding="async" onload="this.classList.remove('img-skeleton')" onerror="this.closest('.panel').classList.add('no-photo');this.remove();">
       </div>
 
       <div style="margin-top:32px;">
@@ -425,7 +432,7 @@
         <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">ഗോവർദ്ധന പർവ്വതത്തെ കുടയാക്കി ഭൂമിയെയും പ്രകൃതിയെയും സർവ്വചരാചരങ്ങളെയും കാത്ത ഭഗവാന്റെ ചുറ്റും അനുസരണയോടെ ചെവിയാട്ടി നിൽക്കുന്ന പശുക്കിടാങ്ങൾ കണ്ണിനു കുളിർമ്മ നൽകുന്ന കാഴ്ചയാണ്. ഭാരതം ഗോമാതാവിനെ പൂജിക്കുന്ന അതേ ഭക്തിയോടെ, ക്ഷേത്ര പരിസരത്ത് ഒരു ഗോശാല സ്ഥാപിക്കാനും പശുപരിപാലനത്തിലൂടെ പഞ്ചഗവ്യാധിഷ്ഠിത പൂജാക്രമങ്ങൾ പരിപോഷിപ്പിക്കാനും ക്ഷേത്ര സേവാസമിതി ലക്ഷ്യമിടുന്നു.</p>
         
         <!-- ADD GOSHALA PHOTO HERE -->
-        <img src="./images/goshala.jpg" alt="ഗോശാല" class="img-fluid img-rounded">
+        <img src="./images/goshala.jpg" alt="ഗോശാല" class="img-fluid img-rounded img-skeleton" loading="lazy" decoding="async" onload="this.classList.remove('img-skeleton')" onerror="this.closest('.panel').classList.add('no-photo');this.remove();">
       </div>
     </div>
   </section>
@@ -445,7 +452,7 @@
         <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">ക്ഷേത്ര പൂജാരികളെ കിട്ടാൻ ഏറെ പ്രയാസപ്പെടുന്ന വർത്തമാന കാലത്ത്, മുത്തശ്ശ്യമ്മ ക്ഷേത്രത്തോട് അനുബന്ധിച്ച് ഒരു ഗുരുകുല സമ്പ്രദായ വേദപഠനശാല സ്ഥാപിക്കാൻ ആലോചനയുണ്ട്. ജാതീയമായ വേർതിരിവുകൾക്ക് ഇടം നൽകാതെ, വിശ്വാസിയായ ഏതൊരു ഹിന്ദുവിനും ഈ വേദപഠനം പ്രയോജനപ്പെടുത്താൻ സാധിക്കുന്ന വിധമാണ് പദ്ധതി വിഭാവനം ചെയ്യുന്നത്.</p>
         
         <!-- ADD VEDAPADANASHALA PHOTO HERE -->
-        <img src="./images/vedapadanashala.jpg" alt="വേദപഠനശാല" class="img-fluid img-rounded">
+        <img src="./images/vedapadanashala.jpg" alt="വേദപഠനശാല" class="img-fluid img-rounded img-skeleton" loading="lazy" decoding="async" onload="this.classList.remove('img-skeleton')" onerror="this.closest('.panel').classList.add('no-photo');this.remove();">
       </div>
     </div>
   </section>
@@ -465,7 +472,7 @@
         <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">പുതുക്കിപ്പണിത ശ്രീകോവിലിനു മുന്നിലായി സ്ഥിതി ചെയ്യുന്ന ക്ഷേത്രക്കുളം പഴയകാലത്തെ പ്രൗഢിയോടെ പുനർനിർമ്മിക്കാൻ ലക്ഷ്യമിടുന്നു. ക്ഷേത്രത്തിനും ക്ഷേത്രത്തട്ടകത്തിനും ഉപയോഗപ്രദമാവുന്ന ഈ കുളം, നാടിന്റെ വരൾച്ച മാറ്റാൻ ഉപകരിക്കുന്ന ഒരു മഹാസംരംഭം കൂടിയാണ്. ഓരോ ഭക്തനും ഈ നിർമ്മാണത്തിൽ പങ്കാളിയാവാൻ സാധിക്കും.</p>
         
         <!-- ADD KSHETRAKULAM PHOTO HERE -->
-        <img src="./images/kulam.jpg" alt="ക്ഷേത്രക്കുളം" class="img-fluid img-rounded">
+        <img src="./images/kulam.jpg" alt="ക്ഷേത്രക്കുളം" class="img-fluid img-rounded img-skeleton" loading="lazy" decoding="async" onload="this.classList.remove('img-skeleton')" onerror="this.closest('.panel').classList.add('no-photo');this.remove();">
       </div>
     </div>
   </section>
@@ -485,7 +492,7 @@
         <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">ഉഗ്രശക്തിശാലികളായ നാഗദൈവങ്ങൾ കുടികൊണ്ട നാഗക്കോട്ട, ക്ഷേത്രത്തിന്റെ ഒരു പ്രധാന ശക്തിവിശേഷമായിരുന്നു. അപൂർവ്വമായ ഔഷധസസ്യങ്ങളാൽ സമ്പുഷ്ടമായ ഈ കാവ്, സൽസന്താന ലബ്ധിക്കും മംഗല്യഭാഗ്യത്തിനുമായി ഭക്തർ പ്രത്യേകം വഴിപാടുകൾ നടത്തിയിരുന്ന സ്ഥലമാണ്. നാഗങ്ങൾ സ്വസ്ഥമായി വാണിരുന്ന കിണറിന്റെ അവശിഷ്ടങ്ങൾ ഇന്നും ഇവിടെ കാണാം. പൗരാണിക പ്രൗഢിയോടെ കിണർ നവീകരിക്കാനും നാഗക്കോട്ട പുനർനിർമ്മിക്കാനും ക്ഷേത്ര സേവാസമിതി ലക്ഷ്യമിടുന്നു.</p>
         
         <!-- ADD NAGAKKAVU PHOTO HERE -->
-        <img src="./images/nagakkavu.jpg" alt="നാഗക്കാവ്" class="img-fluid img-rounded">
+        <img src="./images/nagakkavu.jpg" alt="നാഗക്കാവ്" class="img-fluid img-rounded img-skeleton" loading="lazy" decoding="async" onload="this.classList.remove('img-skeleton')" onerror="this.closest('.panel').classList.add('no-photo');this.remove();">
       </div>
     </div>
   </section>
@@ -506,7 +513,7 @@
         <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">ശ്രീമൂലസ്ഥാനത്ത് ഭക്തർക്ക് പ്രാർത്ഥിക്കാനും ആരാധിക്കാനുമുള്ള സൗകര്യം ഒരുക്കുകയാണ് ലക്ഷ്യം. മലയാളക്കരയിലെ രണ്ട് മഹാമാന്ത്രിക പരമ്പരയിലെ ഇന്നത്തെ സ്ഥാനികരും ആചാര്യന്മാരുമായ ബ്രഹ്മശ്രീ കാട്ടുമാടം ഈശാനൻ നമ്പൂതിരിപ്പാടും ബ്രഹ്മശ്രീ പാറോളി പുരുഷോത്തമൻ ഉണ്ണി നമ്പൂതിരിപ്പാടുമാണ് ഈ കർമ്മം നിർവ്വഹിക്കുന്നത്.</p>
         
         <!-- ADD SREEMOOLAM PHOTO HERE -->
-        <img src="./images/sreemoolam.jpg" alt="ശ്രീമൂല സ്ഥാനം" class="img-fluid img-rounded">
+        <img src="./images/sreemoolam.jpg" alt="ശ്രീമൂല സ്ഥാനം" class="img-fluid img-rounded img-skeleton" loading="lazy" decoding="async" onload="this.classList.remove('img-skeleton')" onerror="this.closest('.panel').classList.add('no-photo');this.remove();">
       </div>
       
       <div style="margin-top:28px;">
@@ -539,10 +546,10 @@
       </div>
       <div class="gallery-grid stagger">
         <!-- ADD GALLERY PHOTOS HERE -->
-        <div class="gtile"><img src="./images/gallery_1.jpg" alt="ക്ഷേത്ര ദൃശ്യം 1" class="gallery-img"></div>
-        <div class="gtile"><img src="./images/gallery_2.jpg" alt="ക്ഷേത്ര ദൃശ്യം 2" class="gallery-img"></div>
-        <div class="gtile"><img src="./images/gallery_3.jpg" alt="ക്ഷേത്ര ദൃശ്യം 3" class="gallery-img"></div>
-        <div class="gtile"><img src="./images/gallery_4.jpg" alt="ക്ഷേത്ര ദൃശ്യം 4" class="gallery-img"></div>
+        <div class="gtile"><img src="./images/gallery_1.jpg" alt="ക്ഷേത്ര ദൃശ്യം 1" class="gallery-img" loading="lazy" decoding="async"></div>
+        <div class="gtile"><img src="./images/gallery_2.jpg" alt="ക്ഷേത്ര ദൃശ്യം 2" class="gallery-img" loading="lazy" decoding="async"></div>
+        <div class="gtile"><img src="./images/gallery_3.jpg" alt="ക്ഷേത്ര ദൃശ്യം 3" class="gallery-img" loading="lazy" decoding="async"></div>
+        <div class="gtile"><img src="./images/gallery_4.jpg" alt="ക്ഷേത്ര ദൃശ്യം 4" class="gallery-img" loading="lazy" decoding="async"></div>
       </div>
     </div>
   </section>
@@ -595,7 +602,7 @@
 </footer>
 
 <div class="fab-stack">
-  <button href="#top" class="top-float" id="topFloat" aria-label="മുകളിലേക്ക് പോകുക" onclick="document.getElementById('top').scrollIntoView({behavior:'smooth'})">
+  <button type="button" class="top-float" id="topFloat" aria-label="മുകളിലേക്ക് പോകുക">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
   </button>
   <a href="https://wa.me/919847501188" class="wa-float" aria-label="വാട്സാപ്പ്">
