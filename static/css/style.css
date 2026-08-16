@@ -79,7 +79,7 @@ a:focus-visible, button:focus-visible, .pill:focus-visible{
 /* ---------- top utility bar ---------- */
 .topbar{background:var(--ink);color:var(--gold-light);font-family:'Cormorant Garamond',serif;font-size:15px;letter-spacing:.4px;}
 .topbar .wrap{display:flex;justify-content:space-between;align-items:center;padding:8px 28px;flex-wrap:wrap;gap:6px;}
-.topbar a{opacity:.92;transition:.2s;}
+.topbar a{opacity:.92;transition:.2s;font-family:'Manjari',sans-serif;font-variant-numeric:lining-nums tabular-nums;letter-spacing:.3px;font-size:14.5px;}
 .topbar a:hover{color:var(--gold);}
 .topbar .sep{opacity:.4;margin:0 8px;}
 
@@ -125,6 +125,9 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 2
 .burger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .burger.active span:nth-child(2) { opacity: 0; }
 .burger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+@media (max-width:880px){
+  .burger.active{opacity:0;pointer-events:none;transition:opacity .2s var(--ease);}
+}
 
 /* ---------- sub nav (project pills) ---------- */
 .subnav{background:var(--ink);border-bottom:1px solid #4A3624;position:sticky;top:var(--header-h, 64px);z-index:45;}
