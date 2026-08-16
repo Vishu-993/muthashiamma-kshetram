@@ -1,7 +1,5 @@
-from workers import WorkerEntrypoint
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
-import asgi
 
 app = FastAPI()
 
@@ -17,18 +15,16 @@ async def add_security_headers(request: Request, call_next):
 # Example Database Route: How you will save donations to Cloudflare D1
 @app.post("/api/donations")
 async def save_donation(request: Request):
+    # Access the Cloudflare environment safely
     env = request.scope.get("env")
+    if not env or not hasattr(env, "DB"):
+        return JSONResponse({"error": "Database binding not found"}, status_code=500)
+        
     data = await request.json()
     
     try:
-        # Example D1 SQL Query (Replaces your old MongoDB insert_one)
+        # Example D1 SQL Query
         # await env.DB.prepare("INSERT INTO donations (name, amount) VALUES (?1, ?2)").bind(data['name'], data['amount']).run()
         return JSONResponse({"status": "success", "message": "Database ready"})
     except Exception as e:
         return JSONResponse({"error": "Database error", "details": str(e)}, status_code=500)
-
-
-# Main Cloudflare Worker Entrypoint
-class Default(WorkerEntrypoint):
-    async def fetch(self, request):
-        return await asgi.fetch(app, request, self.env)
