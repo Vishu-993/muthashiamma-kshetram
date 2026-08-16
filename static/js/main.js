@@ -6,7 +6,6 @@
   var burger = document.getElementById('burgerBtn');
   var navlinks = document.getElementById('navlinks');
   var overlay = document.getElementById('navOverlay');
-  var drawerClose = document.getElementById('drawerClose');
   var progressBar = document.getElementById('progressBar');
   var topFloat = document.getElementById('topFloat');
   var toast = document.getElementById('toast');
@@ -60,7 +59,6 @@
   if (burger && navlinks && overlay) {
     burger.addEventListener('click', toggleDrawer);
     overlay.addEventListener('click', closeDrawer);
-    if (drawerClose) drawerClose.addEventListener('click', closeDrawer);
 
     navlinks.querySelectorAll('a').forEach(function (a) {
       a.addEventListener('click', closeDrawer);
