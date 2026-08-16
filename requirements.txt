@@ -1,2 +1,2 @@
 fastapi
-workers-py>=1.90.0
+workers-py>=1.9.0
