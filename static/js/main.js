@@ -126,10 +126,6 @@
             behavior: reducedMotion ? 'auto' : 'smooth'
           });
         }
-
-        document.querySelectorAll('.navlinks a[href^="#"]').forEach(function (a) {
-          a.classList.toggle('active', a.getAttribute('href') === '#' + id);
-        });
       });
     }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
 
