@@ -225,6 +225,37 @@ section{padding:8px 0 60px;scroll-margin-top:120px;}
 .section-head p{font-size:15.5px;color:#D8C79E;margin-top:12px;line-height:1.8;}
 
 .explore-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;}
+
+/* ---------- masapooja offering selector ---------- */
+.timing-row{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px;}
+.timing-item{display:flex;align-items:center;gap:12px;flex:1;min-width:180px;padding:14px 18px;border-radius:12px;background:rgba(212,169,74,0.07);border:1px solid var(--maroon-line);}
+.timing-item svg{width:22px;height:22px;color:var(--gold);flex:none;}
+.timing-item .t-label{display:block;font-size:12.5px;color:#B99B6A;letter-spacing:.3px;}
+.timing-item .t-value{display:block;font-family:'Noto Serif Malayalam',serif;font-weight:700;font-size:17px;color:var(--gold-light);}
+
+.pooja-selector{display:flex;flex-direction:column;gap:2px;}
+.pooja-row{display:flex;align-items:center;gap:14px;padding:14px 4px;border-bottom:1px solid rgba(212,169,74,0.14);}
+.pooja-row:last-child{border-bottom:none;}
+.pr-name{flex:1;font-family:'Noto Serif Malayalam',serif;font-size:16.5px;color:var(--ink);}
+.pr-price{font-size:15px;color:var(--maroon-mid);font-weight:700;min-width:58px;text-align:right;}
+
+.qty-stepper{display:flex;align-items:center;gap:0;border:1px solid var(--maroon-line);border-radius:10px;overflow:hidden;flex:none;}
+.qbtn{width:34px;height:34px;border:none;background:rgba(92,16,25,0.06);color:var(--maroon-deep);font-size:18px;line-height:1;cursor:pointer;transition:.15s;}
+.qbtn:hover{background:rgba(212,169,74,0.28);}
+.qbtn:active{transform:scale(.92);}
+.qty-input{width:40px;height:34px;border:none;border-left:1px solid var(--maroon-line);border-right:1px solid var(--maroon-line);text-align:center;font-size:15px;font-weight:600;color:var(--ink);background:#fff;-moz-appearance:textfield;}
+.qty-input::-webkit-outer-spin-button,.qty-input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+.pooja-row.has-qty{background:rgba(212,169,74,0.09);border-radius:10px;}
+.pooja-row.has-qty .pr-name{color:var(--maroon-deep);font-weight:700;}
+
+.pooja-total-bar{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-top:22px;padding-top:20px;border-top:1px dashed var(--maroon-line);}
+.pooja-total{font-family:'Noto Serif Malayalam',serif;font-size:19px;font-weight:700;color:var(--maroon-deep);margin-left:auto;}
+.pooja-total span{color:var(--maroon-mid);}
+.pooja-total-bar .btn{font-size:13.5px;padding:9px 16px;}
+@media (max-width:520px){
+  .pooja-total{margin-left:0;order:3;flex:1 0 100%;text-align:center;}
+  .pooja-total-bar #poojaBookBtn{flex:1 0 100%;order:4;text-align:center;}
+}
 .explore-card{
   display:flex;flex-direction:column;gap:6px;padding:24px 22px;border-radius:16px;
   background:linear-gradient(160deg, var(--maroon-mid), var(--maroon-deep));
