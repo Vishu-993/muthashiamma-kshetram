@@ -4,14 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ശ്രീ പൂകുന്നത്ത് കാട്ടുമാടം മുത്തശ്ശ്യമ്മ ക്ഷേത്രം</title>
-<meta name="description" content="പൂകുന്നത്ത് മഠം, പൂക്കോം, തലശ്ശേരി — ശ്രീ കാട്ടുമാടം മുത്തശ്ശ്യമ്മ ക്ഷേത്ര പുനരുദ്ധാരണം. ചരിത്രം, തേവാര മഠം, കളരി, നക്ഷത്രവനം — സമർപ്പണ വിവരങ്ങൾ.">
+<meta name="description" content="പൂകുന്നത്ത് മഠം, പൂക്കോം, തലശ്ശേരി — ശ്രീ കാട്ടുമാടം മുത്തശ്ശ്യമ്മ ക്ഷേത്ര പുനരുദ്ധാരണം.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='19' fill='%235C1019'/%3E%3Cpath d='M20 8c3 4-1 6-1 9a4 4 0 0 0 8 0c0-2-1-3-1-3 2 2 3 5 3 7a9 9 0 1 1-18 0c0-6 5-9 9-13z' fill='%23F0D89A'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Malayalam:wght@500;600;700;800&family=Manjari:wght@400;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./css/style.css">
 <style>
-  /* Extra utility classes for the new image placeholders */
   .img-fluid { width: 100%; height: auto; object-fit: cover; }
   .img-rounded { border-radius: 18px; margin-top: 20px; box-shadow: var(--shadow); }
   .avatar-img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
@@ -31,7 +30,7 @@
 
 <header class="site" id="siteHeader">
   <nav class="wrap" aria-label="പ്രധാന നാവിഗേഷൻ">
-    <a href="#top" class="brand">
+    <a href="index.html" class="brand">
       <svg class="flame-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <circle cx="20" cy="20" r="19" stroke="#D4A94A" stroke-width="1.4"/>
         <path d="M20 8c3 4-1 6-1 9a4 4 0 0 0 8 0c0-2-1-3-1-3 2 2 3 5 3 7a9 9 0 1 1-18 0c0-6 5-9 9-13z" fill="#F0D89A"/>
@@ -42,40 +41,23 @@
       </span>
     </a>
     <div class="navlinks" id="navlinks">
-      <a href="#top">ഹോം</a>
-      <a href="#charithram">ചരിത്രം</a>
-      <a href="#punarudharanam">പുനരുദ്ധാരണം</a>
-      <a href="#kalari">കളരി</a>
-      <a href="#gallery">ഗാലറി</a>
-      <a href="#contact" class="navcta">ബന്ധപ്പെടാം</a>
+      <a href="index.html" class="active" aria-current="page">ഹോം</a>
+      <a href="history.html">ചരിത്രം</a>
+      <a href="renovation.html">പുനരുദ്ധാരണം</a>
+      <a href="pooja.html">വഴിപാടുകൾ</a>
+      <a href="kalari.html">കളരി</a>
+      <a href="gallery.html">ഗാലറി</a>
+      <a href="contact.html" class="navcta">ബന്ധപ്പെടാം</a>
     </div>
     <button class="burger" id="burgerBtn" aria-label="മെനു തുറക്കുക" aria-expanded="false" aria-controls="navlinks">
       <span></span><span></span><span></span>
     </button>
   </nav>
   <div class="nav-overlay" id="navOverlay" hidden></div>
-  <div class="subnav">
-    <div class="subnav-scroll" id="subnav" aria-label="വിഭാഗങ്ങൾ">
-      <a class="pill" data-target="charithram" href="#charithram">ചരിത്രം</a>
-      <a class="pill" data-target="punarudharanam" href="#punarudharanam">ക്ഷേത്ര പുനർനിർമ്മാണം</a>
-      <a class="pill" data-target="thevaramadam" href="#thevaramadam">തേവാര മഠം</a>
-      <a class="pill" data-target="sreemoolam" href="#sreemoolam">ശ്രീമൂല സ്ഥാനം</a>
-      <a class="pill" data-target="orupidimannu" href="#orupidimannu">ഒരുപിടി മണ്ണ്</a>
-      <a class="pill" data-target="kulam" href="#kulam">ക്ഷേത്രക്കുളം</a>
-      <a class="pill" data-target="nagakkavu" href="#nagakkavu">നാഗക്കാവ്</a>
-      <a class="pill" data-target="vrikshavanam" href="#vrikshavanam">നക്ഷത്രവനം</a>
-      <a class="pill" data-target="vedapadanashala" href="#vedapadanashala">വേദപഠനശാല</a>
-      <a class="pill" data-target="goshala" href="#goshala">ഗോശാല</a>
-      <a class="pill" data-target="vande-padmanabham" href="#vande-padmanabham">പ്രണാമം</a>
-      <a class="pill" data-target="kalari" href="#kalari">കളരി</a>
-    </div>
-  </div>
 </header>
 
 <main id="top">
-
-  <!-- HERO -->
-  <section class="hero">
+<section class="hero">
     <div class="wrap hero-grid">
       <div class="reveal in">
         <span class="eyebrow">ശ്രീ: മുത്തശ്ശ്യമ്മ ശരണം</span>
@@ -125,459 +107,47 @@
       </div>
     </div>
   </section>
-
-  <!-- LAMP DIVIDER COMPONENT -->
   <div class="lamp-divider" aria-hidden="true"><span class="line"></span>
     <svg viewBox="0 0 30 40"><path class="flame" d="M15 2c4 6-1 8-1 12a4 4 0 0 0 8 0c0-1 0-2-.5-3 2 2 3 5 2 8-1.5 4-6 6-8.5 6-4 0-8-3-8-8 0-8 6-10 8-15z" fill="#F0D89A"/><path d="M8 24 h14 l-2 6 h-10 z" fill="#D4A94A"/><rect x="13" y="30" width="4" height="8" fill="#D4A94A"/><ellipse cx="15" cy="38" rx="9" ry="2" fill="#7A1B24"/></svg>
   <span class="line"></span></div>
 
-  <!-- HISTORY -->
-  <section id="charithram">
+  <section id="explore">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="eyebrow">ചരിത്രം</span>
-        <h2>രണ്ട് നൂറ്റാണ്ടിന്റെ വിശ്വാസം</h2>
+        <span class="eyebrow">പര്യടനം</span>
+        <h2>ക്ഷേത്രത്തെക്കുറിച്ച് കൂടുതൽ അറിയാം</h2>
       </div>
-      <div class="panel reveal">
-        <div class="history-copy">
-          <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">പൂക്കോം പ്രദേശത്തിന്റെ ഐശ്വര്യ ദേവതയായിരുന്നു എക്കാലത്തും ശ്രീ മുത്തശ്ശ്യമ്മ. ഭക്തസഹസ്രങ്ങളുടെ ഭക്തിവാത്സല്യത്താലും ആരാധനാ സമ്പ്രദായത്തിലെ വ്യത്യസ്തത കൊണ്ടും ഒരു ദേശത്തിന്റെ നാമമായി ആ പ്രദേശത്തിന്റെ കാവലായി, സർവ്വവിധ പ്രൗഢിയോടെ പരിപാലിച്ചിരുന്നു ശ്രീ മുത്തശ്ശ്യമ്മയെയും അമ്മയുടെ തട്ടകത്തെയും.</p>
-          <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">ഏതാണ്ട് രണ്ടായിരത്തിലധികം ആണ്ടുകൾക്ക് മുൻപ് അന്നത്തെ നാട്ടുരാജാക്കന്മാരുടെ നേരിട്ടുള്ള മേൽനോട്ടത്തിൽ കൊട്ടാര സദൃശ്യമായ ക്ഷേത്രം പണികഴിപ്പിക്കപ്പെട്ടു എന്നും നാടിന്റെ സർവ്വവിധ ക്ഷേമത്തിനുമായി ആരാധന ക്രമങ്ങൾ ചിട്ടപ്പെടുത്തി പരിപാലിച്ചുവെന്നും പിന്നീട് കാലചക്രം തിരിയവെ ക്ഷേത്രത്തിന്റെ അവകാശം വടക്കെ മലബാറിലെ അന്നത്തെ പ്രധാന തന്ത്രമാന്ത്രികപരമ്പരയായ കാട്ടുമാടം സമ്പ്രദായത്തിന്റെ കൈകളിൽ എത്തിച്ചേർന്നതാകാം എന്നും ഐതിഹ്യം പറയുന്നു.</p>
-          <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">മാന്ത്രിക വിദ്യയിൽ അഗ്രഗണ്യരായ കാട്ടുമാടം തിരുമേനിമാരുടെ കീഴിൽ ക്ഷേത്രത്തിൽ ഏറെ സങ്കീർണ്ണമായ പലവിധ മാനുഷിക പ്രശ്നങ്ങൾക്കും പരിഹാരം കണ്ടിരുന്നു. അതിലൂടെ ക്ഷേത്രം ഏറെ അറിയപ്പെട്ടതായും പറയപ്പെടുന്നു. സൽസന്താന ലബ്ധിക്കായി ഇവിടെ ദമ്പതിമാർ ഭജന ഇരുന്നു പ്രാർത്ഥിച്ചതായും നിരവധി ആളുകൾക്ക് അതുവഴി ഫലപ്രാപ്തി ഉണ്ടായതായും പഴമക്കാർ പറഞ്ഞു കേട്ടിട്ടുണ്ട്.</p>
-          <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">കലുഷിതമായ ജീവിത സാഹചര്യങ്ങളിൽ മാനസികവിഭ്രാന്തിക്കടിമപ്പെട്ട് മനോനില തെറ്റിയ ആളുകൾക്ക് എന്നും അത്താണിയായിരുന്നു കാട്ടുമാടം മുത്തശ്ശ്യമ്മ ക്ഷേത്രം. മുത്തശ്ശ്യമ്മയെ തൊഴുതു പ്രാർത്ഥിച്ച് ഭജന ഇരുന്ന് കാട്ടുമാടം തിരുമേനിമാരുടെ മന്ത്രശക്തിയാൽ മനോനില വീണ്ടെടുത്ത് സാധാരണ ജീവിതത്തിലേക്ക് തിരിച്ചു വന്ന നിരവധിയായ ആളുകളുടെ കഥകൾ പഴമക്കാർ പറഞ്ഞറിഞ്ഞത് ഇന്നും ഈ പ്രദേശത്തുകാർ അത്ഭുതത്തോടെ ഓർക്കുന്നുണ്ട്.</p>
-          <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">ഇരുവേനാട് എന്നറിയപ്പെട്ടിരുന്ന ഈ പ്രദേശത്തിന്റെ തിലകക്കുറിയായി നൂറ്റാണ്ടുകളോളം പരിപാലിച്ചിരുന്ന ഈ ക്ഷേത്രം ടിപ്പുവിന്റെ ലഹളയോടെ നാശോന്മുഖമായി തീർന്നു. ഉടമസ്ഥരായ കാട്ടുമാടം നമ്പൂതിരിമാർ പ്രാണഭയത്താൽ തെക്കൻ ജില്ലകളിലേക്ക് കുടിയേറിയതായി കാണാം. ക്ഷേത്രവും സ്വത്തുക്കളും നോക്കി നടത്തി പരിപാലിക്കാൻ പാട്ടാളിയായി കുറ്റേരി തറവാട്ടു കാരണവരെ ഏൽപ്പിച്ചതായി രേഖകൾ പറയുന്നു.</p>
-          <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">ഏതാണ്ട് 50 വർഷങ്ങൾ മുൻപുവരെ ഒരു നേരത്തെ പൂജയും വാർഷിക പാട്ടുത്സവവുമായി ക്ഷേത്രം ഒരു വിധം നിലനിന്നിരുന്നു. ക്രമേണ നാശോന്മുഖമായ ക്ഷേത്രം ശ്രദ്ധിക്കാൻ ആളില്ലാതെ നാട്ടുകാരുടെയും ഭക്തരുടെയും അശ്രദ്ധയോ അറിവില്ലായ്മയോ മൂലം തകർന്നു പോവുകയും ക്ഷേത്ര സ്വത്തുക്കൾ അന്യാധീനപ്പെട്ടുപോവുകയും ചെയ്തു. അരനൂറ്റാണ്ടു കാലത്തെ ഗ്രാമചരിത്രം എടുത്ത് പരിശോധിച്ചാൽ ഈ ക്ഷേത്ര സ്വത്തുക്കൾ കൈയൊഴിഞ്ഞവരും കൈവശപ്പെടുത്തിയവരും അനുഭവിച്ച് പോന്നത് വർണ്ണനാതീതമായ ദുരിതങ്ങളാണെന്ന് നമുക്ക് മനസ്സിലാക്കാം.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="lamp-divider" aria-hidden="true"><span class="line"></span>
-    <svg viewBox="0 0 30 40"><path class="flame" d="M15 2c4 6-1 8-1 12a4 4 0 0 0 8 0c0-1 0-2-.5-3 2 2 3 5 2 8-1.5 4-6 6-8.5 6-4 0-8-3-8-8 0-8 6-10 8-15z" fill="#F0D89A"/><path d="M8 24 h14 l-2 6 h-10 z" fill="#D4A94A"/><rect x="13" y="30" width="4" height="8" fill="#D4A94A"/><ellipse cx="15" cy="38" rx="9" ry="2" fill="#7A1B24"/></svg>
-  <span class="line"></span></div>
-
-  <!-- APPEAL + MAIN DONATION TABLE -->
-  <section id="punarudharanam">
-    <div class="wrap">
-      <div class="appeal reveal">
-        <div>
-          <span class="eyebrow" style="color:var(--ink);opacity:.75;">ക്ഷേത്ര പുനർനിർമ്മാണം</span>
-          <h2>ഭക്തർക്കൊപ്പം ഒരു പുതിയ തുടക്കം</h2>
-          <p>എന്നാൽ ക്ഷേത്രം ഇന്ന് പുനരുദ്ധാരണത്തിന്റെ വഴിയിലാണ്. സുമനസ്സുകളായ നാട്ടുകാരുടെയും വിശിഷ്യാ മുത്തശ്ശ്യമ്മയുടെ ഭക്തരായ ആളുകളുടെയും പരിശ്രമത്താൽ ക്ഷേത്രം സ്ഥിതിചെയ്യുന്ന സ്ഥലം ഭാഗികമായി ഏറ്റെടുത്ത് പുനരുദ്ധാരണ പ്രവർത്തികൾ ചെയ്തു വരുന്നു.</p>
-          <p>ക്ഷേത്ര ശ്രീകോവിലിന്റെ പണി ഏകദേശം പൂർത്തിയാക്കാൻ സാധിച്ചിട്ടുണ്ട്. ഒരു വ്യാഴവട്ടം മുൻപ് 2010 ലാണ് നാട്ടുകാരുടെ ആഗ്രഹത്തിന്റെ ഫലമായി പുനരുദ്ധാരണ പ്രവർത്തനങ്ങൾക്ക് തുടക്കമാവുന്നത്. ഈ കാലയളവിൽ ക്ഷേത്ര തിരുമുറ്റത്ത് നടന്ന രണ്ട് അഷ്ടമംഗല്യ പ്രശ്ന ചിന്തയിലും തർക്കങ്ങൾക്ക് വഴിയില്ലാതെ അടിവരയിട്ട് പറഞ്ഞകാര്യം നമ്മളെയെല്ലാം അതീവ വാത്സല്യത്തോടെ സംരക്ഷിച്ച് പോകുന്ന മുത്തശ്ശ്യമ്മയെന്ന ഭക്തവത്സലയായ ദേവി ചൈതന്യത്തെ താമസം വിനാ യഥാവിധി പുനഃപ്രതിഷ്ഠ നടത്തി നാടിനെ സംരക്ഷിക്കണം എന്നാണ്.</p>
-          <p>പാട്ടുപുര സമ്പ്രദായത്തിലാണ് ക്ഷേത്ര ശ്രീകോവിൽ നിർമ്മാണം നടക്കുന്നത്. ഉദ്ദേശിക്കുന്ന രീതിയിൽ ശ്രീകോവിൽ നിർമ്മാണം നടക്കുന്നതോടെ സമീപ പ്രദേശങ്ങളിൽ ഒന്നും തന്നെ ഇല്ലാത്ത ശില്പ ഭംഗിയുള്ള ശ്രീകോവിൽ നമുക്ക് ദർശിക്കാനാവും.</p>
-          <div class="cta-row"><a href="#contact" class="btn btn-primary">നിർമ്മാണ സഹായം നൽകാൻ ബന്ധപ്പെടുക</a></div>
-        </div>
-        <div class="appeal-right">
-          <!-- ADD TEMPLE RECONSTRUCTION PHOTO HERE -->
-          <img src="./images/temple_reconstruction.jpg" alt="പുനരുദ്ധാരണം" class="img-fluid img-skeleton" style="border-radius: 50%; width: 200px; height: 200px; border: 4px solid #33080D;" loading="lazy" decoding="async" onload="this.classList.remove('img-skeleton')" onerror="this.remove();">
-        </div>
-      </div>
-
-      <div style="margin-top:40px;">
-        <p class="table-title">ക്ഷേത്രം — സമർപ്പണ സംഖ്യ</p>
-        <div class="table-wrap reveal">
-          <table>
-            <caption class="sr-only">ക്ഷേത്ര നിർമ്മാണ ഇനങ്ങളും സൂചക തുകയും</caption>
-            <thead><tr><th scope="col">#</th><th scope="col">നിർമ്മാണ ഇനം</th><th scope="col">സൂചക തുക (₹)</th></tr></thead>
-            <tbody>
-              <tr><td>1</td><td>ക്ഷേത്ര തറ</td><td>1,00,000</td></tr>
-              <tr><td>2</td><td>ക്ഷേത്ര ചുമര്</td><td>1,50,000</td></tr>
-              <tr><td>3</td><td>സോപാനം — വലുത് - 1</td><td>36,000</td></tr>
-              <tr><td>4</td><td>സോപാനം — ചെറുത് - 1</td><td>22,000</td></tr>
-              <tr><td>5</td><td>പാട്ടുപുരയുടെ കരികൽ തൂൺ 4 എണ്ണം (4×25000)</td><td>1,00,000</td></tr>
-              <tr><td>6</td><td>പാട്ടുപുരയുടെ കരികൽ ഭിത്തി</td><td>1,80,000</td></tr>
-              <tr><td>7</td><td>ഓവ് കരികൽ</td><td>10,000</td></tr>
-              <tr><td>8</td><td>അഴിക്കൂടിന്റെ വലിയ തൂൺ (8×20000)</td><td>1,60,000</td></tr>
-              <tr><td>9</td><td>ശ്രീകോവിൽ വലിയ ഉത്തരം</td><td>1,00,000</td></tr>
-              <tr><td>10</td><td>അഴിക്കൂടിന്റെ ചെറിയ ഉത്തരം</td><td>60,000</td></tr>
-              <tr><td>11</td><td>അഴിക്കൂടിന്റെ ചെറിയ തൂണുകൾ 36 എണ്ണം (36×10000)</td><td>3,60,000</td></tr>
-              <tr><td>12</td><td>ശ്രീകോവിൽ മേൽക്കൂരയുടെ കഴുക്കോൽ 36 എണ്ണം (36×10000)</td><td>3,60,000</td></tr>
-              <tr><td>13</td><td>ശ്രീകോവിൽ മച്ച്</td><td>20,000</td></tr>
-              <tr><td>14</td><td>പാട്ടു പുരയുടെ മച്ച്</td><td>30,000</td></tr>
-              <tr><td>15</td><td>ശ്രീകോവിൽ വലിയ വാതിൽ</td><td>80,000</td></tr>
-              <tr><td>16</td><td>പാട്ടുപുരയുടെ ചെറിയ വാതിൽ</td><td>20,000</td></tr>
-              <tr><td>17</td><td>താഴികക്കുടം 3 എണ്ണം (3×20000)</td><td>60,000</td></tr>
-              <tr><td>18</td><td>ഗണപതി ശ്രീകോവിൽ നിർമ്മാണത്തിന്</td><td>1,00,000</td></tr>
-              <tr><td>19</td><td>ശ്രീകോവിലിന്റെ ചുറ്റുമതിൽ നിർമ്മാണം</td><td>3,00,000</td></tr>
-              <tr><td>20</td><td>ശ്രീകോവിലിന് മുന്നിൽ നടപ്പന്തൽ നിർമ്മിക്കാൻ ചെലവ്</td><td>10,00,000</td></tr>
-              <tr><td>21</td><td>ശ്രീകോവിലിനും തേവാര മഠത്തിനും ചുറ്റും കരികൽ പതിക്കാൻ</td><td>3,00,000</td></tr>
-            </tbody>
-            <tfoot><tr><td></td><td>ആകെ സൂചക എസ്റ്റിമേറ്റ്</td><td>35,48,000</td></tr></tfoot>
-          </table>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="lamp-divider" aria-hidden="true"><span class="line"></span>
-    <svg viewBox="0 0 30 40"><path class="flame" d="M15 2c4 6-1 8-1 12a4 4 0 0 0 8 0c0-1 0-2-.5-3 2 2 3 5 2 8-1.5 4-6 6-8.5 6-4 0-8-3-8-8 0-8 6-10 8-15z" fill="#F0D89A"/><path d="M8 24 h14 l-2 6 h-10 z" fill="#D4A94A"/><rect x="13" y="30" width="4" height="8" fill="#D4A94A"/><ellipse cx="15" cy="38" rx="9" ry="2" fill="#7A1B24"/></svg>
-  <span class="line"></span></div>
-
-  <!-- THEVARA MADAM -->
-  <section id="thevaramadam">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">പൂകുന്നത്ത് മഠം (തേവാര മഠം)</span>
-        <h2>തേവാര മഠം</h2>
-      </div>
-      <div class="panel reveal">
-        <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">ആദികാലത്ത് ക്ഷേത്രത്തോടൊപ്പമോ ഒരുവേള അതിനേക്കാൾ കൂടുതലോ പ്രാധാന്യം പൂകുന്നത്ത് തേവാരമഠത്തിന് ഉണ്ടായിരുന്നു. കാട്ടുമാടം നമ്പൂതിരിമാരുടെ തേവാര മൂർത്തികളായ ചാത്തൻ മുതലായ ദേവതാസങ്കല്പങ്ങളെ തേവാരമഠത്തിൽ വച്ചായിരുന്നു ആരാധിച്ചു പോന്നിരുന്നത്. കാട്ടുമാടം തിരുമേനിമാർ മന്ത്രവാദ സംബന്ധമായ കാര്യങ്ങൾക്ക് വന്നിരുന്നതും അത്തരം കർമ്മങ്ങൾ നടത്തി വന്നതും തേവാര മഠത്തിൽ വച്ചായിരുന്നു. പൂക്കോത്ത് മഠം എന്നായിരുന്നു ഇവിടം അറിയപ്പെട്ടിരുന്നത്. ഒരു നൂറ്റാണ്ട് മുൻപ് നിരവധിയായ രോഗികൾക്കും അശരണർക്കും അത്താണിയായിരുന്ന മഠം പിന്നീട് നശിച്ച് നാശോന്മുഖമാവുകയായിരുന്നു.</p>
-        <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">അന്നത്തെ അതേ പ്രൗഢിയോടെ ക്ഷേത്രത്തോടൊപ്പം തേവാരമഠവും നിർമ്മിച്ച് സമർപ്പിക്കുക എന്നതാണ് ക്ഷേത്ര സംരക്ഷണ സമിതിയുടെ ലക്ഷ്യം. കാട്ടുമാടം തിരുമേനിമാരുടെ പ്രധാന ഉപാസനാ മൂർത്തികളായ ഭൈരവൻ, വിഷ്ണുമായ, ഭദ്രകാളി, കുട്ടിച്ചാത്തൻ, ഗുളികൻ എന്നീ ദേവതാ സങ്കല്പങ്ങളെ തേവാരമഠത്തിൽ വച്ച് ആരാധിച്ചു വന്നിരുന്നു. അതുപോലെ തന്നെ മുത്തശ്ശ്യമ്മയുടെ പ്രധാന ഉപദേവനായി ഒക്കത്ത് ഗണപതിക്കും ക്ഷേത്രത്തിൽ പ്രത്യേക സ്ഥാനവും പൂജകളും ചെയ്തു വന്നിരുന്നു. തേവാരമഠത്തിൽ ശ്രീചക്രം പ്രതിഷ്ഠിച്ച് നടത്തിവന്നിരുന്ന പ്രത്യേക പൂജയും ഏറെ ശ്രേയസ്കരമായിരുന്നു എന്ന് ചരിത്രം പറയുന്നു.</p>
-        <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">ശ്രീ പൂകുന്നത്ത് കാട്ടുമാടം മുത്തശ്ശ്യമ്മ ക്ഷേത്രത്തിന്റെ പുനർനിർമ്മാണ പ്രവൃത്തികൾ യഥാവിധി നടത്തി ദേവ പ്രതിഷ്ഠ ചെയ്ത് സൽഗതി വരുത്തിയാൽ മാത്രമേ ഈ നാടിനു ശാപമോക്ഷം ലഭിക്കുകയുള്ളൂ. അതുവരെയും ദുരിതങ്ങളും കഷ്ടപ്പാടുകളും പരസ്പര വിദ്വേഷവും പേറി നമുക്ക് മുന്നോട്ട് പോവേണ്ടതായി വരും. അതിനാൽ തന്നെ നമ്മുടെ നാടിന്റെ രക്ഷയ്ക്കായി വരും തലമുറയുടെ മോചനത്തിനായി നമുക്ക് കൈകോർക്കാം. ക്ഷേത്ര പുനരുദ്ധാരണം എന്ന ക്ഷേത്ര സേവാസമിതിയുടെ ആത്യന്തിക ലക്ഷ്യത്തിനായി ഒത്തു ചേരാം. ഭീമമായ സാമ്പത്തിക ചെലവുകളും സമർപ്പണവും ഇതിലേക്കായി ആവശ്യമാണ്. എല്ലാവരും കുടുംബം ലക്ഷ്യപൂർത്തിക്കായി പരിശ്രമിക്കുക. എല്ലാവർക്കും ഭക്തവത്സലയായ ആശ്രിതവത്സലയായ ശ്രീ മുത്തശ്ശ്യമ്മയുടെ അനുഗ്രഹാശിസ്സുകൾ ഉണ്ടാകട്ടെ.</p>
-      </div>
-
-      <div style="margin-top:32px;">
-        <p class="table-title">തേവാര മഠം — സമർപ്പണ സംഖ്യ</p>
-        <div class="table-wrap reveal">
-          <table>
-            <caption class="sr-only">തേവാര മഠം നിർമ്മാണ ഇനങ്ങളും സൂചക തുകയും</caption>
-            <thead><tr><th scope="col">#</th><th scope="col">നിർമ്മാണ ഇനം</th><th scope="col">സൂചക തുക (₹)</th></tr></thead>
-            <tbody>
-              <tr><td>1</td><td>തേവാര മഠം തറ</td><td>2,50,000</td></tr>
-              <tr><td>2</td><td>ചുമര്</td><td>3,00,000</td></tr>
-              <tr><td>3</td><td>പൂമുഖം</td><td>2,00,000</td></tr>
-              <tr><td>4</td><td>തേവാര മഠം കട്ടില - 5 എണ്ണം (30000×5)</td><td>1,50,000</td></tr>
-              <tr><td>5</td><td>സോപാനം 3 എണ്ണം (30000×3)</td><td>90,000</td></tr>
-              <tr><td>6</td><td>കരികൽ തൂണുകൾ വരാന്തയ്ക്ക് - 18 എണ്ണം (25000×18)</td><td>4,50,000</td></tr>
-              <tr><td>7</td><td>കരികൽ തൂണുകളുടെ പീഠം 18 എണ്ണം (18×5000)</td><td>90,000</td></tr>
-              <tr><td>8</td><td>തൂണുകളുടെ ഇടയിലുള്ള കരികല്ലിന്റെ അരഭിത്തി 8 എണ്ണം (8×50000)</td><td>4,00,000</td></tr>
-              <tr><td>9</td><td>ജനലുകൾ - 6 എണ്ണം (6×25000)</td><td>1,50,000</td></tr>
-              <tr><td>10</td><td>കഴുക്കോൽ 150 എണ്ണം (150×6000)</td><td>9,00,000</td></tr>
-              <tr><td>11</td><td>തേവാര മഠം മച്ച് പാവൽ - (100000×3)</td><td>3,00,000</td></tr>
-              <tr><td>12</td><td>തേവാര മഠം ഓട് 3000 എണ്ണം</td><td>1,20,000</td></tr>
-              <tr><td>13</td><td>തേവാര മഠം മുഴുവൻ സംഖ്യ</td><td>34,00,000</td></tr>
-            </tbody>
-            <tfoot><tr><td></td><td>തേവാര മഠം — ആകെ സൂചക സംഖ്യ</td><td>34,00,000</td></tr></tfoot>
-          </table>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="lamp-divider" aria-hidden="true"><span class="line"></span>
-    <svg viewBox="0 0 30 40"><path class="flame" d="M15 2c4 6-1 8-1 12a4 4 0 0 0 8 0c0-1 0-2-.5-3 2 2 3 5 2 8-1.5 4-6 6-8.5 6-4 0-8-3-8-8 0-8 6-10 8-15z" fill="#F0D89A"/><path d="M8 24 h14 l-2 6 h-10 z" fill="#D4A94A"/><rect x="13" y="30" width="4" height="8" fill="#D4A94A"/><ellipse cx="15" cy="38" rx="9" ry="2" fill="#7A1B24"/></svg>
-  <span class="line"></span></div>
-
-  <!-- VANDE PADMANABHAM (NEW SECTION) -->
-  <section id="vande-padmanabham">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">പ്രണാമം</span>
-        <h2>വന്ദേ പത്മനാഭം</h2>
-      </div>
-      <div class="panel reveal">
-        <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);text-align:center;font-style:italic;margin-bottom:16px;font-weight:bold;">പ്രണാമം പ്രിയപ്പെട്ട പപ്പേട്ടന്...</p>
-        <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">കാലം എത്രകഴിഞ്ഞാലും ജനമനസ്സുകളിൽ ഒളിമങ്ങാതെ കിടക്കും പ്രിയപ്പെട്ട പപ്പേട്ടന്റെ ഓർമ്മകൾ. കാരണം ഞങ്ങൾക്ക് അത്രയും പ്രിയപ്പെട്ടവനായിരുനു പപ്പേട്ടൻ. വലിയ ചെറുപ്പമില്ലാതെ എല്ലാവരെയും ഒരുപോലെ സ്നേഹിച്ചു കരുതലോടെ ചേർത്തുപിടിച്ച മഹത് വ്യക്തിത്വം. വലുതും ചെറുതുമായ നിരവധി സ്വപ്‌നങ്ങൾ ഞങ്ങളുമായി പങ്കുവെച്ച ഞങ്ങളുടെ വഴികാട്ടി. നാടിന്റെ വികസനത്തിനായി ഞങ്ങളിലൊരാളായി ഞങ്ങൾക്ക് മുൻപേ നടന്ന നേതൃപാഠവം.</p>
-        <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">ഏറെക്കാലം ഒരു നാട് അനുഭവിച്ച യാത്രാ ദുരിതത്തിന് അറുതിവരുത്തിയ സ്വന്തം പിതാവിന്റെ ഓർമ്മക്കായി നാടിന് സമർപ്പിച്ച 'രാവണൻപാലം' ഒരു തിലകക്കുറിയായി നിലനിൽക്കുന്നു. പപ്പേട്ടന്റെ ഏറ്റവും വലിയ സ്വപ്നമായിരുന്നു കാലഹരണപ്പെട്ടുപോയ പൂകുന്നത്ത് കാട്ടുമാടം മുത്തശ്ശ്യമ്മ ക്ഷേത്രത്തിന്റെയും കാട്ടുമാടം കളരിയുടെയും പുനരുദ്ധാരണം.</p>
-        <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">അദ്ദേഹത്തിന്റെ ധീഷണമായ ചിന്തകൾക്കൊപ്പം ഒരു നാട് കൂട്ടുനിന്നപ്പോൾ ക്ഷേത്ര പുനരുദ്ധാരണം ത്വരിതഗതിയിൽ നടന്നു. പക്ഷെ വിധി ഞങ്ങൾക്കായി ഒരുക്കിവെച്ചത് മറ്റൊന്നായിരുന്നു. പുത്തൻവീട്ടിൽ പത്മനാഭൻ എന്ന ആ മഹാമാനുഷി അകാലത്തിൽ ഞങ്ങളെ തനിച്ചാക്കി വിഷ്ണുപാദം പൂകി. പക്ഷെ അദ്ദേഹത്തിന്റെ ഓർമ്മകൾ മാത്രം മതി ഞങ്ങൾക്ക് തുടങ്ങിവെച്ച സ്വപ്‌നങ്ങൾ പൂർണ്ണതയിൽ എത്തിക്കുവാൻ. തിരുവനന്തപുരത്ത് ഇരിക്കുമ്പോഴും സ്വന്തം നാടിനെ വല്ലാതെ സ്നേഹിച്ച ആ വലിയ മനസ്സിന് മുൻപിൽ ഞങ്ങൾ ശതകോടി കണ്ണീർ പ്രണാമങ്ങൾ അർപ്പിക്കുന്നു. കുടുംബത്തിന്റെ വേദനയിൽ ഈ നാടും പങ്കു ചേരുന്നു.</p>
-        <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">പപ്പേട്ടന്റെ വലിയ സ്വപ്നങ്ങളിൽ ഒന്നായിരുന്നു കാട്ടുമാടം കളരി. അദ്ദേഹത്തിന്റെ ഓർമ്മയ്ക്കായി ആ പേരിൽ മികച്ച രീതിയിൽ കളരി പണിത് നാടിന് സമർപ്പിക്കുക എന്നതാണ് നമുക്ക് പപ്പേട്ടനു വേണ്ടി ചെയ്യാനുള്ള ദൗത്യം. അതിനായി പപ്പേട്ടനെ സ്നേഹിച്ച മുഴുവൻ ആളുകളുടെയും സ്നേഹപൂർണ്ണമായ സഹകരണം പ്രതീക്ഷിക്കുന്നു.</p>
-      </div>
-    </div>
-  </section>
-
-  <div class="lamp-divider" aria-hidden="true"><span class="line"></span>
-    <svg viewBox="0 0 30 40"><path class="flame" d="M15 2c4 6-1 8-1 12a4 4 0 0 0 8 0c0-1 0-2-.5-3 2 2 3 5 2 8-1.5 4-6 6-8.5 6-4 0-8-3-8-8 0-8 6-10 8-15z" fill="#F0D89A"/><path d="M8 24 h14 l-2 6 h-10 z" fill="#D4A94A"/><rect x="13" y="30" width="4" height="8" fill="#D4A94A"/><ellipse cx="15" cy="38" rx="9" ry="2" fill="#7A1B24"/></svg>
-  <span class="line"></span></div>
-
-  <!-- KALARI -->
-  <section id="kalari">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">പൂകുന്നത്ത് കാട്ടുമാടം</span>
-        <h2>കളരി കലാക്ഷേത്രം</h2>
-      </div>
-      
-      <div class="panel reveal">
-        <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">ഭക്തിരസ പ്രാധാന്യത്തോടൊപ്പം മറ്റ് മേഖലകളിലും അതായത് കലാപരവും കായികപരവുമായ രംഗത്ത് ശ്രദ്ധയൂന്നി ആരോഗ്യമുള്ള സമൂഹത്തെ സൃഷ്ടിക്കുക എന്നതാണ് ക്ഷേത്ര സേവാസമിതിയുടെ ലക്ഷ്യമാണ്. അതിനായി കാട്ടുമാടം കളരി കലാക്ഷേത്രം പ്രവർത്തനം ആരംഭിച്ചിട്ടുണ്ട്. മുത്തശ്ശ്യമ്മ ക്ഷേത്രവും ഏറ്റവും പഴക്കംചെന്ന ആയോധന കലയായ കളരിയും തമ്മിൽ ഏറെ ബന്ധമുണ്ട്.</p>
-        <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">ക്ഷേത്രത്തിൽ ചെണ്ട, നൃത്തം, സംഗീതം തുടങ്ങിയ കലാരൂപങ്ങളും ആരംഭിച്ചിട്ടുണ്ട്. ഇവയൊക്കെ ശരിയായ രീതിയിലേക്ക് വന്നാൽ ഒരു ദേവീക്ഷേത്രത്തിൽ വേണ്ട എല്ലാ പ്രൗഢിയും ശ്രീ പൂകുന്നത്ത് കാട്ടുമാടം മുത്തശ്ശ്യമ്മ ക്ഷേത്രം കൈവരിക്കും.</p>
-        
-        <!-- ADD KALARI WEAPONS PHOTO HERE -->
-        <img src="./images/kalari_weapons.jpg" alt="കളരി ആയുധങ്ങൾ" class="img-fluid img-rounded img-skeleton" loading="lazy" decoding="async" onload="this.classList.remove('img-skeleton')" onerror="this.closest('.panel').classList.add('no-photo');this.remove();">
-      </div>
-
-      <!-- POOKUNNATHAKAM -->
-      <div class="panel reveal" style="margin-top: 32px;">
-        <h3 style="color:var(--maroon-mid);text-align:center;margin-bottom:16px;">പൂകുന്നത്തകം</h3>
-        <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">നിലവിൽ നടന്ന് വരുന്ന കാട്ടുമാടം കളരി സജീവമാക്കി മറ്റ് കളരികളുടെ സഹകരണത്തോടെ വർഷത്തിൽ പൂകുന്നത്തകം എന്ന പേരിൽ സംസ്ഥാനത്തിന്റെ വിവിധയിടങ്ങളിൽ കളരി പ്രദർശനങ്ങൾ സംഘടിപ്പിക്കാൻ പദ്ധതിയുണ്ട്. അച്ചടക്കമുള്ള, ആരോഗ്യമുള്ള, സാമൂഹിക പ്രതിബദ്ധതയുള്ള ഒരു പുതിയ യുവതയെ വാർത്തെടുക്കുക മാത്രമാണ് ഈ ഒരു കാര്യത്തിലൂടെ ലക്ഷ്യമിടുന്നത്.</p>
-        <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">ഒപ്പം തച്ചോളി ഒതേനനും, ആരോമൽ ചേകവരും ഉണ്ണിയാർച്ചയും തുടങ്ങി നിരവധിയായ വീരന്മാർ അരങ്ങ് വാണ ഈ നാട്ടിൽ കളരിയെന്ന ആയോധന കലയുടെ അനന്ത സാധ്യതകൾ ഒളിമങ്ങാതെ സംരക്ഷിക്കുക എന്ന സുപ്രധാന ദൗത്യവും കാട്ടുമാടം കളരി കലാക്ഷേത്രം ലക്ഷ്യം വെക്കുന്നു.</p>
-        
-        <!-- ADD KALARI PERFORMANCE PHOTO HERE -->
-        <img src="./images/kalari_performance.jpg" alt="കളരി പയറ്റ്" class="img-fluid img-rounded img-skeleton" loading="lazy" decoding="async" onload="this.classList.remove('img-skeleton')" onerror="this.closest('.panel').classList.add('no-photo');this.remove();">
-      </div>
-
-      <div style="margin-top:32px;">
-        <p class="table-title">പൂകുന്നത്ത് കാട്ടുമാടം കളരി നിർമ്മാണ ചെലവ്</p>
-        <div class="table-wrap reveal">
-          <table>
-            <caption class="sr-only">കളരി നിർമ്മാണ ഇനങ്ങളും സൂചക തുകയും</caption>
-            <thead><tr><th scope="col">#</th><th scope="col">നിർമ്മാണ ഇനം</th><th scope="col">സൂചക തുക (₹)</th></tr></thead>
-            <tbody>
-              <tr><td>1</td><td>കളരിസ്ഥാനത്തിന്റെ നിർമ്മാണ ചെലവ് അടിത്തറ അടക്കം</td><td>3,00,000</td></tr>
-              <tr><td>2</td><td>പൂത്തറ</td><td>1,00,000</td></tr>
-              <tr><td>3</td><td>നിലം തറയോട് പാകൽ</td><td>3,00,000</td></tr>
-              <tr><td>4</td><td>മതിലിന് ചുറ്റും കരികൽ പതിക്കാൻ</td><td>2,00,000</td></tr>
-              <tr><td>5</td><td>കളരിയുടെ പുറം ചുമര്</td><td>4,00,000</td></tr>
-              <tr><td>6</td><td>മുന്നിലെ വരാന്ത തറയടക്കം</td><td>2,00,000</td></tr>
-              <tr><td>7</td><td>കരികൽ തൂണുകൾ 10 എണ്ണം (10×25000)</td><td>2,50,000</td></tr>
-              <tr><td>8</td><td>2 ഭാഗം അഴികൂട്ടിന്</td><td>4,00,000</td></tr>
-              <tr><td>9</td><td>മേൽക്കൂര ഉത്തരം</td><td>4,00,000</td></tr>
-              <tr><td>10</td><td>കഴുക്കോൽ (100×5000)</td><td>5,00,000</td></tr>
-              <tr><td>11</td><td>ഓട് (3000 എണ്ണം)</td><td>1,20,000</td></tr>
-            </tbody>
-            <tfoot><tr><td></td><td>ആകെ സൂചക എസ്റ്റിമേറ്റ്</td><td>31,70,000</td></tr></tfoot>
-          </table>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="lamp-divider" aria-hidden="true"><span class="line"></span>
-    <svg viewBox="0 0 30 40"><path class="flame" d="M15 2c4 6-1 8-1 12a4 4 0 0 0 8 0c0-1 0-2-.5-3 2 2 3 5 2 8-1.5 4-6 6-8.5 6-4 0-8-3-8-8 0-8 6-10 8-15z" fill="#F0D89A"/><path d="M8 24 h14 l-2 6 h-10 z" fill="#D4A94A"/><rect x="13" y="30" width="4" height="8" fill="#D4A94A"/><ellipse cx="15" cy="38" rx="9" ry="2" fill="#7A1B24"/></svg>
-  <span class="line"></span></div>
-
-  <!-- VRIKSHAVANAM -->
-  <section id="vrikshavanam">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">ഹരിത പദ്ധതി</span>
-        <h2>ജന നക്ഷത്ര വൃക്ഷവനം</h2>
-      </div>
-      
-      <div class="panel reveal" style="margin-bottom:28px;">
-        <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">ശ്രീ പൂകുന്നത്ത് കാട്ടുമാടം മുത്തശ്ശ്യമ്മ ക്ഷേത്രം ഏറെ പ്രാധാന്യത്തോടെ നടപ്പിൽ വരുത്താൻ ഉദ്ദേശിക്കുന്ന ഒരു പദ്ധതിയാണ് ജനനക്ഷത്ര വൃക്ഷവനം. ഭാരതീയ ജ്യോതിഷത്തിൽ അശ്വതി മുതൽ രേവതി വരെയുള്ള 27 നക്ഷത്രങ്ങളിൽ ഓരോ നക്ഷത്രത്തിനും ഓരോ വൃക്ഷം കൽപ്പിക്കപ്പെട്ടിട്ടുണ്ട്. ഓരോരുത്തരും അവരവരുടെ ജന്മനക്ഷത്ര വൃക്ഷം നട്ട് പരിപാലിച്ചാൽ ആയുസ്സും ആരോഗ്യവും ഐശ്വര്യവും വർദ്ധിക്കുമെന്നാണ് ഹൈന്ദവ വിശ്വാസം.</p>
-        <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">ക്ഷേത്ര പറമ്പിനോട് ചേർന്ന് 27 ജനനക്ഷത്ര വൃക്ഷങ്ങളും നട്ടുപിടിപ്പിച്ച് ഓരോ വൃക്ഷത്തിനും പ്രത്യേകം തറകൾ കെട്ടി സംരക്ഷിച്ച് മനോഹരമായ ഒരു നക്ഷത്രവനം ഒരുക്കാൻ ക്ഷേത്രം ലക്ഷ്യമിടുന്നു.</p>
-        
-        <p class="table-title" style="color:var(--maroon-mid); margin-top: 20px;">ജന്മനക്ഷത്രവും അതിന്റെ വൃക്ഷവും</p>
-        <div class="nk-grid stagger">
-            <div class="nk-item"><b>അശ്വതി</b><span>കാഞ്ഞിരം</span></div>
-            <div class="nk-item"><b>ഭരണി</b><span>നെല്ലി</span></div>
-            <div class="nk-item"><b>കാർത്തിക</b><span>അത്തി</span></div>
-            <div class="nk-item"><b>രോഹിണി</b><span>ഞാവൽ</span></div>
-            <div class="nk-item"><b>മകീര്യം</b><span>കരിങ്ങാലി</span></div>
-            <div class="nk-item"><b>തിരുവാതിര</b><span>കരിമരം</span></div>
-            <div class="nk-item"><b>പുണർതം</b><span>മുള</span></div>
-            <div class="nk-item"><b>പൂയ്യം</b><span>അരയാൽ</span></div>
-            <div class="nk-item"><b>ആയില്യം</b><span>നാഗചെമ്പ</span></div>
-            <div class="nk-item"><b>മകം</b><span>പേരാൽ</span></div>
-            <div class="nk-item"><b>പൂരം</b><span>ചമത-പ്ലാശ്</span></div>
-            <div class="nk-item"><b>ഉത്രം</b><span>ഇത്തി</span></div>
-            <div class="nk-item"><b>അത്തം</b><span>അമ്പഴം</span></div>
-            <div class="nk-item"><b>ചിത്തിര</b><span>കൂവളം</span></div>
-            <div class="nk-item"><b>ചോതി</b><span>നീർമരുത്</span></div>
-            <div class="nk-item"><b>വിശാഖം</b><span>വയ്യങ്കത</span></div>
-            <div class="nk-item"><b>അനിഴം</b><span>ഇലഞ്ഞി</span></div>
-            <div class="nk-item"><b>തൃക്കേട്ട</b><span>വെട്ടി</span></div>
-            <div class="nk-item"><b>മൂലം</b><span>വെള്ളപൈൻ</span></div>
-            <div class="nk-item"><b>പൂരാടം</b><span>വഞ്ചിമരം</span></div>
-            <div class="nk-item"><b>ഉത്രാടം</b><span>പ്ലാവ്</span></div>
-            <div class="nk-item"><b>തിരുവോണം</b><span>എരുക്ക്</span></div>
-            <div class="nk-item"><b>അവിട്ടം</b><span>വഹ്നി</span></div>
-            <div class="nk-item"><b>ചതയം</b><span>കടമ്പ്</span></div>
-            <div class="nk-item"><b>പൂരുരുട്ടാതി</b><span>തേന്മാവ്</span></div>
-            <div class="nk-item"><b>ഉത്രട്ടാതി</b><span>കരിമ്പന</span></div>
-            <div class="nk-item"><b>രേവതി</b><span>ഇലിപ്പ</span></div>
-        </div>
-      </div>
-
-      <p class="table-title">നക്ഷത്ര വൃക്ഷം വഴിപാടായി സമർപ്പിക്കാൻ</p>
-      <div class="table-wrap reveal">
-        <table>
-          <caption class="sr-only">നക്ഷത്രവൃക്ഷ സമർപ്പണ നിരക്കുകൾ</caption>
-          <thead><tr><th scope="col">ഇനം</th><th scope="col">തുക (₹)</th></tr></thead>
-          <tbody>
-            <tr><td>27 ജനനക്ഷത്ര വൃക്ഷം പ്രതിഷ്ഠാ യജ്ഞം</td><td>27,000</td></tr>
-            <tr><td>ഒരു നക്ഷത്ര വൃക്ഷത്തിന്റെ തറ നിർമ്മാണ ചിലവ്</td><td>1,00,000</td></tr>
-            <tr><td>ഒരു വൃക്ഷം പ്രതിഷ്ഠിക്കാനും ആജീവനാന്ത പൂഷ്പാഞ്ജലിക്കും</td><td>3,000</td></tr>
-            <tr><td>ഒരു വർഷം നക്ഷത്ര പൂജയ്ക്കും മറ്റു വിശേഷാൽ പൂജയ്ക്കും</td><td>1,000</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <div class="lamp-divider" aria-hidden="true"><span class="line"></span>
-    <svg viewBox="0 0 30 40"><path class="flame" d="M15 2c4 6-1 8-1 12a4 4 0 0 0 8 0c0-1 0-2-.5-3 2 2 3 5 2 8-1.5 4-6 6-8.5 6-4 0-8-3-8-8 0-8 6-10 8-15z" fill="#F0D89A"/><path d="M8 24 h14 l-2 6 h-10 z" fill="#D4A94A"/><rect x="13" y="30" width="4" height="8" fill="#D4A94A"/><ellipse cx="15" cy="38" rx="9" ry="2" fill="#7A1B24"/></svg>
-  <span class="line"></span></div>
-
-  <!-- ORUPIDI MANNU -->
-  <section id="orupidimannu">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">ഭൂമി സമർപ്പണം</span>
-        <h2>മുത്തശ്ശ്യമ്മയ്ക്ക് ഒരുപിടി മണ്ണ്</h2>
-      </div>
-      <div class="panel reveal">
-        <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">ക്ഷേത്രക്കുളം നിലകൊള്ളുന്ന 40 സെന്റ് ഭൂമിക്കൊപ്പം അന്യാധീനപ്പെട്ട സ്ഥലത്ത് ബാക്കിവരുന്ന 72 സെന്റ് കൂടി ക്ഷേത്ര സംരക്ഷണ സമിതിക്ക് വിലയ്ക്കു നൽകാൻ ഇപ്പോഴത്തെ കൈവശക്കാർ സമ്മതിച്ചിട്ടുണ്ട്. ഈ ഭൂമി തിരികെ വാങ്ങാൻ ആയിരം രൂപ വീതം ഒരു "പിടി മണ്ണ്" ആയി സമർപ്പിക്കുന്ന 100 ഭക്തരെ ഈ പദ്ധതിയിൽ പങ്കാളികളാക്കുകയാണ് ലക്ഷ്യം.</p>
-        <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">മുത്തശ്ശ്യമ്മയ്ക്ക് ഒരുപിടി മണ്ണ് മനസ്സോടെ സമർപ്പിച്ചാൽ ആ ആളെ അമ്മ കൈവിടില്ല എന്നാണ് വിശ്വാസം. ഭാവിയിൽ സ്വന്തമായി ഭൂമി സമ്പാദിക്കാനും വീട് വെക്കാനുമുള്ള ആഗ്രഹത്തിന്റെ അസ്ഥിവാരമായി ഈ സമർപ്പണം മാറുമെന്നും ഭക്തർ വിശ്വസിക്കുന്നു.</p>
-        <div class="cta-row" style="justify-content:center;margin-top:20px;">
-          <a href="#contact" class="btn btn-primary">ഒരുപിടി മണ്ണ് സമർപ്പിക്കാൻ ബന്ധപ്പെടുക</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="lamp-divider" aria-hidden="true"><span class="line"></span>
-    <svg viewBox="0 0 30 40"><path class="flame" d="M15 2c4 6-1 8-1 12a4 4 0 0 0 8 0c0-1 0-2-.5-3 2 2 3 5 2 8-1.5 4-6 6-8.5 6-4 0-8-3-8-8 0-8 6-10 8-15z" fill="#F0D89A"/><path d="M8 24 h14 l-2 6 h-10 z" fill="#D4A94A"/><rect x="13" y="30" width="4" height="8" fill="#D4A94A"/><ellipse cx="15" cy="38" rx="9" ry="2" fill="#7A1B24"/></svg>
-  <span class="line"></span></div>
-
-  <!-- GOSHALA -->
-  <section id="goshala">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">ഗോസംരക്ഷണം</span>
-        <h2>കാമധേനു ഗോശാല</h2>
-      </div>
-      <div class="panel reveal">
-        <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">ഗോവർദ്ധന പർവ്വതത്തെ കുടയാക്കി ഭൂമിയെയും പ്രകൃതിയെയും സർവ്വചരാചരങ്ങളെയും കാത്ത ഭഗവാന്റെ ചുറ്റും അനുസരണയോടെ ചെവിയാട്ടി നിൽക്കുന്ന പശുക്കിടാങ്ങൾ കണ്ണിനു കുളിർമ്മ നൽകുന്ന കാഴ്ചയാണ്. ഭാരതം ഗോമാതാവിനെ പൂജിക്കുന്ന അതേ ഭക്തിയോടെ, ക്ഷേത്ര പരിസരത്ത് ഒരു ഗോശാല സ്ഥാപിക്കാനും പശുപരിപാലനത്തിലൂടെ പഞ്ചഗവ്യാധിഷ്ഠിത പൂജാക്രമങ്ങൾ പരിപോഷിപ്പിക്കാനും ക്ഷേത്ര സേവാസമിതി ലക്ഷ്യമിടുന്നു.</p>
-        
-        <!-- ADD GOSHALA PHOTO HERE -->
-        <img src="./images/goshala.jpg" alt="ഗോശാല" class="img-fluid img-rounded img-skeleton" loading="lazy" decoding="async" onload="this.classList.remove('img-skeleton')" onerror="this.closest('.panel').classList.add('no-photo');this.remove();">
-      </div>
-    </div>
-  </section>
-
-  <div class="lamp-divider" aria-hidden="true"><span class="line"></span>
-    <svg viewBox="0 0 30 40"><path class="flame" d="M15 2c4 6-1 8-1 12a4 4 0 0 0 8 0c0-1 0-2-.5-3 2 2 3 5 2 8-1.5 4-6 6-8.5 6-4 0-8-3-8-8 0-8 6-10 8-15z" fill="#F0D89A"/><path d="M8 24 h14 l-2 6 h-10 z" fill="#D4A94A"/><rect x="13" y="30" width="4" height="8" fill="#D4A94A"/><ellipse cx="15" cy="38" rx="9" ry="2" fill="#7A1B24"/></svg>
-  <span class="line"></span></div>
-
-  <!-- VEDAPADANASHALA -->
-  <section id="vedapadanashala">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">വിദ്യാഭ്യാസം</span>
-        <h2>വേദപഠനശാല</h2>
-      </div>
-      <div class="panel reveal">
-        <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">ക്ഷേത്ര പൂജാരികളെ കിട്ടാൻ ഏറെ പ്രയാസപ്പെടുന്ന വർത്തമാന കാലത്ത്, മുത്തശ്ശ്യമ്മ ക്ഷേത്രത്തോട് അനുബന്ധിച്ച് ഒരു ഗുരുകുല സമ്പ്രദായ വേദപഠനശാല സ്ഥാപിക്കാൻ ആലോചനയുണ്ട്. ജാതീയമായ വേർതിരിവുകൾക്ക് ഇടം നൽകാതെ, വിശ്വാസിയായ ഏതൊരു ഹിന്ദുവിനും ഈ വേദപഠനം പ്രയോജനപ്പെടുത്താൻ സാധിക്കുന്ന വിധമാണ് പദ്ധതി വിഭാവനം ചെയ്യുന്നത്.</p>
-        
-        <!-- ADD VEDAPADANASHALA PHOTO HERE -->
-        <img src="./images/vedapadanashala.jpg" alt="വേദപഠനശാല" class="img-fluid img-rounded img-skeleton" loading="lazy" decoding="async" onload="this.classList.remove('img-skeleton')" onerror="this.closest('.panel').classList.add('no-photo');this.remove();">
-      </div>
-    </div>
-  </section>
-
-  <div class="lamp-divider" aria-hidden="true"><span class="line"></span>
-    <svg viewBox="0 0 30 40"><path class="flame" d="M15 2c4 6-1 8-1 12a4 4 0 0 0 8 0c0-1 0-2-.5-3 2 2 3 5 2 8-1.5 4-6 6-8.5 6-4 0-8-3-8-8 0-8 6-10 8-15z" fill="#F0D89A"/><path d="M8 24 h14 l-2 6 h-10 z" fill="#D4A94A"/><rect x="13" y="30" width="4" height="8" fill="#D4A94A"/><ellipse cx="15" cy="38" rx="9" ry="2" fill="#7A1B24"/></svg>
-  <span class="line"></span></div>
-
-  <!-- KSHETRAKULAM -->
-  <section id="kulam">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">ജലാശയം</span>
-        <h2>ക്ഷേത്രക്കുളം</h2>
-      </div>
-      <div class="panel reveal">
-        <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">പുതുക്കിപ്പണിത ശ്രീകോവിലിനു മുന്നിലായി സ്ഥിതി ചെയ്യുന്ന ക്ഷേത്രക്കുളം പഴയകാലത്തെ പ്രൗഢിയോടെ പുനർനിർമ്മിക്കാൻ ലക്ഷ്യമിടുന്നു. ക്ഷേത്രത്തിനും ക്ഷേത്രത്തട്ടകത്തിനും ഉപയോഗപ്രദമാവുന്ന ഈ കുളം, നാടിന്റെ വരൾച്ച മാറ്റാൻ ഉപകരിക്കുന്ന ഒരു മഹാസംരംഭം കൂടിയാണ്. ഓരോ ഭക്തനും ഈ നിർമ്മാണത്തിൽ പങ്കാളിയാവാൻ സാധിക്കും.</p>
-        
-        <!-- ADD KSHETRAKULAM PHOTO HERE -->
-        <img src="./images/kulam.jpg" alt="ക്ഷേത്രക്കുളം" class="img-fluid img-rounded img-skeleton" loading="lazy" decoding="async" onload="this.classList.remove('img-skeleton')" onerror="this.closest('.panel').classList.add('no-photo');this.remove();">
-      </div>
-    </div>
-  </section>
-
-  <div class="lamp-divider" aria-hidden="true"><span class="line"></span>
-    <svg viewBox="0 0 30 40"><path class="flame" d="M15 2c4 6-1 8-1 12a4 4 0 0 0 8 0c0-1 0-2-.5-3 2 2 3 5 2 8-1.5 4-6 6-8.5 6-4 0-8-3-8-8 0-8 6-10 8-15z" fill="#F0D89A"/><path d="M8 24 h14 l-2 6 h-10 z" fill="#D4A94A"/><rect x="13" y="30" width="4" height="8" fill="#D4A94A"/><ellipse cx="15" cy="38" rx="9" ry="2" fill="#7A1B24"/></svg>
-  <span class="line"></span></div>
-
-  <!-- NAGAKKAVU -->
-  <section id="nagakkavu">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">ശക്തി കേന്ദ്രം</span>
-        <h2>നാഗക്കാവ് - നാഗക്കോട്ട</h2>
-      </div>
-      <div class="panel reveal">
-        <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">ഉഗ്രശക്തിശാലികളായ നാഗദൈവങ്ങൾ കുടികൊണ്ട നാഗക്കോട്ട, ക്ഷേത്രത്തിന്റെ ഒരു പ്രധാന ശക്തിവിശേഷമായിരുന്നു. അപൂർവ്വമായ ഔഷധസസ്യങ്ങളാൽ സമ്പുഷ്ടമായ ഈ കാവ്, സൽസന്താന ലബ്ധിക്കും മംഗല്യഭാഗ്യത്തിനുമായി ഭക്തർ പ്രത്യേകം വഴിപാടുകൾ നടത്തിയിരുന്ന സ്ഥലമാണ്. നാഗങ്ങൾ സ്വസ്ഥമായി വാണിരുന്ന കിണറിന്റെ അവശിഷ്ടങ്ങൾ ഇന്നും ഇവിടെ കാണാം. പൗരാണിക പ്രൗഢിയോടെ കിണർ നവീകരിക്കാനും നാഗക്കോട്ട പുനർനിർമ്മിക്കാനും ക്ഷേത്ര സേവാസമിതി ലക്ഷ്യമിടുന്നു.</p>
-        
-        <!-- ADD NAGAKKAVU PHOTO HERE -->
-        <img src="./images/nagakkavu.jpg" alt="നാഗക്കാവ്" class="img-fluid img-rounded img-skeleton" loading="lazy" decoding="async" onload="this.classList.remove('img-skeleton')" onerror="this.closest('.panel').classList.add('no-photo');this.remove();">
-      </div>
-    </div>
-  </section>
-
-  <div class="lamp-divider" aria-hidden="true"><span class="line"></span>
-    <svg viewBox="0 0 30 40"><path class="flame" d="M15 2c4 6-1 8-1 12a4 4 0 0 0 8 0c0-1 0-2-.5-3 2 2 3 5 2 8-1.5 4-6 6-8.5 6-4 0-8-3-8-8 0-8 6-10 8-15z" fill="#F0D89A"/><path d="M8 24 h14 l-2 6 h-10 z" fill="#D4A94A"/><rect x="13" y="30" width="4" height="8" fill="#D4A94A"/><ellipse cx="15" cy="38" rx="9" ry="2" fill="#7A1B24"/></svg>
-  <span class="line"></span></div>
-
-  <!-- SREEMOOLA STHANAM -->
-  <section id="sreemoolam">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">മൂലസ്ഥാനം</span>
-        <h2>മുത്തശ്ശ്യമ്മ ശ്രീമൂല സ്ഥാനം</h2>
-      </div>
-      <div class="panel reveal">
-        <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">ത്രിപുരസുന്ദരി മുത്തശ്ശ്യമ്മ ആദ്യമായി കുടികൊണ്ട ശ്രീമൂല സ്ഥാനം ഇന്നത്തെ ക്ഷേത്രത്തിന്റെ കിഴക്കു മാറിയാണെന്ന് കരുതപ്പെടുന്നു. ആ പുണ്യസ്ഥലം കാത്തുസൂക്ഷിക്കാൻ ത്രിമൂർത്തി സങ്കല്പത്തിലുള്ള മൂന്ന് മഹാവൃക്ഷങ്ങൾ അവിടെ പ്രതിഷ്ഠിച്ചിരിക്കുന്നു.</p>
-        <p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">ശ്രീമൂലസ്ഥാനത്ത് ഭക്തർക്ക് പ്രാർത്ഥിക്കാനും ആരാധിക്കാനുമുള്ള സൗകര്യം ഒരുക്കുകയാണ് ലക്ഷ്യം. മലയാളക്കരയിലെ രണ്ട് മഹാമാന്ത്രിക പരമ്പരയിലെ ഇന്നത്തെ സ്ഥാനികരും ആചാര്യന്മാരുമായ ബ്രഹ്മശ്രീ കാട്ടുമാടം ഈശാനൻ നമ്പൂതിരിപ്പാടും ബ്രഹ്മശ്രീ പാറോളി പുരുഷോത്തമൻ ഉണ്ണി നമ്പൂതിരിപ്പാടുമാണ് ഈ കർമ്മം നിർവ്വഹിക്കുന്നത്.</p>
-        
-        <!-- ADD SREEMOOLAM PHOTO HERE -->
-        <img src="./images/sreemoolam.jpg" alt="ശ്രീമൂല സ്ഥാനം" class="img-fluid img-rounded img-skeleton" loading="lazy" decoding="async" onload="this.classList.remove('img-skeleton')" onerror="this.closest('.panel').classList.add('no-photo');this.remove();">
-      </div>
-      
-      <div style="margin-top:28px;">
-        <p class="table-title">ശ്രീമൂല സ്ഥാനം — സമർപ്പണ സംഖ്യ</p>
-        <div class="table-wrap reveal">
-          <table>
-            <caption class="sr-only">ശ്രീമൂല സ്ഥാനം നിർമ്മാണ ഇനങ്ങളും സൂചക തുകയും</caption>
-            <thead><tr><th scope="col">#</th><th scope="col">നിർമ്മാണ ഇനം</th><th scope="col">സൂചക തുക (₹)</th></tr></thead>
-            <tbody>
-              <tr><td>1</td><td>ശ്രീ മൂലസ്ഥാനം തറ</td><td>1,00,000</td></tr>
-              <tr><td>2</td><td>കല്ല് (500×120)</td><td>60,000</td></tr>
-              <tr><td>3</td><td>കരികൽ കട്ടില</td><td>25,000</td></tr>
-              <tr><td>4</td><td>തൂൺ (4 എണ്ണം)</td><td>1,00,000</td></tr>
-              <tr><td>5</td><td>മുന്നിലെ മണ്ഡപം</td><td>2,00,000</td></tr>
-              <tr><td>6</td><td>പ്രദിക്ഷിണ വഴി</td><td>2,00,000</td></tr>
-            </tbody>
-            <tfoot><tr><td></td><td>ആകെ സൂചക സംഖ്യ</td><td>6,85,000</td></tr></tfoot>
-          </table>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- GALLERY -->
-  <section id="gallery">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">ഗാലറി</span>
-        <h2>ക്ഷേത്ര ദൃശ്യങ്ങൾ</h2>
-      </div>
-      <div class="gallery-grid stagger">
-        <!-- ADD GALLERY PHOTOS HERE -->
-        <div class="gtile"><img src="./images/gallery_1.jpg" alt="ക്ഷേത്ര ദൃശ്യം 1" class="gallery-img" loading="lazy" decoding="async"></div>
-        <div class="gtile"><img src="./images/gallery_2.jpg" alt="ക്ഷേത്ര ദൃശ്യം 2" class="gallery-img" loading="lazy" decoding="async"></div>
-        <div class="gtile"><img src="./images/gallery_3.jpg" alt="ക്ഷേത്ര ദൃശ്യം 3" class="gallery-img" loading="lazy" decoding="async"></div>
-        <div class="gtile"><img src="./images/gallery_4.jpg" alt="ക്ഷേത്ര ദൃശ്യം 4" class="gallery-img" loading="lazy" decoding="async"></div>
-      </div>
-    </div>
-  </section>
-
-  <div class="lamp-divider" aria-hidden="true"><span class="line"></span>
-    <svg viewBox="0 0 30 40"><path class="flame" d="M15 2c4 6-1 8-1 12a4 4 0 0 0 8 0c0-1 0-2-.5-3 2 2 3 5 2 8-1.5 4-6 6-8.5 6-4 0-8-3-8-8 0-8 6-10 8-15z" fill="#F0D89A"/><path d="M8 24 h14 l-2 6 h-10 z" fill="#D4A94A"/><rect x="13" y="30" width="4" height="8" fill="#D4A94A"/><ellipse cx="15" cy="38" rx="9" ry="2" fill="#7A1B24"/></svg>
-  <span class="line"></span></div>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <span class="eyebrow">സമ്പർക്കം</span>
-        <h2>ഞങ്ങളെ ബന്ധപ്പെടാം</h2>
-      </div>
-      <div class="panel contact-grid reveal">
-        <div>
-          <h3 style="color:var(--maroon-mid);font-size:20px;">വിലാസവും വിവരങ്ങളും</h3>
-          <ul class="info-list">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>കേരള ക്ഷേത്ര സംരക്ഷണ സമിതി 3440/2022, കണ്ണൂർ, തലശ്ശേരി, പാനൂർ, പൂക്കോം</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 5c0 8 7 15 15 15l3-4-6-3-2 2c-3-1.5-4.5-3-6-6l2-2-3-6z"/></svg>9847501188 &nbsp;·&nbsp; 9895124698</li>
-          </ul>
-          <div class="cta-row" style="margin-top:26px;">
-            <a href="https://wa.me/919847501188" class="btn btn-primary" style="background:var(--maroon-mid);color:var(--gold-light);">വാട്സാപ്പിൽ സന്ദേശം അയക്കുക</a>
-          </div>
-        </div>
-        <div class="map-box map-placeholder" role="img" aria-label="ക്ഷേത്ര സ്ഥാന ഭൂപടം — ഉടൻ ചേർക്കും">
-          <span>📍 ഭൂപടം ഉടൻ ചേർക്കും</span>
-        </div>
+      <div class="explore-grid stagger">
+        <a class="explore-card reveal" href="history.html">
+          <span class="ec-title">ചരിത്രം</span>
+          <span class="ec-desc">രണ്ട് നൂറ്റാണ്ടിന്റെ വിശ്വാസത്തിന്റെ കഥ, വന്ദേ പത്മനാഭം സ്മരണയും</span>
+          <span class="ec-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="explore-card reveal" href="renovation.html">
+          <span class="ec-title">പുനരുദ്ധാരണം</span>
+          <span class="ec-desc">ക്ഷേത്രം, തേവാര മഠം, ശ്രീമൂല സ്ഥാനം — നിർമ്മാണ വിവരങ്ങളും സമർപ്പണവും</span>
+          <span class="ec-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="explore-card reveal" href="pooja.html">
+          <span class="ec-title">വഴിപാടുകൾ</span>
+          <span class="ec-desc">നാഗക്കാവ്, ക്ഷേത്രക്കുളം, ഗോശാല, വേദപഠനശാല, നക്ഷത്രവനം</span>
+          <span class="ec-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="explore-card reveal" href="kalari.html">
+          <span class="ec-title">കളരി കലാക്ഷേത്രം</span>
+          <span class="ec-desc">കാട്ടുമാടം കളരിയും പൂകുന്നത്തകം പ്രദർശനങ്ങളും</span>
+          <span class="ec-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="explore-card reveal" href="gallery.html">
+          <span class="ec-title">ഗാലറി</span>
+          <span class="ec-desc">ക്ഷേത്ര ദൃശ്യങ്ങൾ കാണാം</span>
+          <span class="ec-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="explore-card reveal" href="contact.html">
+          <span class="ec-title">ബന്ധപ്പെടാം</span>
+          <span class="ec-desc">വിലാസം, ഫോൺ നമ്പറുകൾ, വാട്സാപ്പ്</span>
+          <span class="ec-arrow" aria-hidden="true">→</span>
+        </a>
       </div>
     </div>
   </section>
@@ -591,10 +161,10 @@
       <p class="fname">ശ്രീ പൂകുന്നത്ത് കാട്ടുമാടം മുത്തശ്ശ്യമ്മ ക്ഷേത്രം · പൂക്കോത്ത് മഠം<br>പൂക്കോം, തലശ്ശേരി, കണ്ണൂർ</p>
     </div>
     <div class="foot-links">
-      <a href="#charithram">ചരിത്രം</a>
-      <a href="#punarudharanam">പുനരുദ്ധാരണം</a>
-      <a href="#kalari">കളരി</a>
-      <a href="#contact">സമ്പർക്കം</a>
+      <a href="history.html">ചരിത്രം</a>
+      <a href="renovation.html">പുനരുദ്ധാരണം</a>
+      <a href="kalari.html">കളരി</a>
+      <a href="contact.html">സമ്പർക്കം</a>
     </div>
   </div>
   <div class="foot-bottom">© 2026 ശ്രീ പൂകുന്നത്ത് കാട്ടുമാടം മുത്തശ്ശ്യമ്മ ക്ഷേത്രം</div>
