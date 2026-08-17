@@ -170,6 +170,81 @@
     toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 2200);
   };
 
+  /* ---------- masapooja offering selector ---------- */
+  var poojaSelector = document.getElementById('poojaSelector');
+  if (poojaSelector) {
+    var poojaRows = Array.prototype.slice.call(poojaSelector.querySelectorAll('.pooja-row'));
+    var totalEl = document.getElementById('poojaTotalAmount');
+    var bookBtn = document.getElementById('poojaBookBtn');
+    var selectAllBtn = document.getElementById('poojaSelectAll');
+    var clearAllBtn = document.getElementById('poojaClearAll');
+
+    function clampQty(v) {
+      v = parseInt(v, 10);
+      if (isNaN(v) || v < 0) v = 0;
+      if (v > 99) v = 99;
+      return v;
+    }
+
+    function refreshPooja() {
+      var total = 0;
+      var chosen = [];
+      poojaRows.forEach(function (row) {
+        var input = row.querySelector('.qty-input');
+        var qty = clampQty(input.value);
+        var price = parseInt(row.dataset.price, 10) || 0;
+        row.classList.toggle('has-qty', qty > 0);
+        if (qty > 0) {
+          total += qty * price;
+          chosen.push(row.dataset.name + ' × ' + qty);
+        }
+      });
+      if (totalEl) totalEl.textContent = '₹' + total.toLocaleString('en-IN');
+      if (bookBtn) {
+        var msg = chosen.length
+          ? 'നമസ്കാരം, എനിക്ക് ഈ വഴിപാടുകൾ ബുക്ക് ചെയ്യണം:\n' + chosen.join('\n') + '\nആകെ: ₹' + total.toLocaleString('en-IN')
+          : 'നമസ്കാരം, മാസപൂജയെക്കുറിച്ച് അറിയാൻ ആഗ്രഹിക്കുന്നു.';
+        bookBtn.href = 'https://wa.me/919847501188?text=' + encodeURIComponent(msg);
+      }
+    }
+
+    poojaSelector.addEventListener('click', function (e) {
+      var btn = e.target.closest('.qbtn');
+      if (!btn) return;
+      var row = btn.closest('.pooja-row');
+      var input = row.querySelector('.qty-input');
+      var qty = clampQty(input.value);
+      qty = btn.dataset.action === 'inc' ? qty + 1 : Math.max(0, qty - 1);
+      input.value = qty;
+      refreshPooja();
+    });
+
+    poojaSelector.addEventListener('input', function (e) {
+      if (!e.target.classList.contains('qty-input')) return;
+      e.target.value = clampQty(e.target.value);
+      refreshPooja();
+    });
+
+    if (selectAllBtn) {
+      selectAllBtn.addEventListener('click', function () {
+        poojaRows.forEach(function (row) {
+          var input = row.querySelector('.qty-input');
+          if (clampQty(input.value) === 0) input.value = 1;
+        });
+        refreshPooja();
+      });
+    }
+
+    if (clearAllBtn) {
+      clearAllBtn.addEventListener('click', function () {
+        poojaRows.forEach(function (row) { row.querySelector('.qty-input').value = 0; });
+        refreshPooja();
+      });
+    }
+
+    refreshPooja();
+  }
+
   /* ---------- utils ---------- */
   function debounce(fn, wait) {
     var t;
