@@ -94,6 +94,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:14px 2
 .navlinks{display:flex;gap:26px;align-items:center;font-size:16px;}
 .navlinks a{padding:6px 2px;border-bottom:2px solid transparent;transition:.2s;}
 .navlinks a:hover{border-color:var(--gold);color:var(--gold-light);}
+.navlinks a.active{color:var(--gold-light);border-color:var(--gold);}
 .navcta{background:var(--gold);color:var(--ink);padding:9px 20px;border-radius:30px;font-weight:700;font-family:'Noto Serif Malayalam';font-size:15px;transition:.2s;}
 .navcta:hover{background:var(--gold-light);transform:translateY(-1px);}
 
@@ -222,6 +223,22 @@ section{padding:8px 0 60px;scroll-margin-top:120px;}
 .section-head .eyebrow{margin-bottom:8px;}
 .section-head h2{font-size:32px;color:var(--cream);}
 .section-head p{font-size:15.5px;color:#D8C79E;margin-top:12px;line-height:1.8;}
+
+.page-hero{padding:44px 0 6px;text-align:center;}
+.page-hero h1{margin:8px 0 0;font-size:clamp(26px,5vw,38px);color:var(--cream);}
+
+.explore-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;}
+.explore-card{
+  display:flex;flex-direction:column;gap:6px;padding:24px 22px;border-radius:16px;
+  background:linear-gradient(160deg, var(--maroon-mid), var(--maroon-deep));
+  border:1px solid var(--maroon-line);text-decoration:none;position:relative;
+  transition:transform .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease);
+}
+.explore-card:hover{transform:translateY(-4px);border-color:var(--gold);box-shadow:0 14px 30px -14px rgba(0,0,0,.55);}
+.explore-card .ec-title{font-family:'Noto Serif Malayalam',serif;font-weight:700;font-size:19px;color:var(--gold-light);}
+.explore-card .ec-desc{font-size:14px;color:#D8C79E;line-height:1.6;}
+.explore-card .ec-arrow{position:absolute;top:20px;right:20px;color:var(--gold);opacity:.7;transition:.25s var(--ease);}
+.explore-card:hover .ec-arrow{transform:translateX(4px);opacity:1;}
 
 .panel{background:var(--cream);color:var(--ink);border-radius:var(--radius-lg);box-shadow:var(--shadow);padding:38px;position:relative;}
 .panel::before{content:"";position:absolute;inset:9px;border:1px solid rgba(92,16,25,0.18);border-radius:19px;pointer-events:none;}
