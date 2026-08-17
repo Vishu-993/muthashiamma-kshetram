@@ -224,9 +224,6 @@ section{padding:8px 0 60px;scroll-margin-top:120px;}
 .section-head h2{font-size:32px;color:var(--cream);}
 .section-head p{font-size:15.5px;color:#D8C79E;margin-top:12px;line-height:1.8;}
 
-.page-hero{padding:44px 0 6px;text-align:center;}
-.page-hero h1{margin:8px 0 0;font-size:clamp(26px,5vw,38px);color:var(--cream);}
-
 .explore-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;}
 .explore-card{
   display:flex;flex-direction:column;gap:6px;padding:24px 22px;border-radius:16px;
