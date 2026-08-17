@@ -56,6 +56,7 @@
   <div class="nav-overlay" id="navOverlay" hidden></div>
   <div class="subnav">
     <div class="subnav-scroll" id="subnav" aria-label="വിഭാഗങ്ങൾ">
+      <a class="pill" data-target="masapooja" href="#masapooja">മാസപൂജ</a>
       <a class="pill" data-target="nagakkavu" href="#nagakkavu">നാഗക്കാവ്</a>
       <a class="pill" data-target="kulam" href="#kulam">ക്ഷേത്രക്കുളം</a>
       <a class="pill" data-target="goshala" href="#goshala">ഗോശാല</a>
@@ -66,6 +67,87 @@
 </header>
 
 <main id="top">
+  <section id="masapooja">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">മാസവിശേഷം</span>
+        <h2>മാസപൂജ</h2>
+        <p>മൂപ്പെട്ടു വെള്ളിയാഴ്ച <span style="opacity:.75;">(മലയാളമാസം ആദ്യത്തെ വെള്ളിയാഴ്ച)</span></p>
+      </div>
+
+      <div class="panel reveal">
+        <div class="timing-row">
+          <div class="timing-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+            <div><span class="t-label">നട തുറക്കൽ</span><span class="t-value">രാവിലെ 6:00</span></div>
+          </div>
+          <div class="timing-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+            <div><span class="t-label">നട അടയ്ക്കൽ</span><span class="t-value">വൈകുന്നേരം 6:00</span></div>
+          </div>
+        </div>
+
+        <div class="pooja-selector" id="poojaSelector">
+          <div class="pooja-row" data-name="മാസപൂജ" data-price="500">
+            <div class="pr-name">മാസപൂജ</div>
+            <div class="pr-price">₹500</div>
+            <div class="qty-stepper">
+              <button type="button" class="qbtn" data-action="dec" aria-label="കുറയ്ക്കുക">−</button>
+              <input type="number" class="qty-input" value="0" min="0" max="99" inputmode="numeric" aria-label="മാസപൂജ എണ്ണം">
+              <button type="button" class="qbtn" data-action="inc" aria-label="കൂട്ടുക">+</button>
+            </div>
+          </div>
+          <div class="pooja-row" data-name="ഗണപതി ഹോമം" data-price="100">
+            <div class="pr-name">ഗണപതി ഹോമം</div>
+            <div class="pr-price">₹100</div>
+            <div class="qty-stepper">
+              <button type="button" class="qbtn" data-action="dec" aria-label="കുറയ്ക്കുക">−</button>
+              <input type="number" class="qty-input" value="0" min="0" max="99" inputmode="numeric" aria-label="ഗണപതി ഹോമം എണ്ണം">
+              <button type="button" class="qbtn" data-action="inc" aria-label="കൂട്ടുക">+</button>
+            </div>
+          </div>
+          <div class="pooja-row" data-name="സരസ്വതി പൂജ" data-price="100">
+            <div class="pr-name">സരസ്വതി പൂജ</div>
+            <div class="pr-price">₹100</div>
+            <div class="qty-stepper">
+              <button type="button" class="qbtn" data-action="dec" aria-label="കുറയ്ക്കുക">−</button>
+              <input type="number" class="qty-input" value="0" min="0" max="99" inputmode="numeric" aria-label="സരസ്വതി പൂജ എണ്ണം">
+              <button type="button" class="qbtn" data-action="inc" aria-label="കൂട്ടുക">+</button>
+            </div>
+          </div>
+          <div class="pooja-row" data-name="നെയ്യ് വിളക്ക്" data-price="20">
+            <div class="pr-name">നെയ്യ് വിളക്ക്</div>
+            <div class="pr-price">₹20</div>
+            <div class="qty-stepper">
+              <button type="button" class="qbtn" data-action="dec" aria-label="കുറയ്ക്കുക">−</button>
+              <input type="number" class="qty-input" value="0" min="0" max="99" inputmode="numeric" aria-label="നെയ്യ് വിളക്ക് എണ്ണം">
+              <button type="button" class="qbtn" data-action="inc" aria-label="കൂട്ടുക">+</button>
+            </div>
+          </div>
+          <div class="pooja-row" data-name="രക്തപുഷ്പാഞ്ജലി" data-price="10">
+            <div class="pr-name">രക്തപുഷ്പാഞ്ജലി</div>
+            <div class="pr-price">₹10</div>
+            <div class="qty-stepper">
+              <button type="button" class="qbtn" data-action="dec" aria-label="കുറയ്ക്കുക">−</button>
+              <input type="number" class="qty-input" value="0" min="0" max="99" inputmode="numeric" aria-label="രക്തപുഷ്പാഞ്ജലി എണ്ണം">
+              <button type="button" class="qbtn" data-action="inc" aria-label="കൂട്ടുക">+</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pooja-total-bar">
+          <button type="button" class="btn btn-ghost" id="poojaSelectAll">എല്ലാം ചേർക്കുക</button>
+          <button type="button" class="btn btn-ghost" id="poojaClearAll">മായ്ക്കുക</button>
+          <div class="pooja-total">ആകെ &nbsp;<span id="poojaTotalAmount">₹0</span></div>
+          <a href="https://wa.me/919847501188" id="poojaBookBtn" class="btn btn-primary" target="_blank" rel="noopener">വഴിപാട് ബുക്ക് ചെയ്യാൻ</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="lamp-divider" aria-hidden="true"><span class="line"></span>
+    <svg viewBox="0 0 30 40"><path class="flame" d="M15 2c4 6-1 8-1 12a4 4 0 0 0 8 0c0-1 0-2-.5-3 2 2 3 5 2 8-1.5 4-6 6-8.5 6-4 0-8-3-8-8 0-8 6-10 8-15z" fill="#F0D89A"/><path d="M8 24 h14 l-2 6 h-10 z" fill="#D4A94A"/><rect x="13" y="30" width="4" height="8" fill="#D4A94A"/><ellipse cx="15" cy="38" rx="9" ry="2" fill="#7A1B24"/></svg>
+  <span class="line"></span></div>
 <section id="nagakkavu">
     <div class="wrap">
       <div class="section-head reveal">
