@@ -4,84 +4,345 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>അഡ്മിൻ പാനൽ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Malayalam:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  body { font-family: sans-serif; background:#1a0d10; color:#f0d89a; margin:0; padding:20px; }
-  input, textarea, select { width:100%; padding:10px; margin:6px 0; border-radius:8px; border:1px solid #5c1019; background:#2a1418; color:#fff; box-sizing:border-box; }
-  button { padding:10px 16px; border-radius:8px; border:none; background:#D4A94A; color:#1a0d10; font-weight:bold; cursor:pointer; margin:6px 4px 6px 0; }
-  .tabs { display:flex; gap:8px; margin:16px 0; flex-wrap:wrap; }
-  .tab { padding:8px 14px; border-radius:8px; background:#2a1418; cursor:pointer; }
-  .tab.active { background:#D4A94A; color:#1a0d10; }
-  .panel { display:none; }
-  .panel.active { display:block; }
-  .row { display:flex; gap:8px; align-items:center; border-bottom:1px solid #5c1019; padding:8px 0; }
-  #loginBox { max-width:360px; margin:60px auto; }
-  .log-entry { font-size:13px; border-bottom:1px solid #5c1019; padding:6px 0; }
+  :root {
+    --maroon: #5C1019;
+    --maroon-dark: #2a0a0e;
+    --gold: #D4A94A;
+    --gold-light: #F0D89A;
+    --bg: #150a0c;
+    --card: #1f1013;
+    --border: #3a1a1f;
+    --text: #f0e6d8;
+    --text-soft: #b8a89a;
+    --danger: #e05c5c;
+    --success: #5cbf6a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    min-height: 100vh;
+  }
+  .mal { font-family: 'Noto Serif Malayalam', serif; }
+
+  /* Login screen */
+  .login-wrap {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .login-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 36px 28px;
+    max-width: 380px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+  .login-card h1 {
+    color: var(--gold);
+    font-size: 22px;
+    margin: 0 0 4px;
+  }
+  .login-card p.sub {
+    color: var(--text-soft);
+    font-size: 13px;
+    margin: 0 0 24px;
+  }
+  label {
+    display: block;
+    font-size: 13px;
+    color: var(--text-soft);
+    margin: 14px 0 6px;
+  }
+  input {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--maroon-dark);
+    color: var(--text);
+    font-size: 15px;
+    outline: none;
+    transition: border-color .15s;
+  }
+  input:focus { border-color: var(--gold); }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: none;
+    background: var(--gold);
+    color: var(--maroon-dark);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: opacity .15s, transform .1s;
+  }
+  .btn:hover { opacity: 0.9; }
+  .btn:active { transform: scale(0.98); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-block { width: 100%; margin-top: 20px; }
+  .btn-danger { background: var(--danger); color: #fff; }
+  .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--text); }
+  .btn-sm { padding: 8px 12px; font-size: 13px; }
+
+  .error-box {
+    margin-top: 14px;
+    padding: 10px 14px;
+    background: rgba(224,92,92,0.12);
+    border: 1px solid rgba(224,92,92,0.4);
+    border-radius: 8px;
+    color: var(--danger);
+    font-size: 13px;
+    display: none;
+  }
+  .error-box.show { display: block; }
+
+  /* Dashboard */
+  .app { display: none; min-height: 100vh; }
+  .topbar {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .topbar h1 { font-size: 17px; margin: 0; color: var(--gold); }
+  .topbar .who { font-size: 12px; color: var(--text-soft); }
+  .role-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 11px;
+    background: var(--gold);
+    color: var(--maroon-dark);
+    font-weight: 600;
+    margin-left: 6px;
+  }
+
+  .layout { display: flex; min-height: calc(100vh - 57px); }
+  .sidebar {
+    width: 190px;
+    background: var(--card);
+    border-right: 1px solid var(--border);
+    padding: 16px 10px;
+    flex-shrink: 0;
+  }
+  .nav-item {
+    padding: 11px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-soft);
+    margin-bottom: 4px;
+    transition: background .15s, color .15s;
+  }
+  .nav-item:hover { background: rgba(212,169,74,0.08); color: var(--text); }
+  .nav-item.active { background: var(--gold); color: var(--maroon-dark); font-weight: 600; }
+
+  .content { flex: 1; padding: 24px; max-width: 900px; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+  .panel h2 { color: var(--gold); font-size: 19px; margin-top: 0; }
+
+  textarea {
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--maroon-dark);
+    color: var(--text);
+    font-family: 'Courier New', monospace;
+    font-size: 13px;
+    resize: vertical;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 16px;
+  }
+  .row-item {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .row-item:last-child { border-bottom: none; }
+  .row-item input { flex: 1; }
+  .row-item input.amount { max-width: 110px; flex: none; }
+
+  .add-form {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+  .add-form input { flex: 1; min-width: 140px; }
+
+  .log-entry {
+    font-size: 13px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-soft);
+  }
+  .log-entry b { color: var(--text); }
+  .log-entry .action-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: rgba(212,169,74,0.15);
+    color: var(--gold);
+    font-size: 11px;
+    margin-left: 6px;
+  }
+
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--card);
+    border: 1px solid var(--gold);
+    color: var(--text);
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s, transform .2s;
+    z-index: 100;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+  .toast.error { border-color: var(--danger); }
+
+  .spinner {
+    display: inline-block;
+    width: 14px; height: 14px;
+    border: 2px solid rgba(0,0,0,0.2);
+    border-top-color: var(--maroon-dark);
+    border-radius: 50%;
+    animation: spin .6s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media (max-width: 640px) {
+    .layout { flex-direction: column; }
+    .sidebar { width: 100%; display: flex; overflow-x: auto; gap: 6px; padding: 10px; }
+    .nav-item { flex-shrink: 0; margin-bottom: 0; }
+    .content { padding: 16px; }
+  }
 </style>
 </head>
 <body>
 
-<div id="loginBox">
-  <h2>അഡ്മിൻ ലോഗിൻ</h2>
-  <input id="username" placeholder="Username">
-  <input id="password" type="password" placeholder="Password">
-  <button onclick="login()">Login</button>
-  <p id="loginError" style="color:#ff8080;"></p>
-</div>
-
-<div id="dashboard" style="display:none;">
-  <h2>ഡാഷ്ബോർഡ് — <span id="whoami"></span></h2>
-  <button onclick="logout()">Logout</button>
-  <div class="tabs">
-    <div class="tab active" onclick="showTab('index')">Index</div>
-    <div class="tab" onclick="showTab('history')">History</div>
-    <div class="tab" onclick="showTab('renovation')">Renovation</div>
-    <div class="tab" onclick="showTab('pooja')">Pooja</div>
-    <div class="tab" onclick="showTab('owner')" id="ownerTab" style="display:none;">Owner Log</div>
-  </div>
-
-  <div class="panel active" id="panel-index">
-    <h3>Index Page Content (JSON)</h3>
-    <textarea id="content-index" rows="14"></textarea>
-    <button onclick="saveContent('index')">Save</button>
-  </div>
-  <div class="panel" id="panel-history">
-    <h3>History Page Content (JSON)</h3>
-    <textarea id="content-history" rows="14"></textarea>
-    <button onclick="saveContent('history')">Save</button>
-  </div>
-  <div class="panel" id="panel-renovation">
-    <h3>Renovation Page Content (JSON)</h3>
-    <textarea id="content-renovation" rows="14"></textarea>
-    <button onclick="saveContent('renovation')">Save</button>
-  </div>
-
-  <div class="panel" id="panel-pooja">
-    <h3>Pooja List</h3>
-    <div id="poojaList"></div>
-    <h4>Add New Pooja</h4>
-    <input id="newPoojaName" placeholder="പൂജ പേര്">
-    <input id="newPoojaAmount" type="number" placeholder="തുക (₹)">
-    <button onclick="addPooja()">Add</button>
-  </div>
-
-  <div class="panel" id="panel-owner">
-    <h3>Last Updates (Owner Only)</h3>
-    <div id="activityLog"></div>
+<div class="login-wrap" id="loginWrap">
+  <div class="login-card">
+    <h1 class="mal">അഡ്മിൻ ലോഗിൻ</h1>
+    <p class="sub">Temple Admin Panel</p>
+    <label>Username</label>
+    <input id="username" autocomplete="username" placeholder="Enter username">
+    <label>Password</label>
+    <input id="password" type="password" autocomplete="current-password" placeholder="Enter password">
+    <button class="btn btn-block" id="loginBtn" onclick="login()">Login</button>
+    <div class="error-box" id="loginError"></div>
   </div>
 </div>
+
+<div class="app" id="app">
+  <div class="topbar">
+    <h1 class="mal">അഡ്മിൻ പാനൽ</h1>
+    <div class="who">
+      <span id="whoami"></span>
+      <button class="btn btn-ghost btn-sm" onclick="logout()" style="margin-left:12px;">Logout</button>
+    </div>
+  </div>
+  <div class="layout">
+    <div class="sidebar">
+      <div class="nav-item active" data-tab="index" onclick="showTab('index')">ഹോം</div>
+      <div class="nav-item" data-tab="history" onclick="showTab('history')">ചരിത്രം</div>
+      <div class="nav-item" data-tab="renovation" onclick="showTab('renovation')">പുനരുദ്ധാരണം</div>
+      <div class="nav-item" data-tab="pooja" onclick="showTab('pooja')">വഴിപാടുകൾ</div>
+      <div class="nav-item" data-tab="owner" id="ownerNav" style="display:none;" onclick="showTab('owner')">Owner Log</div>
+    </div>
+
+    <div class="content">
+      <div class="panel active" id="panel-index">
+        <h2>ഹോം പേജ് ഉള്ളടക്കം</h2>
+        <textarea id="content-index" rows="16"></textarea>
+        <button class="btn" style="margin-top:12px;" onclick="saveContent('index')">സേവ് ചെയ്യുക</button>
+      </div>
+
+      <div class="panel" id="panel-history">
+        <h2>ചരിത്രം ഉള്ളടക്കം</h2>
+        <textarea id="content-history" rows="16"></textarea>
+        <button class="btn" style="margin-top:12px;" onclick="saveContent('history')">സേവ് ചെയ്യുക</button>
+      </div>
+
+      <div class="panel" id="panel-renovation">
+        <h2>പുനരുദ്ധാരണം ഉള്ളടക്കം</h2>
+        <textarea id="content-renovation" rows="16"></textarea>
+        <button class="btn" style="margin-top:12px;" onclick="saveContent('renovation')">സേവ് ചെയ്യുക</button>
+      </div>
+
+      <div class="panel" id="panel-pooja">
+        <h2>വഴിപാടുകൾ</h2>
+        <div class="card" id="poojaList"></div>
+        <div class="card">
+          <h3 style="margin-top:0;font-size:15px;color:var(--gold);">പുതിയത് ചേർക്കുക</h3>
+          <div class="add-form">
+            <input id="newPoojaName" placeholder="പൂജ പേര്">
+            <input id="newPoojaAmount" type="number" class="amount" placeholder="₹">
+            <button class="btn" onclick="addPooja()">Add</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" id="panel-owner">
+        <h2>Last Updates</h2>
+        <div class="card" id="activityLog"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
 
 <script>
 let token = localStorage.getItem('admin_token');
 let role = localStorage.getItem('admin_role');
 let username = localStorage.getItem('admin_username');
 
+function showToast(msg, isError) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (isError ? ' error' : '');
+  setTimeout(() => t.className = 'toast', 2500);
+}
+
 function showApp() {
-  document.getElementById('loginBox').style.display = 'none';
-  document.getElementById('dashboard').style.display = 'block';
-  document.getElementById('whoami').textContent = username + ' (' + role + ')';
-  if (role === 'owner') {
-    document.getElementById('ownerTab').style.display = 'block';
-  }
+  document.getElementById('loginWrap').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  document.getElementById('whoami').innerHTML = username + '<span class="role-badge">' + role + '</span>';
+  if (role === 'owner') document.getElementById('ownerNav').style.display = 'block';
   loadAllContent();
   loadPoojas();
 }
@@ -89,23 +350,52 @@ function showApp() {
 if (token) showApp();
 
 async function login() {
-  const username_ = document.getElementById('username').value;
-  const password_ = document.getElementById('password').value;
-  const res = await fetch('/api/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username: username_, password: password_ })
-  });
-  if (!res.ok) {
-    document.getElementById('loginError').textContent = 'Login failed';
+  const u = document.getElementById('username').value.trim();
+  const p = document.getElementById('password').value;
+  const errBox = document.getElementById('loginError');
+  const btn = document.getElementById('loginBtn');
+  errBox.classList.remove('show');
+
+  if (!u || !p) {
+    errBox.textContent = 'Enter username and password';
+    errBox.classList.add('show');
     return;
   }
-  const data = await res.json();
-  token = data.token; role = data.role; username = data.username;
-  localStorage.setItem('admin_token', token);
-  localStorage.setItem('admin_role', role);
-  localStorage.setItem('admin_username', username);
-  showApp();
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Logging in...';
+
+  try {
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: u, password: p })
+    });
+
+    if (!res.ok) {
+      let detail = 'Login failed';
+      try {
+        const errData = await res.json();
+        detail = errData.detail || detail;
+      } catch (e) {}
+      errBox.textContent = res.status === 401 ? 'Invalid username or password' : ('Error: ' + detail + ' (status ' + res.status + ')');
+      errBox.classList.add('show');
+      return;
+    }
+
+    const data = await res.json();
+    token = data.token; role = data.role; username = data.username;
+    localStorage.setItem('admin_token', token);
+    localStorage.setItem('admin_role', role);
+    localStorage.setItem('admin_username', username);
+    showApp();
+  } catch (e) {
+    errBox.textContent = 'Network error — check connection';
+    errBox.classList.add('show');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Login';
+  }
 }
 
 function logout() {
@@ -114,18 +404,20 @@ function logout() {
 }
 
 function showTab(name) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  event.target.classList.add('active');
+  document.querySelector('.nav-item[data-tab="' + name + '"]').classList.add('active');
   document.getElementById('panel-' + name).classList.add('active');
   if (name === 'owner') loadActivity();
 }
 
 async function loadAllContent() {
   for (const page of ['index', 'history', 'renovation']) {
-    const res = await fetch('/api/content/' + page);
-    const data = await res.json();
-    document.getElementById('content-' + page).value = JSON.stringify(data.data || {}, null, 2);
+    try {
+      const res = await fetch('/api/content/' + page);
+      const data = await res.json();
+      document.getElementById('content-' + page).value = JSON.stringify(data.data || {}, null, 2);
+    } catch (e) {}
   }
 }
 
@@ -134,34 +426,44 @@ async function saveContent(page) {
   try {
     data = JSON.parse(document.getElementById('content-' + page).value);
   } catch (e) {
-    alert('Invalid JSON');
+    showToast('Invalid JSON format', true);
     return;
   }
-  await fetch('/api/content/' + page, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
-    body: JSON.stringify({ data })
-  });
-  alert('Saved');
+  try {
+    const res = await fetch('/api/content/' + page, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+      body: JSON.stringify({ data })
+    });
+    if (!res.ok) throw new Error();
+    showToast('സേവ് ചെയ്തു ✓');
+  } catch (e) {
+    showToast('Save failed', true);
+  }
 }
 
 async function loadPoojas() {
   const res = await fetch('/api/poojas');
   const items = await res.json();
   const box = document.getElementById('poojaList');
+  if (items.length === 0) {
+    box.innerHTML = '<p style="color:var(--text-soft);">No poojas yet</p>';
+    return;
+  }
   box.innerHTML = items.map(p => `
-    <div class="row">
+    <div class="row-item">
       <input value="${p.name}" onchange="editPooja('${p._id}', this.value, ${p.amount})">
-      <input type="number" value="${p.amount}" style="max-width:100px;" onchange="editPooja('${p._id}', '${p.name}', this.value)">
-      <button onclick="markDone('${p._id}')">Done</button>
-      <button onclick="deletePooja('${p._id}')">Delete</button>
+      <input type="number" class="amount" value="${p.amount}" onchange="editPooja('${p._id}', '${p.name}', this.value)">
+      <button class="btn btn-sm" onclick="markDone('${p._id}')">Done</button>
+      <button class="btn btn-sm btn-danger" onclick="deletePooja('${p._id}')">Delete</button>
     </div>
   `).join('');
 }
 
 async function addPooja() {
-  const name = document.getElementById('newPoojaName').value;
+  const name = document.getElementById('newPoojaName').value.trim();
   const amount = document.getElementById('newPoojaAmount').value;
+  if (!name || !amount) { showToast('Fill name and amount', true); return; }
   await fetch('/api/poojas', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
@@ -169,6 +471,7 @@ async function addPooja() {
   });
   document.getElementById('newPoojaName').value = '';
   document.getElementById('newPoojaAmount').value = '';
+  showToast('Pooja added ✓');
   loadPoojas();
 }
 
@@ -178,6 +481,7 @@ async function editPooja(id, name, amount) {
     headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
     body: JSON.stringify({ name, amount: Number(amount) })
   });
+  showToast('Updated ✓');
 }
 
 async function deletePooja(id) {
@@ -186,6 +490,7 @@ async function deletePooja(id) {
     method: 'DELETE',
     headers: { 'Authorization': 'Bearer ' + token }
   });
+  showToast('Deleted');
   loadPoojas();
 }
 
@@ -195,7 +500,7 @@ async function markDone(id) {
     headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
     body: JSON.stringify({})
   });
-  alert('Marked done (email/payment wiring pending)');
+  showToast('Marked done (email/payment pending)');
 }
 
 async function loadActivity() {
@@ -204,9 +509,9 @@ async function loadActivity() {
   });
   if (!res.ok) return;
   const items = await res.json();
-  document.getElementById('activityLog').innerHTML = items.map(a => `
-    <div class="log-entry">${a.timestamp} — <b>${a.user}</b> (${a.role}) did <b>${a.action}</b> on <b>${a.target}</b></div>
-  `).join('');
+  document.getElementById('activityLog').innerHTML = items.length ? items.map(a => `
+    <div class="log-entry"><b>${a.user}</b> (${a.role}) <span class="action-tag">${a.action}</span> → ${a.target}<br>${new Date(a.timestamp).toLocaleString()}</div>
+  `).join('') : '<p style="color:var(--text-soft);">No activity yet</p>';
 }
 </script>
 </body>
