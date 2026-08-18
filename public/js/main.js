@@ -90,11 +90,13 @@ document.addEventListener("DOMContentLoaded", () => {
         let currentPage = 'index'; 
         const path = window.location.pathname;
 
-        if (path.includes('history.html')) currentPage = 'history';
-        else if (path.includes('renovation.html')) currentPage = 'renovation';
-        else if (path.includes('kalari.html')) currentPage = 'kalari';
-        else if (path.includes('gallery.html')) currentPage = 'gallery';
-        else if (path.includes('contact.html')) currentPage = 'contact';
+        // Updated routing logic for Clean URLs (supporting both formats)
+        if (path.includes('/history') || path.includes('history.html')) currentPage = 'history';
+        else if (path.includes('/renovation') || path.includes('renovation.html')) currentPage = 'renovation';
+        else if (path.includes('/kalari') || path.includes('kalari.html')) currentPage = 'kalari';
+        else if (path.includes('/gallery') || path.includes('gallery.html')) currentPage = 'gallery';
+        else if (path.includes('/contact') || path.includes('contact.html')) currentPage = 'contact';
+        else currentPage = 'index'; // Defaults to root
 
         const contentContainer = document.getElementById('dynamic-text-container');
         
