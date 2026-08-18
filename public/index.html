@@ -24,7 +24,7 @@
 
 <div class="topbar">
   <div class="wrap">
-    <span>പൂക്കോം &nbsp;·&nbsp; തലശ്ശേരി &nbsp;·&nbsp; പാനൂർ &nbsp;·&nbsp; കണ്ണൂർ</span>
+    <span data-edit="topbar_location">പൂക്കോം &nbsp;·&nbsp; തലശ്ശേരി &nbsp;·&nbsp; പാനൂർ &nbsp;·&nbsp; കണ്ണൂർ</span>
     <span><a href="tel:9847501188">📞 9847501188</a><span class="sep">|</span><a href="tel:9895124698">9895124698</a></span>
   </div>
 </div>
@@ -37,18 +37,18 @@
         <path d="M20 8c3 4-1 6-1 9a4 4 0 0 0 8 0c0-2-1-3-1-3 2 2 3 5 3 7a9 9 0 1 1-18 0c0-6 5-9 9-13z" fill="#F0D89A"/>
       </svg>
       <span class="name">
-        <span class="mal">മുത്തശ്ശ്യമ്മ</span>
-        <span class="sub">Pookunnath Kattumadam Temple</span>
+        <span class="mal" data-edit="brand_name_ml">മുത്തശ്ശ്യമ്മ</span>
+        <span class="sub" data-edit="brand_name_en">Pookunnath Kattumadam Temple</span>
       </span>
     </a>
     <div class="navlinks" id="navlinks">
-      <a href="/" class="active" aria-current="page">ഹോം</a>
-      <a href="/history">ചരിത്രം</a>
-      <a href="/renovation">പുനരുദ്ധാരണം</a>
-      <a href="/pooja">വഴിപാടുകൾ</a>
-      <a href="/kalari">കളരി</a>
-      <a href="/gallery">ഗാലറി</a>
-      <a href="/contact" class="navcta">ബന്ധപ്പെടാം</a>
+      <a href="/" class="active" aria-current="page" data-edit="nav_home">ഹോം</a>
+      <a href="/history" data-edit="nav_history">ചരിത്രം</a>
+      <a href="/renovation" data-edit="nav_renovation">പുനരുദ്ധാരണം</a>
+      <a href="/pooja" data-edit="nav_pooja">വഴിപാടുകൾ</a>
+      <a href="/kalari" data-edit="nav_kalari">കളരി</a>
+      <a href="/gallery" data-edit="nav_gallery">ഗാലറി</a>
+      <a href="/contact" class="navcta" data-edit="nav_contact">ബന്ധപ്പെടാം</a>
     </div>
     <button class="burger" id="burgerBtn" aria-label="മെനു തുറക്കുക" aria-expanded="false" aria-controls="navlinks">
       <span></span><span></span><span></span>
@@ -61,17 +61,15 @@
 <section class="hero">
     <div class="wrap hero-grid">
       <div class="reveal in">
-        <span class="eyebrow">ശ്രീ: മുത്തശ്ശ്യമ്മ ശരണം</span>
-        <h1>പൂക്കോം ശ്രീ പൂകുന്നത്ത് കാട്ടുമാടം <span class="accent">മുത്തശ്ശ്യമ്മ</span> ക്ഷേത്രം</h1>
-        <span class="tagline">പൂക്കോത്ത് മഠം · പൂക്കോം ദേശത്തിന്റെ ഐശ്വര്യ ദേവത</span>
+        <span class="eyebrow" data-edit="hero_eyebrow">ശ്രീ: മുത്തശ്ശ്യമ്മ ശരണം</span>
+        <h1 data-edit="hero_title">പൂക്കോം ശ്രീ പൂകുന്നത്ത് കാട്ടുമാടം <span class="accent">മുത്തശ്ശ്യമ്മ</span> ക്ഷേത്രം</h1>
+        <span class="tagline" data-edit="hero_subtitle">പൂക്കോത്ത് മഠം · പൂക്കോം ദേശത്തിന്റെ ഐശ്വര്യ ദേവത</span>
         
-        <div id="dynamic-text-container">
-          <p class="desc">നൂറ്റാണ്ടുകളായി പൂക്കോം ദേശത്തെ കാത്തുപോരുന്ന അമ്മ. ഭക്തരുടെ കൈകോർത്ത പരിശ്രമത്തിൽ ക്ഷേത്രം ഇന്ന് വീണ്ടും പഴയ പ്രതാപത്തിലേക്ക് — ശ്രീകോവിലും തേവാര മഠവും കളരി കലാക്ഷേത്രവും നക്ഷത്രവനവും ഉൾപ്പെടെ.</p>
-        </div>
+        <p class="desc" data-edit="hero_desc">നൂറ്റാണ്ടുകളായി പൂക്കോം ദേശത്തെ കാത്തുപോരുന്ന അമ്മ. ഭക്തരുടെ കൈകോർത്ത പരിശ്രമത്തിൽ ക്ഷേത്രം ഇന്ന് വീണ്ടും പഴയ പ്രതാപത്തിലേക്ക് — ശ്രീകോവിലും തേവാര മഠവും കളരി കലാക്ഷേത്രവും നക്ഷത്രവനവും ഉൾപ്പെടെ.</p>
 
         <div class="cta-row">
-          <a href="#punarudharanam" class="btn btn-primary">പുനരുദ്ധാരണത്തിൽ പങ്കാളിയാകാം</a>
-          <a href="/contact" class="btn btn-ghost">ബന്ധപ്പെടാം</a>
+          <a href="#punarudharanam" class="btn btn-primary" data-edit="hero_btn_primary">പുനരുദ്ധാരണത്തിൽ പങ്കാളിയാകാം</a>
+          <a href="/contact" class="btn btn-ghost" data-edit="hero_btn_ghost">ബന്ധപ്പെടാം</a>
         </div>
         <div class="priest-row">
           <div class="priest-card">
@@ -79,8 +77,8 @@
               <img src="/images/thantri.jpg" alt="തന്ത്രി" class="avatar-img" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('avatar-fallback');this.remove();">
             </div>
             <div>
-              <div class="role">ക്ഷേത്രം തന്ത്രി</div>
-              <div class="pname">ബ്രഹ്മശ്രീ കാട്ടുമാടം ഈശാനൻ നമ്പൂതിരിപ്പാട്</div>
+              <div class="role" data-edit="thantri_role">ക്ഷേത്രം തന്ത്രി</div>
+              <div class="pname" data-edit="thantri_name">ബ്രഹ്മശ്രീ കാട്ടുമാടം ഈശാനൻ നമ്പൂതിരിപ്പാട്</div>
             </div>
           </div>
           <div class="priest-card">
@@ -88,8 +86,8 @@
               <img src="/images/margadarshi.jpg" alt="മാർഗ്ഗദർശി" class="avatar-img" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('avatar-fallback');this.remove();">
             </div>
             <div>
-              <div class="role">ക്ഷേത്രം മാർഗ്ഗദർശി</div>
-              <div class="pname">പാറോളി ഇല്ലം ബ്രഹ്മശ്രീ പുരുഷോത്തമൻ ഉണ്ണി നമ്പൂതിരിപ്പാട്</div>
+              <div class="role" data-edit="margadarshi_role">ക്ഷേത്രം മാർഗ്ഗദർശി</div>
+              <div class="pname" data-edit="margadarshi_name">പാറോളി ഇല്ലം ബ്രഹ്മശ്രീ പുരുഷോത്തമൻ ഉണ്ണി നമ്പൂതിരിപ്പാട്</div>
             </div>
           </div>
         </div>
@@ -109,38 +107,38 @@
   <section id="explore">
     <div class="wrap">
       <div class="section-head reveal">
-        <span class="eyebrow">പര്യടനം</span>
-        <h2>ക്ഷേത്രത്തെക്കുറിച്ച് കൂടുതൽ അറിയാം</h2>
+        <span class="eyebrow" data-edit="explore_eyebrow">പര്യടനം</span>
+        <h2 data-edit="explore_title">ക്ഷേത്രത്തെക്കുറിച്ച് കൂടുതൽ അറിയാം</h2>
       </div>
       <div class="explore-grid stagger">
         <a class="explore-card reveal" href="/history">
-          <span class="ec-title">ചരിത്രം</span>
-          <span class="ec-desc">രണ്ട് നൂറ്റാണ്ടിന്റെ വിശ്വാസത്തിന്റെ കഥ, വന്ദേ പത്മനാഭം സ്മരണയും</span>
+          <span class="ec-title" data-edit="card_history_title">ചരിത്രം</span>
+          <span class="ec-desc" data-edit="card_history_desc">രണ്ട് നൂറ്റാണ്ടിന്റെ വിശ്വാസത്തിന്റെ കഥ, വന്ദേ പത്മനാഭം സ്മരണയും</span>
           <span class="ec-arrow" aria-hidden="true">→</span>
         </a>
         <a class="explore-card reveal" href="/renovation">
-          <span class="ec-title">പുനരുദ്ധാരണം</span>
-          <span class="ec-desc">ക്ഷേത്രം, തേവാര മഠം, ശ്രീമൂല സ്ഥാനം — നിർമ്മാണ വിവരങ്ങളും സമർപ്പണവും</span>
+          <span class="ec-title" data-edit="card_renovation_title">പുനരുദ്ധാരണം</span>
+          <span class="ec-desc" data-edit="card_renovation_desc">ക്ഷേത്രം, തേവാര മഠം, ശ്രീമൂല സ്ഥാനം — നിർമ്മാണ വിവരങ്ങളും സമർപ്പണവും</span>
           <span class="ec-arrow" aria-hidden="true">→</span>
         </a>
         <a class="explore-card reveal" href="/pooja">
-          <span class="ec-title">വഴിപാടുകൾ</span>
-          <span class="ec-desc">നാഗക്കാവ്, ക്ഷേത്രക്കുളം, ഗോശാല, വേദപഠനശാല, നക്ഷത്രവനം</span>
+          <span class="ec-title" data-edit="card_pooja_title">വഴിപാടുകൾ</span>
+          <span class="ec-desc" data-edit="card_pooja_desc">നാഗക്കാവ്, ക്ഷേത്രക്കുളം, ഗോശാല, വേദപഠനശാല, നക്ഷത്രവനം</span>
           <span class="ec-arrow" aria-hidden="true">→</span>
         </a>
         <a class="explore-card reveal" href="/kalari">
-          <span class="ec-title">കളരി കലാക്ഷേത്രം</span>
-          <span class="ec-desc">കാട്ടുമാടം കളരിയും പൂകുന്നത്തകം പ്രദർശനങ്ങളും</span>
+          <span class="ec-title" data-edit="card_kalari_title">കളരി കലാക്ഷേത്രം</span>
+          <span class="ec-desc" data-edit="card_kalari_desc">കാട്ടുമാടം കളരിയും പൂകുന്നത്തകം പ്രദർശനങ്ങളും</span>
           <span class="ec-arrow" aria-hidden="true">→</span>
         </a>
         <a class="explore-card reveal" href="/gallery">
-          <span class="ec-title">ഗാലറി</span>
-          <span class="ec-desc">ക്ഷേത്ര ദൃശ്യങ്ങൾ കാണാം</span>
+          <span class="ec-title" data-edit="card_gallery_title">ഗാലറി</span>
+          <span class="ec-desc" data-edit="card_gallery_desc">ക്ഷേത്ര ദൃശ്യങ്ങൾ കാണാം</span>
           <span class="ec-arrow" aria-hidden="true">→</span>
         </a>
         <a class="explore-card reveal" href="/contact">
-          <span class="ec-title">ബന്ധപ്പെടാം</span>
-          <span class="ec-desc">വിലാസം, ഫോൺ നമ്പറുകൾ, വാട്സാപ്പ്</span>
+          <span class="ec-title" data-edit="card_contact_title">ബന്ധപ്പെടാം</span>
+          <span class="ec-desc" data-edit="card_contact_desc">വിലാസം, ഫോൺ നമ്പറുകൾ, വാട്സാപ്പ്</span>
           <span class="ec-arrow" aria-hidden="true">→</span>
         </a>
       </div>
@@ -151,17 +149,17 @@
 <footer>
   <div class="wrap foot-grid">
     <div>
-      <h3>മുത്തശ്ശ്യമ്മ</h3>
-      <p class="fname">ശ്രീ പൂകുന്നത്ത് കാട്ടുമാടം മുത്തശ്ശ്യമ്മ ക്ഷേത്രം · പൂക്കോത്ത് മഠം<br>പൂക്കോം, തലശ്ശേരി, കണ്ണൂർ</p>
+      <h3 data-edit="footer_brand">മുത്തശ്ശ്യമ്മ</h3>
+      <p class="fname" data-edit="footer_address">ശ്രീ പൂകുന്നത്ത് കാട്ടുമാടം മുത്തശ്ശ്യമ്മ ക്ഷേത്രം · പൂക്കോത്ത് മഠം<br>പൂക്കോം, തലശ്ശേരി, കണ്ണൂർ</p>
     </div>
     <div class="foot-links">
-      <a href="/history">ചരിത്രം</a>
-      <a href="/renovation">പുനരുദ്ധാരണം</a>
-      <a href="/kalari">കളരി</a>
-      <a href="/contact">സമ്പർക്കം</a>
+      <a href="/history" data-edit="nav_history">ചരിത്രം</a>
+      <a href="/renovation" data-edit="nav_renovation">പുനരുദ്ധാരണം</a>
+      <a href="/kalari" data-edit="nav_kalari">കളരി</a>
+      <a href="/contact" data-edit="nav_contact">സമ്പർക്കം</a>
     </div>
   </div>
-  <div class="foot-bottom">© 2026 ശ്രീ പൂകുന്നത്ത് കാട്ടുമാടം മുത്തശ്ശ്യമ്മ ക്ഷേത്രം</div>
+  <div class="foot-bottom" data-edit="footer_copyright">© 2026 ശ്രീ പൂകുന്നത്ത് കാട്ടുമാടം മുത്തശ്ശ്യമ്മ ക്ഷേത്രം</div>
 </footer>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
