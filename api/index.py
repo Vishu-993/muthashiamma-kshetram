@@ -125,4 +125,15 @@ async def get_activity(user=Depends(require_owner)):
         items.append(a)
     return items
 
+@app.get("/api/debug-auth")
+async def debug_auth():
+    return {
+        "jwt_secret_set": bool(os.environ.get("JWT_SECRET")),
+        "admin1_user_set": bool(os.environ.get("ADMIN1_USERNAME")),
+        "admin1_pass_set": bool(os.environ.get("ADMIN1_PASSWORD")),
+        "admin1_role": os.environ.get("ADMIN1_ROLE", "not set"),
+        "admin2_user_set": bool(os.environ.get("ADMIN2_USERNAME")),
+        "admin3_user_set": bool(os.environ.get("ADMIN3_USERNAME")),
+    }
+    
 handler = Mangum(app)
