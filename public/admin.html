@@ -7,196 +7,77 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Malayalam:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg-base: #09090b; /* Zinc 950 */
-    --bg-panel: #18181b; /* Zinc 900 */
-    --bg-card: #27272a; /* Zinc 800 */
-    --border: #3f3f46; /* Zinc 700 */
-    --text-main: #f4f4f5; /* Zinc 100 */
-    --text-muted: #a1a1aa; /* Zinc 400 */
-    --accent: #ffffff;
-    --accent-invert: #000000;
-    --danger: #ef4444;
-    --success: #22c55e;
+    --bg-base: #09090b; --bg-panel: #18181b; --bg-card: #27272a;
+    --border: #3f3f46; --text-main: #f4f4f5; --text-muted: #a1a1aa;
+    --accent: #ffffff; --accent-invert: #000000; --danger: #ef4444; --success: #22c55e;
     --shadow-lg: 0 20px 40px rgba(0,0,0,0.8);
     --transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
   }
 
   * { box-sizing: border-box; }
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg-base);
-    color: var(--text-main);
-    margin: 0;
-    min-height: 100vh;
-    overflow: hidden; /* App-like feel */
-  }
+  body { font-family: 'Inter', sans-serif; background: var(--bg-base); color: var(--text-main); margin: 0; min-height: 100vh; overflow: hidden; }
   .mal { font-family: 'Noto Serif Malayalam', serif; }
-
   @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-  
-  /* --- Login Screen --- */
-  .login-wrap {
-    position: fixed; inset: 0; z-index: 100;
-    background: var(--bg-base);
-    display: flex; align-items: center; justify-content: center;
-    padding: 20px; animation: fadeIn 0.5s ease;
-  }
-  .login-card {
-    background: var(--bg-panel); border: 1px solid var(--border);
-    border-radius: 16px; padding: 48px 40px;
-    max-width: 400px; width: 100%; box-shadow: var(--shadow-lg);
-  }
-  .login-card h1 { font-size: 24px; margin: 0 0 8px; font-weight: 600; letter-spacing: -0.5px; }
-  .login-card p.sub { color: var(--text-muted); font-size: 14px; margin: 0 0 32px; }
-  
-  label { display: block; font-size: 11px; color: var(--text-muted); margin: 16px 0 8px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
-  input {
-    width: 100%; padding: 14px 16px; border-radius: 10px;
-    border: 1px solid var(--border); background: var(--bg-base);
-    color: var(--text-main); font-size: 15px; outline: none;
-    transition: var(--transition);
-  }
-  input:focus { border-color: var(--accent); background: var(--bg-card); box-shadow: 0 0 0 3px rgba(255,255,255,0.1); }
 
-  .btn {
-    display: inline-flex; align-items: center; justify-content: center;
-    gap: 8px; padding: 14px 24px; border-radius: 10px; border: 1px solid var(--accent);
-    background: var(--accent); color: var(--accent-invert);
-    font-weight: 600; font-size: 14px; cursor: pointer; transition: var(--transition);
-  }
+  /* Login & Basic UI */
+  .login-wrap { position: fixed; inset: 0; z-index: 100; background: var(--bg-base); display: flex; align-items: center; justify-content: center; padding: 20px; animation: fadeIn 0.5s ease; }
+  .login-card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 16px; padding: 48px 40px; max-width: 400px; width: 100%; box-shadow: var(--shadow-lg); }
+  .login-card h1 { font-size: 24px; margin: 0 0 8px; font-weight: 600; }
+  .login-card p.sub { color: var(--text-muted); font-size: 14px; margin: 0 0 32px; }
+  label { display: block; font-size: 11px; color: var(--text-muted); margin: 16px 0 8px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+  input { width: 100%; padding: 14px 16px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg-base); color: var(--text-main); font-size: 15px; outline: none; transition: var(--transition); }
+  input:focus { border-color: var(--accent); background: var(--bg-card); }
+  
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 24px; border-radius: 10px; border: 1px solid var(--accent); background: var(--accent); color: var(--accent-invert); font-weight: 600; font-size: 14px; cursor: pointer; transition: var(--transition); }
   .btn:hover { background: transparent; color: var(--accent); }
-  .btn:active { transform: scale(0.97); }
-  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
   .btn-block { width: 100%; margin-top: 32px; }
   .btn-danger { background: transparent; border-color: var(--danger); color: var(--danger); }
   .btn-danger:hover { background: var(--danger); color: #fff; }
+  .btn-ghost { background: transparent; border-color: var(--border); color: var(--text-main); }
+  .btn-ghost:hover { border-color: var(--accent); }
   .btn-sm { padding: 8px 16px; font-size: 12px; border-radius: 8px; }
 
-  .error-box {
-    margin-top: 16px; padding: 12px; border: 1px solid var(--danger); background: rgba(239, 68, 68, 0.1);
-    border-radius: 8px; color: var(--danger); font-size: 13px; display: none; text-align: center;
-  }
+  .error-box { margin-top: 16px; padding: 12px; border: 1px solid var(--danger); background: rgba(239, 68, 68, 0.1); border-radius: 8px; color: var(--danger); font-size: 13px; display: none; text-align: center; }
   .error-box.show { display: block; }
 
-  /* --- Dashboard Layout --- */
+  /* Layout */
   .app { display: none; height: 100vh; flex-direction: column; }
-  .topbar {
-    background: var(--bg-panel); border-bottom: 1px solid var(--border);
-    height: 64px; display: flex; align-items: center; justify-content: space-between;
-    padding: 0 24px; flex-shrink: 0;
-  }
+  .topbar { background: var(--bg-panel); border-bottom: 1px solid var(--border); height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; flex-shrink: 0; }
   .topbar h1 { font-size: 18px; margin: 0; font-weight: 600; }
-  .topbar .who { font-size: 13px; color: var(--text-muted); display: flex; align-items: center; gap: 16px; }
-  .role-badge {
-    padding: 4px 10px; border-radius: 20px; font-size: 10px; text-transform: uppercase;
-    background: var(--bg-card); color: var(--text-main); font-weight: 700; border: 1px solid var(--border);
-  }
-
+  .role-badge { padding: 4px 10px; border-radius: 20px; font-size: 10px; text-transform: uppercase; background: var(--bg-card); color: var(--text-main); font-weight: 700; border: 1px solid var(--border); }
+  
   .main-layout { display: flex; flex: 1; overflow: hidden; }
-  .sidebar {
-    width: 240px; background: var(--bg-base); border-right: 1px solid var(--border);
-    padding: 24px 16px; display: flex; flex-direction: column; gap: 6px; overflow-y: auto;
-  }
-  .nav-item {
-    padding: 12px 16px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500;
-    color: var(--text-muted); transition: var(--transition);
-  }
+  .sidebar { width: 240px; background: var(--bg-base); border-right: 1px solid var(--border); padding: 24px 16px; display: flex; flex-direction: column; gap: 6px; overflow-y: auto; }
+  .nav-item { padding: 12px 16px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; color: var(--text-muted); transition: var(--transition); }
   .nav-item:hover { background: var(--bg-panel); color: var(--text-main); }
   .nav-item.active { background: var(--accent); color: var(--accent-invert); font-weight: 600; }
-
-  .content-area {
-    flex: 1; display: flex; flex-direction: column; background: var(--bg-base);
-    overflow-y: auto;
-  }
-
-  /* --- Dynamic Panel System --- */
+  
+  .content-area { flex: 1; display: flex; flex-direction: column; background: var(--bg-base); overflow-y: auto; }
   .panel { display: none; height: 100%; padding: 24px; animation: fadeIn 0.4s ease; }
   .panel.active { display: flex; flex-direction: column; }
-  
   .panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-shrink: 0; }
-  .panel-header h2 { font-size: 22px; margin: 0; font-weight: 600; letter-spacing: -0.5px; }
+  .panel-header h2 { font-size: 22px; margin: 0; font-weight: 600; }
 
-  /* --- Split View (Editor + Iframe) --- */
+  /* Editor split */
   .editor-split { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; flex: 1; min-height: 0; }
-  .editor-col { display: flex; flex-direction: column; min-height: 0; }
-  .editor-col h3 { font-size: 11px; text-transform: uppercase; color: var(--text-muted); margin: 0 0 12px; letter-spacing: 1px; font-weight: 600; display: flex; justify-content: space-between; align-items: center;}
-  .live-badge { display: inline-flex; align-items: center; gap: 6px; color: var(--success); font-size: 10px; background: rgba(34, 197, 94, 0.1); padding: 4px 8px; border-radius: 12px; }
-  .live-badge::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--success); animation: pulse 2s infinite; }
+  .editor-col { display: flex; flex-direction: column; min-height: 0; overflow-y: auto; padding-right: 10px; }
+  .editor-col h3 { font-size: 11px; text-transform: uppercase; color: var(--text-muted); margin: 0 0 12px; font-weight: 600; display: flex; justify-content: space-between; align-items: center;}
   
-  @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+  .field-group { background: var(--bg-panel); border: 1px solid var(--border); padding: 16px; border-radius: 12px; margin-bottom: 16px; }
+  .field-key-input { width: 100%; background: var(--bg-base); border: 1px solid var(--border); padding: 8px 12px; font-family: monospace; font-size: 12px; color: var(--text-muted); margin-bottom: 8px; border-radius: 6px; }
+  .field-value { width: 100%; padding: 16px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-main); font-size: 15px; font-family: 'Noto Serif Malayalam', serif; resize: vertical; min-height: 80px; outline: none; transition: var(--transition); }
+  .field-value:focus { border-color: var(--accent); }
 
-  textarea.main-editor {
-    flex: 1; width: 100%; padding: 24px; border-radius: 12px; border: 1px solid var(--border);
-    background: var(--bg-panel); color: var(--text-main); font-size: 15px; line-height: 1.8;
-    resize: none; outline: none; transition: var(--transition); font-family: 'Noto Serif Malayalam', serif;
-  }
-  textarea.main-editor:focus { border-color: var(--text-muted); box-shadow: 0 0 0 3px rgba(255,255,255,0.05); }
-
-  /* --- Beautiful Browser Mockup for Iframe --- */
-  .browser-mockup {
-    flex: 1; display: flex; flex-direction: column; border-radius: 12px;
-    border: 1px solid var(--border); overflow: hidden; background: #000; box-shadow: var(--shadow-lg);
-  }
-  .browser-header {
-    height: 38px; background: var(--bg-panel); border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; padding: 0 16px; gap: 8px;
-  }
-  .dot { width: 10px; height: 10px; border-radius: 50%; }
-  .dot.red { background: #ff5f56; } .dot.yel { background: #ffbd2e; } .dot.grn { background: #27c93f; }
+  /* Iframe */
+  .browser-mockup { flex: 1; display: flex; flex-direction: column; border-radius: 12px; border: 1px solid var(--border); overflow: hidden; background: #000; box-shadow: var(--shadow-lg); }
+  .browser-header { height: 38px; background: var(--bg-panel); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 16px; gap: 8px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: #555; }
   .browser-url { margin-left: 12px; background: var(--bg-base); padding: 4px 12px; border-radius: 6px; font-size: 11px; color: var(--text-muted); flex: 1; text-align: center; font-family: monospace; }
-  
-  iframe.live-frame {
-    flex: 1; width: 100%; border: none; background: #33080D; /* Temple BG color fallback */
-  }
+  iframe.live-frame { flex: 1; width: 100%; border: none; background: #33080D; }
 
-  /* --- Cards & Poojas --- */
-  .card-grid { display: flex; flex-direction: column; gap: 16px; max-width: 800px; }
-  .card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
-  
-  .pooja-item {
-    display: flex; gap: 12px; align-items: center; padding: 16px;
-    border: 1px solid var(--border); border-radius: 10px; margin-bottom: 12px; background: var(--bg-base);
-  }
-  .pooja-item:last-child { margin-bottom: 0; }
-  .pooja-item input { padding: 10px 14px; background: var(--bg-panel); border: 1px solid transparent; }
-  .pooja-item input:focus { border-color: var(--border); }
-  .pooja-item .p-name { flex: 1; font-family: 'Noto Serif Malayalam', serif; font-size: 16px;}
-  .pooja-item .p-amt { width: 120px; font-family: monospace; font-size: 15px; }
-
-  .add-form { display: flex; gap: 12px; flex-wrap: wrap; }
-  .add-form input { flex: 1; min-width: 200px; }
-
-  .log-entry { font-size: 13.5px; padding: 16px 0; border-bottom: 1px dashed var(--border); color: var(--text-muted); display: flex; justify-content: space-between; align-items: center;}
-  .log-entry:last-child { border-bottom: none; }
-  .log-entry b { color: var(--text-main); }
-  .log-tag { background: var(--bg-card); border: 1px solid var(--border); padding: 4px 10px; border-radius: 20px; font-size: 10px; text-transform: uppercase; color: var(--accent); }
-
-  /* --- Toast --- */
-  .toast {
-    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px);
-    background: var(--text-main); color: var(--bg-base); font-weight: 600;
-    padding: 14px 28px; border-radius: 30px; font-size: 14px;
-    opacity: 0; pointer-events: none; transition: var(--transition); z-index: 1000;
-    box-shadow: 0 10px 30px rgba(255,255,255,0.1);
-  }
+  /* Toast */
+  .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--text-main); color: var(--bg-base); font-weight: 600; padding: 14px 28px; border-radius: 30px; font-size: 14px; opacity: 0; pointer-events: none; transition: var(--transition); z-index: 1000; }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
-  .toast.error { background: var(--danger); color: #fff; }
-
-  .spinner {
-    display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.2);
-    border-top-color: var(--bg-base); border-radius: 50%; animation: spin 0.6s linear infinite;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  @media (max-width: 900px) {
-    body { overflow: auto; }
-    .main-layout { flex-direction: column; overflow: visible; }
-    .sidebar { width: 100%; flex-direction: row; padding: 16px; overflow-x: auto; border-right: none; border-bottom: 1px solid var(--border); }
-    .nav-item { white-space: nowrap; }
-    .editor-split { grid-template-columns: 1fr; }
-    .browser-mockup { min-height: 500px; margin-top: 24px; }
-    textarea.main-editor { min-height: 300px; }
-  }
 </style>
 </head>
 <body>
@@ -219,21 +100,21 @@
     <h1 class="mal">മുത്തശ്ശ്യമ്മ അഡ്മിൻ</h1>
     <div class="who">
       <span id="whoami"></span>
-      <button class="btn btn-danger btn-sm" style="border:1px solid var(--border)" onclick="logout()">Logout</button>
+      <button class="btn btn-danger btn-sm" onclick="logout()">Logout</button>
     </div>
   </div>
   
   <div class="main-layout">
     <div class="sidebar">
-      <div class="nav-item active" data-tab="content" onclick="switchPage('index', 'ഹോം (Home)')">ഹോം (Home)</div>
-      <div class="nav-item" data-tab="content" onclick="switchPage('history', 'ചരിത്രം (History)')">ചരിത്രം (History)</div>
-      <div class="nav-item" data-tab="content" onclick="switchPage('renovation', 'പുനരുദ്ധാരണം (Renovation)')">പുനരുദ്ധാരണം (Renovation)</div>
-      <div class="nav-item" data-tab="pooja" onclick="showPanel('panel-pooja')">വഴിപാടുകൾ (Poojas)</div>
-      <div class="nav-item" id="ownerNav" style="display:none;" data-tab="owner" onclick="showPanel('panel-owner')">Activity Log</div>
+      <div class="nav-item active" onclick="switchPage('index', 'ഹോം (Home)')">ഹോം (Home)</div>
+      <div class="nav-item" onclick="switchPage('history', 'ചരിത്രം (History)')">ചരിത്രം (History)</div>
+      <div class="nav-item" onclick="switchPage('renovation', 'പുനരുദ്ധാരണം (Renovation)')">പുനരുദ്ധാരണം (Renovation)</div>
+      <div class="nav-item" onclick="switchPage('contact', 'സമ്പർക്കം (Contact)')">സമ്പർക്കം (Contact)</div>
+      <div class="nav-item" onclick="showPanel('panel-pooja')">വഴിപാടുകൾ (Poojas)</div>
     </div>
 
     <div class="content-area">
-      <!-- Universal Content Editor with Iframe Preview -->
+      <!-- Dynamic Content Editor -->
       <div class="panel active" id="panel-content">
         <div class="panel-header">
           <h2 id="editor-title">ഹോം (Home)</h2>
@@ -241,14 +122,15 @@
         </div>
         <div class="editor-split">
           <div class="editor-col">
-            <h3>Content Editor</h3>
-            <textarea id="main-editor" class="main-editor" placeholder="Start typing here... Use the Enter key for new paragraphs." oninput="syncToIframe()"></textarea>
+            <h3>Text Fields to Edit</h3>
+            <div id="fields-container"></div>
+            <button class="btn btn-ghost" onclick="addNewField()" style="margin-top:16px;">+ Add New Text Field</button>
           </div>
           <div class="editor-col">
-            <h3><span>Live Preview</span> <span class="live-badge">SYNCING LIVE</span></h3>
+            <h3>Live Preview</h3>
             <div class="browser-mockup">
               <div class="browser-header">
-                <div class="dot red"></div><div class="dot yel"></div><div class="dot grn"></div>
+                <div class="dot"></div><div class="dot"></div><div class="dot"></div>
                 <div class="browser-url" id="browser-url">muthashyamma.com/</div>
               </div>
               <iframe id="live-frame" class="live-frame" src="/" onload="iframeLoaded()"></iframe>
@@ -256,33 +138,11 @@
           </div>
         </div>
       </div>
-
-      <!-- Pooja Manager -->
+      
+      <!-- Poojas Panel -->
       <div class="panel" id="panel-pooja">
-        <div class="panel-header">
-          <h2>വഴിപാടുകൾ (Poojas & Offerings)</h2>
-        </div>
-        <div class="card-grid">
-          <div class="card">
-            <h3 style="margin-top:0;font-size:14px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:20px;">Add New Pooja</h3>
-            <div class="add-form">
-              <input id="newPoojaName" placeholder="പൂജയുടെ പേര് (Pooja Name)">
-              <input id="newPoojaAmount" type="number" placeholder="തുക (₹ Amount)">
-              <button class="btn" onclick="addPooja()">Add Entry</button>
-            </div>
-          </div>
-          <div id="poojaList"></div>
-        </div>
-      </div>
-
-      <!-- Activity Log -->
-      <div class="panel" id="panel-owner">
-        <div class="panel-header">
-          <h2>System Activity</h2>
-        </div>
-        <div class="card-grid">
-          <div class="card" id="activityLog" style="padding: 0 24px;"></div>
-        </div>
+        <div class="panel-header"><h2>വഴിപാടുകൾ (Poojas)</h2></div>
+        <p style="color:var(--text-muted)">Please use the backend system for Poojas as previously configured.</p>
       </div>
     </div>
   </div>
@@ -295,14 +155,12 @@ let token = localStorage.getItem('admin_token');
 let role = localStorage.getItem('admin_role');
 let username = localStorage.getItem('admin_username');
 
-// State Management
 let currentPage = 'index';
-let contentCache = { index: '', history: '', renovation: '' };
+let contentCache = {};
 
 function showToast(msg, isError = false) {
   const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast show' + (isError ? ' error' : '');
+  t.textContent = msg; t.className = 'toast show' + (isError ? ' error' : '');
   setTimeout(() => t.className = 'toast', 3000);
 }
 
@@ -310,9 +168,7 @@ function showApp() {
   document.getElementById('loginWrap').style.display = 'none';
   document.getElementById('app').style.display = 'flex';
   document.getElementById('whoami').innerHTML = `<span>${username}</span> <span class="role-badge">${role}</span>`;
-  if (role === 'owner') document.getElementById('ownerNav').style.display = 'block';
   fetchAllContent();
-  loadPoojas();
 }
 
 if (token) showApp();
@@ -321,199 +177,123 @@ async function login() {
   const u = document.getElementById('username').value.trim();
   const p = document.getElementById('password').value;
   const errBox = document.getElementById('loginError');
-  const btn = document.getElementById('loginBtn');
-  errBox.classList.remove('show');
-
   if (!u || !p) { errBox.textContent = 'Please enter credentials'; errBox.classList.add('show'); return; }
 
-  btn.disabled = true;
   try {
-    const res = await fetch('/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: u, password: p })
-    });
-
-    if (!res.ok) throw new Error(res.status === 401 ? 'Invalid credentials' : 'Login failed');
+    const res = await fetch('/api/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ username: u, password: p }) });
+    if (!res.ok) throw new Error('Invalid credentials');
     const data = await res.json();
     token = data.token; role = data.role; username = data.username;
     localStorage.setItem('admin_token', token); localStorage.setItem('admin_role', role); localStorage.setItem('admin_username', username);
     showApp();
-  } catch (e) {
-    errBox.textContent = e.message || 'Network error'; errBox.classList.add('show');
-  } finally {
-    btn.disabled = false;
-  }
+  } catch (e) { errBox.textContent = e.message; errBox.classList.add('show'); }
 }
 
 function logout() { localStorage.clear(); location.reload(); }
 
-// --- Navigation & Routing ---
 function showPanel(panelId) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.getElementById(panelId).classList.add('active');
-  document.querySelector(`.nav-item[onclick="showPanel('${panelId}')"]`).classList.add('active');
-  if (panelId === 'panel-owner') loadActivity();
+  event.target.classList.add('active');
+}
+
+async function fetchAllContent() {
+  for (const page of ['index', 'history', 'renovation', 'contact']) {
+    try {
+      const res = await fetch('/api/content/' + page);
+      const data = await res.json();
+      
+      // If old format (string), convert to dictionary format for safety
+      if (typeof data.data === 'string') { contentCache[page] = { main_text: data.data }; } 
+      else if (data.data && data.data.text) { contentCache[page] = { main_text: data.data.text }; }
+      else { contentCache[page] = data.data || {}; }
+    } catch (e) { contentCache[page] = {}; }
+  }
+  switchPage('index', 'ഹോം (Home)');
 }
 
 function switchPage(pageKey, title) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   document.getElementById('panel-content').classList.add('active');
-  document.querySelector(`.nav-item[onclick="switchPage('${pageKey}', '${title}')"]`).classList.add('active');
   
   currentPage = pageKey;
   document.getElementById('editor-title').textContent = title;
-  document.getElementById('main-editor').value = contentCache[pageKey] || '';
   
-  // Update Iframe Route
+  // Setup Iframe
   const route = pageKey === 'index' ? '/' : `/${pageKey}`;
   document.getElementById('browser-url').textContent = `muthashyamma.com${route}`;
   document.getElementById('live-frame').src = route;
+
+  renderFields(pageKey);
 }
 
-// --- Content Fetching & Syncing ---
-async function fetchAllContent() {
-  for (const page of ['index', 'history', 'renovation']) {
-    try {
-      const res = await fetch('/api/content/' + page);
-      if(res.status === 401) return handleUnauthorized();
-      const data = await res.json();
-      contentCache[page] = data.data && data.data.text ? data.data.text : (typeof data.data === 'string' ? data.data : '');
-    } catch (e) {}
-  }
-  // Initialize with Home
-  document.getElementById('main-editor').value = contentCache['index'];
-}
-
-// Triggered when iframe finishes loading a new page route
-function iframeLoaded() {
-  syncToIframe();
-}
-
-// Injects the text from the textarea directly into the live iframe
-function syncToIframe() {
-  const text = document.getElementById('main-editor').value;
-  contentCache[currentPage] = text; // Update cache
+function renderFields(pageKey) {
+  const container = document.getElementById('fields-container');
+  container.innerHTML = '';
+  const data = contentCache[pageKey] || {};
   
+  for (let key in data) { createFieldUI(key, data[key]); }
+}
+
+function createFieldUI(key, value) {
+  const container = document.getElementById('fields-container');
+  const div = document.createElement('div');
+  div.className = 'field-group';
+  div.innerHTML = `
+    <div style="display:flex; justify-content:space-between; margin-bottom:8px;">
+      <input type="text" class="field-key-input" value="${key}" placeholder="e.g., hero_title">
+      <button class="btn btn-danger btn-sm" style="margin-left:12px; height:34px;" onclick="this.parentElement.parentElement.remove(); syncToIframe();">Remove</button>
+    </div>
+    <textarea class="field-value" oninput="syncToIframe()">${value}</textarea>
+  `;
+  container.appendChild(div);
+}
+
+function addNewField() { createFieldUI('new_field_name', 'Type your Malayalam text here...'); }
+
+function syncToIframe() {
   const iframe = document.getElementById('live-frame');
   if (!iframe.contentWindow) return;
   
-  try {
-    // This finds the exact container you placed in your HTML files
-    const container = iframe.contentWindow.document.getElementById('dynamic-text-container');
-    if (container) {
-      if(!text.trim()) {
-         container.innerHTML = '<p style="color:#a1a1aa; font-style:italic;">[Content will appear here]</p>';
-         return;
-      }
-      // Wrap text exactly as the live site styles it
-      const html = text.split('\n')
-        .filter(p => p.trim() !== '')
-        .map(p => `<p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">${p}</p>`)
-        .join('');
-      container.innerHTML = html;
-    }
-  } catch(e) {
-    console.warn("Iframe cross-origin block or DOM not ready yet.");
-  }
+  const groups = document.querySelectorAll('.field-group');
+  groups.forEach(g => {
+    const key = g.querySelector('.field-key-input').value.trim();
+    const val = g.querySelector('.field-value').value;
+    
+    try {
+      // Find the element in the iframe with matching data-edit tag
+      const element = iframe.contentWindow.document.querySelector(`[data-edit="${key}"]`);
+      if (element) { element.innerHTML = val; }
+    } catch(e) {}
+  });
 }
 
+function iframeLoaded() { syncToIframe(); }
+
 async function saveCurrentContent() {
-  const textContent = document.getElementById('main-editor').value;
+  const groups = document.querySelectorAll('.field-group');
+  const newData = {};
+  groups.forEach(g => {
+    const key = g.querySelector('.field-key-input').value.trim();
+    const val = g.querySelector('.field-value').value;
+    if(key) newData[key] = val;
+  });
+
+  contentCache[currentPage] = newData;
+
   try {
     const res = await fetch('/api/content/' + currentPage, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
-      body: JSON.stringify({ data: { text: textContent } })
+      body: JSON.stringify({ data: newData }) // Sending dictionary JSON
     });
-    if(res.status === 401) return handleUnauthorized();
     if (!res.ok) throw new Error();
     showToast(`${currentPage.toUpperCase()} Content Saved ✓`);
   } catch (e) {
     showToast('Failed to save content', true);
   }
-}
-
-// --- Poojas Management ---
-async function loadPoojas() {
-  const res = await fetch('/api/poojas');
-  const items = await res.json();
-  const box = document.getElementById('poojaList');
-  if (items.length === 0) { box.innerHTML = '<p style="color:var(--text-muted);">No poojas listed yet.</p>'; return; }
-  
-  box.innerHTML = items.map(p => `
-    <div class="pooja-item">
-      <input class="p-name" value="${p.name}" onchange="editPooja('${p._id}', this.value, ${p.amount})">
-      <input type="number" class="p-amt" value="${p.amount}" onchange="editPooja('${p._id}', '${p.name}', this.value)">
-      <button class="btn btn-sm" onclick="markDone('${p._id}')">Mark Done</button>
-      <button class="btn btn-sm btn-danger" onclick="deletePooja('${p._id}')">Delete</button>
-    </div>
-  `).join('');
-}
-
-async function addPooja() {
-  const name = document.getElementById('newPoojaName').value.trim();
-  const amount = document.getElementById('newPoojaAmount').value;
-  if (!name || !amount) { showToast('Fill name and amount', true); return; }
-  
-  const res = await fetch('/api/poojas', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
-    body: JSON.stringify({ name, amount: Number(amount) })
-  });
-  if(res.status === 401) return handleUnauthorized();
-  
-  document.getElementById('newPoojaName').value = '';
-  document.getElementById('newPoojaAmount').value = '';
-  showToast('Pooja added ✓'); loadPoojas();
-}
-
-async function editPooja(id, name, amount) {
-  const res = await fetch('/api/poojas/' + id, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
-    body: JSON.stringify({ name, amount: Number(amount) })
-  });
-  if(res.status === 401) return handleUnauthorized();
-  showToast('Updated ✓');
-}
-
-async function deletePooja(id) {
-  if (!confirm('Delete this pooja permanently?')) return;
-  const res = await fetch('/api/poojas/' + id, { method: 'DELETE', headers: { 'Authorization': 'Bearer ' + token }});
-  if(res.status === 401) return handleUnauthorized();
-  showToast('Deleted'); loadPoojas();
-}
-
-async function markDone(id) {
-  const res = await fetch('/api/poojas/' + id + '/done', {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
-    body: JSON.stringify({})
-  });
-  if(res.status === 401) return handleUnauthorized();
-  showToast('Marked as completed');
-}
-
-// --- Activity Log ---
-async function loadActivity() {
-  const res = await fetch('/api/activity', { headers: { 'Authorization': 'Bearer ' + token } });
-  if(res.status === 401) return handleUnauthorized();
-  const items = await res.json();
-  const box = document.getElementById('activityLog');
-  box.innerHTML = items.length ? items.map(a => `
-    <div class="log-entry">
-      <div><b>${a.user}</b> <span class="log-tag">${a.action}</span> <span style="margin-left:8px;">${a.target}</span></div>
-      <div style="font-size:12px;">${new Date(a.timestamp).toLocaleString()}</div>
-    </div>
-  `).join('') : '<p style="padding: 24px 0;">No activity recorded yet.</p>';
-}
-
-function handleUnauthorized() {
-    showToast("Session expired. Logging out...", true);
-    setTimeout(logout, 1500);
 }
 </script>
 </body>
