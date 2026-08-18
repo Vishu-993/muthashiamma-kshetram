@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. Enable CSS animations
     document.body.classList.add('js-ready');
 
-    // 2. Mobile Burger Menu Toggle & Slide-out Drawer
+    // Mobile Burger Menu Toggle
     const burgerBtn = document.getElementById('burgerBtn');
     const navlinks = document.getElementById('navlinks');
     
@@ -28,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 3. Scroll Progress Bar & Floating Top Button
+    // Scroll Progress & Top Button
     const progressBar = document.getElementById('progressBar');
     const topFloat = document.getElementById('topFloat');
 
@@ -41,13 +40,9 @@ document.addEventListener("DOMContentLoaded", () => {
             let scrollPercent = (scrollTop / (docHeight - winHeight)) * 100;
             progressBar.style.width = scrollPercent + '%';
         }
-
         if (topFloat) {
-            if (scrollTop > 400) {
-                topFloat.classList.add('show');
-            } else {
-                topFloat.classList.remove('show');
-            }
+            if (scrollTop > 400) { topFloat.classList.add('show'); } 
+            else { topFloat.classList.remove('show'); }
         }
     });
 
@@ -57,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // 4. Scroll Reveal Animations
+    // Animations & Scroll Spy
     const revealElements = document.querySelectorAll('.reveal, .stagger');
     const revealObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
@@ -67,13 +62,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
-
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // 5. Subnav Scroll Spy
     const sections = document.querySelectorAll('section');
     const pills = document.querySelectorAll('.pill');
-
     const sectionObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -88,21 +80,22 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }, { rootMargin: "-20% 0px -70% 0px" });
-
     sections.forEach(section => sectionObserver.observe(section));
 
     // ==========================================
-    // 6. DYNAMIC CONTENT INJECTION (CMS INTEGRATION)
+    // DYNAMIC CONTENT INJECTION 
     // ==========================================
     
-    // Function to dynamically load page text from the backend
     async function loadDynamicText() {
-        // Detect which page we are currently on based on the URL or the main ID
         let currentPage = 'index'; 
-        if (window.location.pathname.includes('history.html')) currentPage = 'history';
-        if (window.location.pathname.includes('renovation.html')) currentPage = 'renovation';
+        const path = window.location.pathname;
 
-        // Check if there is a designated container for dynamic text on this HTML page
+        if (path.includes('history.html')) currentPage = 'history';
+        else if (path.includes('renovation.html')) currentPage = 'renovation';
+        else if (path.includes('kalari.html')) currentPage = 'kalari';
+        else if (path.includes('gallery.html')) currentPage = 'gallery';
+        else if (path.includes('contact.html')) currentPage = 'contact';
+
         const contentContainer = document.getElementById('dynamic-text-container');
         
         if (contentContainer) {
@@ -111,24 +104,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (res.ok) {
                     const dbData = await res.json();
                     if (dbData.data && dbData.data.text) {
-                        // Replace the static HTML paragraph with the database text.
-                        // We format the raw text to replace line breaks with paragraph tags for neatness.
                         const formattedText = dbData.data.text
                             .split('\n')
                             .filter(p => p.trim() !== '')
                             .map(p => `<p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">${p}</p>`)
                             .join('');
-                        
                         contentContainer.innerHTML = formattedText;
                     }
                 }
             } catch (err) {
-                console.warn("Could not load dynamic text. Falling back to static HTML.", err);
+                console.warn("Could not load dynamic text.", err);
             }
         }
     }
 
-    // Function to dynamically load Poojas into the table on pooja.html
     async function loadDynamicPoojas() {
         const poojaTableBody = document.getElementById('dynamic-pooja-table');
         if (poojaTableBody) {
@@ -146,12 +135,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 }
             } catch (err) {
-                console.warn("Could not load Poojas from backend.", err);
+                console.warn("Could not load Poojas.", err);
             }
         }
     }
 
-    // Trigger the dynamic loading automatically
     loadDynamicText();
     loadDynamicPoojas();
 });
