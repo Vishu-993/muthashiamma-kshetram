@@ -1,257 +1,157 @@
-(function () {
-  'use strict';
-  document.documentElement.classList.add('js-ready');
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. Enable CSS animations
+    document.body.classList.add('js-ready');
 
-  var header = document.getElementById('siteHeader');
-  var burger = document.getElementById('burgerBtn');
-  var navlinks = document.getElementById('navlinks');
-  var overlay = document.getElementById('navOverlay');
-  var progressBar = document.getElementById('progressBar');
-  var topFloat = document.getElementById('topFloat');
-  var toast = document.getElementById('toast');
-  var subnavScroll = document.getElementById('subnav');
-  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // 2. Mobile Burger Menu Toggle & Slide-out Drawer
+    const burgerBtn = document.getElementById('burgerBtn');
+    const navlinks = document.getElementById('navlinks');
+    
+    const overlay = document.createElement('div');
+    overlay.classList.add('nav-overlay');
+    document.body.appendChild(overlay);
 
-  /* ---------- header height -> CSS var (keeps sticky subnav from overlapping when topbar wraps) ---------- */
-  function syncHeaderHeight() {
-    if (!header) return;
-    document.documentElement.style.setProperty('--header-h', header.offsetHeight + 'px');
-  }
-  syncHeaderHeight();
-  window.addEventListener('resize', debounce(syncHeaderHeight, 150));
-  if ('ResizeObserver' in window && header) {
-    new ResizeObserver(syncHeaderHeight).observe(header);
-  }
-
-  /* ---------- mobile drawer ---------- */
-  var lastFocused = null;
-
-  function openDrawer() {
-    if (!navlinks) return;
-    lastFocused = document.activeElement;
-    navlinks.classList.add('open');
-    burger.classList.add('active');
-    burger.setAttribute('aria-expanded', 'true');
-    overlay.hidden = false;
-    requestAnimationFrame(function () { overlay.classList.add('show'); });
-    document.documentElement.classList.add('no-scroll');
-    document.body.classList.add('no-scroll');
-    var firstLink = navlinks.querySelector('a, button');
-    if (firstLink) firstLink.focus({ preventScroll: true });
-  }
-
-  function closeDrawer() {
-    if (!navlinks) return;
-    navlinks.classList.remove('open');
-    burger.classList.remove('active');
-    burger.setAttribute('aria-expanded', 'false');
-    overlay.classList.remove('show');
-    document.documentElement.classList.remove('no-scroll');
-    document.body.classList.remove('no-scroll');
-    setTimeout(function () { if (!navlinks.classList.contains('open')) overlay.hidden = true; }, 350);
-    if (lastFocused) lastFocused.focus({ preventScroll: true });
-  }
-
-  function toggleDrawer() {
-    navlinks.classList.contains('open') ? closeDrawer() : openDrawer();
-  }
-
-  if (burger && navlinks && overlay) {
-    burger.addEventListener('click', toggleDrawer);
-    overlay.addEventListener('click', closeDrawer);
-
-    navlinks.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', closeDrawer);
-    });
-
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && navlinks.classList.contains('open')) closeDrawer();
-    });
-
-    // basic focus trap while drawer open
-    navlinks.addEventListener('keydown', function (e) {
-      if (e.key !== 'Tab' || !navlinks.classList.contains('open')) return;
-      var focusables = navlinks.querySelectorAll('a, button');
-      if (!focusables.length) return;
-      var first = focusables[0], last = focusables[focusables.length - 1];
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-    });
-
-    // close drawer automatically if resized to desktop width
-    window.addEventListener('resize', debounce(function () {
-      if (window.innerWidth > 880 && navlinks.classList.contains('open')) closeDrawer();
-    }, 150));
-  }
-
-  /* ---------- scroll-driven UI: progress bar, header shadow, back-to-top, active pill ---------- */
-  var sections = Array.prototype.slice.call(document.querySelectorAll('main [id]'));
-  var pills = Array.prototype.slice.call(document.querySelectorAll('.pill'));
-  var ticking = false;
-
-  function onScroll() {
-    var scrollTop = window.scrollY || document.documentElement.scrollTop;
-    var docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-
-    if (progressBar) progressBar.style.width = pct + '%';
-    if (header) header.classList.toggle('scrolled', scrollTop > 8);
-    if (topFloat) topFloat.classList.toggle('show', scrollTop > 480);
-
-    ticking = false;
-  }
-
-  window.addEventListener('scroll', function () {
-    if (!ticking) {
-      requestAnimationFrame(onScroll);
-      ticking = true;
+    function toggleMenu() {
+        const isOpen = navlinks.classList.toggle('open');
+        burgerBtn.classList.toggle('active', isOpen);
+        overlay.classList.toggle('show', isOpen);
+        burgerBtn.setAttribute('aria-expanded', isOpen);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
     }
-  }, { passive: true });
-  onScroll();
 
-  /* ---------- active subnav pill + nav link, via IntersectionObserver ---------- */
-  if ('IntersectionObserver' in window && sections.length) {
-    var activeObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        var id = entry.target.id;
-
-        pills.forEach(function (p) {
-          p.classList.toggle('active', p.dataset.target === id);
+    if (burgerBtn && navlinks) {
+        burgerBtn.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
+        navlinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navlinks.classList.contains('open')) toggleMenu();
+            });
         });
-        var pillActive = document.querySelector('.pill.active');
-        if (pillActive && subnavScroll) {
-          subnavScroll.scrollTo({
-            left: pillActive.offsetLeft - 24,
-            behavior: reducedMotion ? 'auto' : 'smooth'
-          });
-        }
-      });
-    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
-
-    sections.forEach(function (s) { activeObserver.observe(s); });
-  }
-
-  /* ---------- reveal / stagger animations ---------- */
-  if ('IntersectionObserver' in window) {
-    var revealObserver = new IntersectionObserver(function (entries, obs) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-          obs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
-
-    document.querySelectorAll('.reveal, .stagger').forEach(function (el) {
-      revealObserver.observe(el);
-    });
-  } else {
-    document.querySelectorAll('.reveal, .stagger').forEach(function (el) {
-      el.classList.add('in');
-    });
-  }
-
-  /* ---------- back to top ---------- */
-  if (topFloat) {
-    topFloat.addEventListener('click', function (e) {
-      e.preventDefault();
-      document.getElementById('top').scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth' });
-    });
-  }
-
-  /* ---------- toast helper (available for copy-to-clipboard etc.) ---------- */
-  var toastTimer = null;
-  window.showToast = function (msg) {
-    if (!toast) return;
-    toast.textContent = msg;
-    toast.classList.add('show');
-    clearTimeout(toastTimer);
-    toastTimer = setTimeout(function () { toast.classList.remove('show'); }, 2200);
-  };
-
-  /* ---------- masapooja offering selector ---------- */
-  var poojaSelector = document.getElementById('poojaSelector');
-  if (poojaSelector) {
-    var poojaRows = Array.prototype.slice.call(poojaSelector.querySelectorAll('.pooja-row'));
-    var totalEl = document.getElementById('poojaTotalAmount');
-    var bookBtn = document.getElementById('poojaBookBtn');
-    var selectAllBtn = document.getElementById('poojaSelectAll');
-    var clearAllBtn = document.getElementById('poojaClearAll');
-
-    function clampQty(v) {
-      v = parseInt(v, 10);
-      if (isNaN(v) || v < 0) v = 0;
-      if (v > 99) v = 99;
-      return v;
     }
 
-    function refreshPooja() {
-      var total = 0;
-      var chosen = [];
-      poojaRows.forEach(function (row) {
-        var input = row.querySelector('.qty-input');
-        var qty = clampQty(input.value);
-        var price = parseInt(row.dataset.price, 10) || 0;
-        row.classList.toggle('has-qty', qty > 0);
-        if (qty > 0) {
-          total += qty * price;
-          chosen.push(row.dataset.name + ' × ' + qty);
+    // 3. Scroll Progress Bar & Floating Top Button
+    const progressBar = document.getElementById('progressBar');
+    const topFloat = document.getElementById('topFloat');
+
+    window.addEventListener('scroll', () => {
+        let scrollTop = window.scrollY;
+        let docHeight = document.documentElement.scrollHeight;
+        let winHeight = window.innerHeight;
+        
+        if (progressBar) {
+            let scrollPercent = (scrollTop / (docHeight - winHeight)) * 100;
+            progressBar.style.width = scrollPercent + '%';
         }
-      });
-      if (totalEl) totalEl.textContent = '₹' + total.toLocaleString('en-IN');
-      if (bookBtn) {
-        var msg = chosen.length
-          ? 'നമസ്കാരം, എനിക്ക് ഈ വഴിപാടുകൾ ബുക്ക് ചെയ്യണം:\n' + chosen.join('\n') + '\nആകെ: ₹' + total.toLocaleString('en-IN')
-          : 'നമസ്കാരം, മാസപൂജയെക്കുറിച്ച് അറിയാൻ ആഗ്രഹിക്കുന്നു.';
-        bookBtn.href = 'https://wa.me/919847501188?text=' + encodeURIComponent(msg);
-      }
-    }
 
-    poojaSelector.addEventListener('click', function (e) {
-      var btn = e.target.closest('.qbtn');
-      if (!btn) return;
-      var row = btn.closest('.pooja-row');
-      var input = row.querySelector('.qty-input');
-      var qty = clampQty(input.value);
-      qty = btn.dataset.action === 'inc' ? qty + 1 : Math.max(0, qty - 1);
-      input.value = qty;
-      refreshPooja();
+        if (topFloat) {
+            if (scrollTop > 400) {
+                topFloat.classList.add('show');
+            } else {
+                topFloat.classList.remove('show');
+            }
+        }
     });
 
-    poojaSelector.addEventListener('input', function (e) {
-      if (!e.target.classList.contains('qty-input')) return;
-      e.target.value = clampQty(e.target.value);
-      refreshPooja();
-    });
-
-    if (selectAllBtn) {
-      selectAllBtn.addEventListener('click', function () {
-        poojaRows.forEach(function (row) {
-          var input = row.querySelector('.qty-input');
-          if (clampQty(input.value) === 0) input.value = 1;
+    if (topFloat) {
+        topFloat.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
-        refreshPooja();
-      });
     }
 
-    if (clearAllBtn) {
-      clearAllBtn.addEventListener('click', function () {
-        poojaRows.forEach(function (row) { row.querySelector('.qty-input').value = 0; });
-        refreshPooja();
-      });
+    // 4. Scroll Reveal Animations
+    const revealElements = document.querySelectorAll('.reveal, .stagger');
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('in');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // 5. Subnav Scroll Spy
+    const sections = document.querySelectorAll('section');
+    const pills = document.querySelectorAll('.pill');
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                let currentId = entry.target.getAttribute('id');
+                pills.forEach(pill => {
+                    pill.classList.remove('active');
+                    if (pill.getAttribute('href') === `#${currentId}`) {
+                        pill.classList.add('active');
+                        pill.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                    }
+                });
+            }
+        });
+    }, { rootMargin: "-20% 0px -70% 0px" });
+
+    sections.forEach(section => sectionObserver.observe(section));
+
+    // ==========================================
+    // 6. DYNAMIC CONTENT INJECTION (CMS INTEGRATION)
+    // ==========================================
+    
+    // Function to dynamically load page text from the backend
+    async function loadDynamicText() {
+        // Detect which page we are currently on based on the URL or the main ID
+        let currentPage = 'index'; 
+        if (window.location.pathname.includes('history.html')) currentPage = 'history';
+        if (window.location.pathname.includes('renovation.html')) currentPage = 'renovation';
+
+        // Check if there is a designated container for dynamic text on this HTML page
+        const contentContainer = document.getElementById('dynamic-text-container');
+        
+        if (contentContainer) {
+            try {
+                const res = await fetch(`/api/content/${currentPage}`);
+                if (res.ok) {
+                    const dbData = await res.json();
+                    if (dbData.data && dbData.data.text) {
+                        // Replace the static HTML paragraph with the database text.
+                        // We format the raw text to replace line breaks with paragraph tags for neatness.
+                        const formattedText = dbData.data.text
+                            .split('\n')
+                            .filter(p => p.trim() !== '')
+                            .map(p => `<p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">${p}</p>`)
+                            .join('');
+                        
+                        contentContainer.innerHTML = formattedText;
+                    }
+                }
+            } catch (err) {
+                console.warn("Could not load dynamic text. Falling back to static HTML.", err);
+            }
+        }
     }
 
-    refreshPooja();
-  }
+    // Function to dynamically load Poojas into the table on pooja.html
+    async function loadDynamicPoojas() {
+        const poojaTableBody = document.getElementById('dynamic-pooja-table');
+        if (poojaTableBody) {
+            try {
+                const res = await fetch('/api/poojas');
+                if (res.ok) {
+                    const poojas = await res.json();
+                    if (poojas.length > 0) {
+                        poojaTableBody.innerHTML = poojas.map(p => `
+                            <tr>
+                                <td>${p.name}</td>
+                                <td>${p.amount}</td>
+                            </tr>
+                        `).join('');
+                    }
+                }
+            } catch (err) {
+                console.warn("Could not load Poojas from backend.", err);
+            }
+        }
+    }
 
-  /* ---------- utils ---------- */
-  function debounce(fn, wait) {
-    var t;
-    return function () {
-      clearTimeout(t);
-      var args = arguments, ctx = this;
-      t = setTimeout(function () { fn.apply(ctx, args); }, wait);
-    };
-  }
-})();
+    // Trigger the dynamic loading automatically
+    loadDynamicText();
+    loadDynamicPoojas();
+});
