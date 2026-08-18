@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>അഡ്മിൻ പാനൽ</title>
+<style>
+  body { font-family: sans-serif; background:#1a0d10; color:#f0d89a; margin:0; padding:20px; }
+  input, textarea, select { width:100%; padding:10px; margin:6px 0; border-radius:8px; border:1px solid #5c1019; background:#2a1418; color:#fff; box-sizing:border-box; }
+  button { padding:10px 16px; border-radius:8px; border:none; background:#D4A94A; color:#1a0d10; font-weight:bold; cursor:pointer; margin:6px 4px 6px 0; }
+  .tabs { display:flex; gap:8px; margin:16px 0; flex-wrap:wrap; }
+  .tab { padding:8px 14px; border-radius:8px; background:#2a1418; cursor:pointer; }
+  .tab.active { background:#D4A94A; color:#1a0d10; }
+  .panel { display:none; }
+  .panel.active { display:block; }
+  .row { display:flex; gap:8px; align-items:center; border-bottom:1px solid #5c1019; padding:8px 0; }
+  #loginBox { max-width:360px; margin:60px auto; }
+  .log-entry { font-size:13px; border-bottom:1px solid #5c1019; padding:6px 0; }
+</style>
+</head>
+<body>
+
+<div id="loginBox">
+  <h2>അഡ്മിൻ ലോഗിൻ</h2>
+  <input id="username" placeholder="Username">
+  <input id="password" type="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+  <p id="loginError" style="color:#ff8080;"></p>
+</div>
+
+<div id="dashboard" style="display:none;">
+  <h2>ഡാഷ്ബോർഡ് — <span id="whoami"></span></h2>
+  <button onclick="logout()">Logout</button>
+  <div class="tabs">
+    <div class="tab active" onclick="showTab('index')">Index</div>
+    <div class="tab" onclick="showTab('history')">History</div>
+    <div class="tab" onclick="showTab('renovation')">Renovation</div>
+    <div class="tab" onclick="showTab('pooja')">Pooja</div>
+    <div class="tab" onclick="showTab('owner')" id="ownerTab" style="display:none;">Owner Log</div>
+  </div>
+
+  <div class="panel active" id="panel-index">
+    <h3>Index Page Content (JSON)</h3>
+    <textarea id="content-index" rows="14"></textarea>
+    <button onclick="saveContent('index')">Save</button>
+  </div>
+  <div class="panel" id="panel-history">
+    <h3>History Page Content (JSON)</h3>
+    <textarea id="content-history" rows="14"></textarea>
+    <button onclick="saveContent('history')">Save</button>
+  </div>
+  <div class="panel" id="panel-renovation">
+    <h3>Renovation Page Content (JSON)</h3>
+    <textarea id="content-renovation" rows="14"></textarea>
+    <button onclick="saveContent('renovation')">Save</button>
+  </div>
+
+  <div class="panel" id="panel-pooja">
+    <h3>Pooja List</h3>
+    <div id="poojaList"></div>
+    <h4>Add New Pooja</h4>
+    <input id="newPoojaName" placeholder="പൂജ പേര്">
+    <input id="newPoojaAmount" type="number" placeholder="തുക (₹)">
+    <button onclick="addPooja()">Add</button>
+  </div>
+
+  <div class="panel" id="panel-owner">
+    <h3>Last Updates (Owner Only)</h3>
+    <div id="activityLog"></div>
+  </div>
+</div>
+
+<script>
+let token = localStorage.getItem('admin_token');
+let role = localStorage.getItem('admin_role');
+let username = localStorage.getItem('admin_username');
+
+function showApp() {
+  document.getElementById('loginBox').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+  document.getElementById('whoami').textContent = username + ' (' + role + ')';
+  if (role === 'owner') {
+    document.getElementById('ownerTab').style.display = 'block';
+  }
+  loadAllContent();
+  loadPoojas();
+}
+
+if (token) showApp();
+
+async function login() {
+  const username_ = document.getElementById('username').value;
+  const password_ = document.getElementById('password').value;
+  const res = await fetch('/api/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username: username_, password: password_ })
+  });
+  if (!res.ok) {
+    document.getElementById('loginError').textContent = 'Login failed';
+    return;
+  }
+  const data = await res.json();
+  token = data.token; role = data.role; username = data.username;
+  localStorage.setItem('admin_token', token);
+  localStorage.setItem('admin_role', role);
+  localStorage.setItem('admin_username', username);
+  showApp();
+}
+
+function logout() {
+  localStorage.clear();
+  location.reload();
+}
+
+function showTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('panel-' + name).classList.add('active');
+  if (name === 'owner') loadActivity();
+}
+
+async function loadAllContent() {
+  for (const page of ['index', 'history', 'renovation']) {
+    const res = await fetch('/api/content/' + page);
+    const data = await res.json();
+    document.getElementById('content-' + page).value = JSON.stringify(data.data || {}, null, 2);
+  }
+}
+
+async function saveContent(page) {
+  let data;
+  try {
+    data = JSON.parse(document.getElementById('content-' + page).value);
+  } catch (e) {
+    alert('Invalid JSON');
+    return;
+  }
+  await fetch('/api/content/' + page, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+    body: JSON.stringify({ data })
+  });
+  alert('Saved');
+}
+
+async function loadPoojas() {
+  const res = await fetch('/api/poojas');
+  const items = await res.json();
+  const box = document.getElementById('poojaList');
+  box.innerHTML = items.map(p => `
+    <div class="row">
+      <input value="${p.name}" onchange="editPooja('${p._id}', this.value, ${p.amount})">
+      <input type="number" value="${p.amount}" style="max-width:100px;" onchange="editPooja('${p._id}', '${p.name}', this.value)">
+      <button onclick="markDone('${p._id}')">Done</button>
+      <button onclick="deletePooja('${p._id}')">Delete</button>
+    </div>
+  `).join('');
+}
+
+async function addPooja() {
+  const name = document.getElementById('newPoojaName').value;
+  const amount = document.getElementById('newPoojaAmount').value;
+  await fetch('/api/poojas', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+    body: JSON.stringify({ name, amount: Number(amount) })
+  });
+  document.getElementById('newPoojaName').value = '';
+  document.getElementById('newPoojaAmount').value = '';
+  loadPoojas();
+}
+
+async function editPooja(id, name, amount) {
+  await fetch('/api/poojas/' + id, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+    body: JSON.stringify({ name, amount: Number(amount) })
+  });
+}
+
+async function deletePooja(id) {
+  if (!confirm('Delete this pooja?')) return;
+  await fetch('/api/poojas/' + id, {
+    method: 'DELETE',
+    headers: { 'Authorization': 'Bearer ' + token }
+  });
+  loadPoojas();
+}
+
+async function markDone(id) {
+  await fetch('/api/poojas/' + id + '/done', {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+    body: JSON.stringify({})
+  });
+  alert('Marked done (email/payment wiring pending)');
+}
+
+async function loadActivity() {
+  const res = await fetch('/api/activity', {
+    headers: { 'Authorization': 'Bearer ' + token }
+  });
+  if (!res.ok) return;
+  const items = await res.json();
+  document.getElementById('activityLog').innerHTML = items.map(a => `
+    <div class="log-entry">${a.timestamp} — <b>${a.user}</b> (${a.role}) did <b>${a.action}</b> on <b>${a.target}</b></div>
+  `).join('');
+}
+</script>
+</body>
+</html>
