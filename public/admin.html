@@ -80,7 +80,6 @@
 </head>
 <body>
 
-<!-- LOGIN SCREEN -->
 <div class="login-wrap" id="loginWrap">
   <div class="login-card">
     <h1 class="mal">ശ്രീ മുത്തശ്ശ്യമ്മ ക്ഷേത്രം</h1>
@@ -94,7 +93,6 @@
   </div>
 </div>
 
-<!-- MAIN DASHBOARD -->
 <div class="app" id="app">
   <div class="topbar">
     <h1 class="mal">അഡ്മിൻ പാനൽ</h1>
@@ -105,51 +103,57 @@
   </div>
   
   <div class="layout">
-    <!-- SIDEBAR -->
     <div class="sidebar">
       <div class="nav-item active" data-tab="index" onclick="showTab('index')">ഹോം (Home)</div>
       <div class="nav-item" data-tab="history" onclick="showTab('history')">ചരിത്രം (History)</div>
-      <div class="nav-item" data-tab="renovation" onclick="showTab('renovation')">പുനരുദ്ധാരണം (Renovation)</div>
+      <div class="nav-item" data-tab="renovation" onclick="showTab('renovation')">പുനരുദ്ധാരണം (Renovate)</div>
+      <div class="nav-item" data-tab="kalari" onclick="showTab('kalari')">കളരി (Kalari)</div>
+      <div class="nav-item" data-tab="gallery" onclick="showTab('gallery')">ഗാലറി (Gallery)</div>
+      <div class="nav-item" data-tab="contact" onclick="showTab('contact')">സമ്പർക്കം (Contact)</div>
       <div class="nav-item" data-tab="pooja" onclick="showTab('pooja')">വഴിപാടുകൾ (Poojas)</div>
-      <div class="nav-item" data-tab="owner" id="ownerNav" style="display:none;" onclick="showTab('owner')">Activity Log (Owner)</div>
+      <div class="nav-item" data-tab="owner" id="ownerNav" style="display:none;" onclick="showTab('owner')">Activity Log</div>
     </div>
 
-    <!-- CONTENT PANELS -->
     <div class="content">
-      
-      <!-- HOME EDIT -->
       <div class="panel active" id="panel-index">
         <h2 class="mal">ഹോം പേജ് ഉള്ളടക്കം (Home Content)</h2>
-        <p style="font-size: 13px; color: var(--text-soft);">Update the main description shown on the front page.</p>
         <textarea id="content-index" rows="8" placeholder="Enter Malayalam text here..."></textarea>
         <button class="btn" style="margin-top:12px;" onclick="saveContent('index')">സേവ് ചെയ്യുക (Save)</button>
       </div>
 
-      <!-- HISTORY EDIT -->
       <div class="panel" id="panel-history">
         <h2 class="mal">ചരിത്രം ഉള്ളടക്കം (History Content)</h2>
-        <p style="font-size: 13px; color: var(--text-soft);">Update the temple history text.</p>
         <textarea id="content-history" rows="12" placeholder="Enter Malayalam text here..."></textarea>
         <button class="btn" style="margin-top:12px;" onclick="saveContent('history')">സേവ് ചെയ്യുക (Save)</button>
       </div>
 
-      <!-- RENOVATION EDIT -->
       <div class="panel" id="panel-renovation">
         <h2 class="mal">പുനരുദ്ധാരണം ഉള്ളടക്കം (Renovation Content)</h2>
-        <p style="font-size: 13px; color: var(--text-soft);">Update the renovation appeal and details.</p>
         <textarea id="content-renovation" rows="12" placeholder="Enter Malayalam text here..."></textarea>
         <button class="btn" style="margin-top:12px;" onclick="saveContent('renovation')">സേവ് ചെയ്യുക (Save)</button>
       </div>
 
-      <!-- POOJA MANAGEMENT -->
+      <div class="panel" id="panel-kalari">
+        <h2 class="mal">കളരി ഉള്ളടക്കം (Kalari Content)</h2>
+        <textarea id="content-kalari" rows="8" placeholder="Enter Malayalam text here..."></textarea>
+        <button class="btn" style="margin-top:12px;" onclick="saveContent('kalari')">സേവ് ചെയ്യുക (Save)</button>
+      </div>
+
+      <div class="panel" id="panel-gallery">
+        <h2 class="mal">ഗാലറി വിവരണം (Gallery Description)</h2>
+        <textarea id="content-gallery" rows="6" placeholder="Enter Malayalam text here..."></textarea>
+        <button class="btn" style="margin-top:12px;" onclick="saveContent('gallery')">സേവ് ചെയ്യുക (Save)</button>
+      </div>
+
+      <div class="panel" id="panel-contact">
+        <h2 class="mal">സമ്പർക്കം വിവരണം (Contact Description)</h2>
+        <textarea id="content-contact" rows="6" placeholder="Enter Malayalam text here..."></textarea>
+        <button class="btn" style="margin-top:12px;" onclick="saveContent('contact')">സേവ് ചെയ്യുക (Save)</button>
+      </div>
+
       <div class="panel" id="panel-pooja">
         <h2 class="mal">വഴിപാടുകൾ (Manage Poojas)</h2>
-        <p style="font-size: 13px; color: var(--text-soft); margin-bottom: 20px;">Add, edit, or remove Poojas. Mark them as Done to trigger the completion flow.</p>
-        
-        <div class="card" id="poojaList">
-          <!-- Poojas loaded here via JS -->
-        </div>
-        
+        <div class="card" id="poojaList"></div>
         <div class="card">
           <h3 style="margin-top:0;font-size:15px;color:var(--gold);">പുതിയത് ചേർക്കുക (Add New)</h3>
           <div class="add-form">
@@ -160,15 +164,10 @@
         </div>
       </div>
 
-      <!-- OWNER LOG -->
       <div class="panel" id="panel-owner">
         <h2>Admin Activity Log</h2>
-        <p style="font-size: 13px; color: var(--text-soft);">Only visible to the Owner role. Tracks who updated what.</p>
-        <div class="card" id="activityLog">
-          <!-- Logs loaded here via JS -->
-        </div>
+        <div class="card" id="activityLog"></div>
       </div>
-
     </div>
   </div>
 </div>
@@ -176,7 +175,6 @@
 <div class="toast" id="toast"></div>
 
 <script>
-// --- Auth State ---
 let token = localStorage.getItem('admin_token');
 let role = localStorage.getItem('admin_role');
 let username = localStorage.getItem('admin_username');
@@ -189,10 +187,8 @@ function showToast(msg, isError = false) {
   setTimeout(() => t.classList.remove('show'), 3000);
 }
 
-// Check if already logged in
 if (token) { showApp(); }
 
-// --- Login Logic ---
 async function login() {
   const u = document.getElementById('username').value.trim();
   const p = document.getElementById('password').value;
@@ -216,23 +212,16 @@ async function login() {
       body: JSON.stringify({ username: u, password: p })
     });
 
-    if (!res.ok) {
-      errBox.textContent = 'Invalid credentials or server error.';
-      errBox.classList.add('show');
-      btn.disabled = false;
-      btn.textContent = 'Login to Dashboard';
-      return;
-    }
+    if (!res.ok) throw new Error();
 
     const data = await res.json();
     token = data.token; role = data.role; username = data.username;
     localStorage.setItem('admin_token', token);
     localStorage.setItem('admin_role', role);
     localStorage.setItem('admin_username', username);
-    
     showApp();
   } catch (e) {
-    errBox.textContent = 'Network error. Cannot reach the server.';
+    errBox.textContent = 'Invalid credentials or network error.';
     errBox.classList.add('show');
     btn.disabled = false;
     btn.textContent = 'Login to Dashboard';
@@ -244,16 +233,11 @@ function logout() {
   location.reload();
 }
 
-// --- Dashboard UI Logic ---
 function showApp() {
   document.getElementById('loginWrap').style.display = 'none';
   document.getElementById('app').style.display = 'block';
   document.getElementById('whoami').innerHTML = `${username} <span class="role-badge">${role}</span>`;
-  
-  if (role === 'owner') {
-    document.getElementById('ownerNav').style.display = 'block';
-  }
-  
+  if (role === 'owner') { document.getElementById('ownerNav').style.display = 'block'; }
   loadAllContent();
   loadPoojas();
 }
@@ -261,64 +245,44 @@ function showApp() {
 function showTab(name) {
   document.querySelectorAll('.nav-item').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  
   document.querySelector(`.nav-item[data-tab="${name}"]`).classList.add('active');
   document.getElementById(`panel-${name}`).classList.add('active');
-  
   if (name === 'owner') loadActivity();
 }
 
-// --- CMS Logic (Content Management) ---
 async function loadAllContent() {
-  const pages = ['index', 'history', 'renovation'];
+  const pages = ['index', 'history', 'renovation', 'kalari', 'gallery', 'contact'];
   for (const page of pages) {
     try {
       const res = await fetch(`/api/content/${page}`);
       const data = await res.json();
-      // Safely extract the raw text if it exists
-      let rawText = "";
-      if (data.data && data.data.text) {
-          rawText = data.data.text;
-      }
+      let rawText = (data.data && data.data.text) ? data.data.text : "";
       document.getElementById(`content-${page}`).value = rawText;
-    } catch (e) {
-        console.error("Failed to load content for", page);
-    }
+    } catch (e) { console.error("Failed to load content for", page); }
   }
 }
 
 async function saveContent(page) {
   const textContent = document.getElementById(`content-${page}`).value;
-  
   try {
     const res = await fetch(`/api/content/${page}`, {
       method: 'PUT',
-      headers: { 
-        'Content-Type': 'application/json', 
-        'Authorization': `Bearer ${token}` 
-      },
-      // We wrap the text inside a "data" object matching the backend expectation
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
       body: JSON.stringify({ data: { text: textContent } })
     });
-    
     if (!res.ok) throw new Error();
-    showToast('ഉള്ളടക്കം സേവ് ചെയ്തു ✓ (Saved successfully)');
+    showToast('ഉള്ളടക്കം സേവ് ചെയ്തു ✓ (Saved)');
   } catch (e) {
-    showToast('Failed to save content. Check your connection.', true);
+    showToast('Failed to save content.', true);
   }
 }
 
-// --- Pooja Management Logic ---
 async function loadPoojas() {
   try {
     const res = await fetch('/api/poojas');
     const items = await res.json();
     const box = document.getElementById('poojaList');
-    
-    if (items.length === 0) {
-      box.innerHTML = '<p style="color:var(--text-soft);">No poojas added yet. Add one below.</p>';
-      return;
-    }
+    if (items.length === 0) { box.innerHTML = '<p style="color:var(--text-soft);">No poojas added yet.</p>'; return; }
     
     box.innerHTML = items.map(p => `
       <div class="row-item">
@@ -328,34 +292,24 @@ async function loadPoojas() {
         <button class="btn btn-sm btn-danger" onclick="deletePooja('${p._id}')">Remove</button>
       </div>
     `).join('');
-  } catch (e) {
-    console.error("Failed to load Poojas");
-  }
+  } catch (e) {}
 }
 
 async function addPooja() {
   const name = document.getElementById('newPoojaName').value.trim();
   const amount = document.getElementById('newPoojaAmount').value;
-  
-  if (!name || !amount) { 
-    showToast('Please provide both a name and an amount.', true); 
-    return; 
-  }
-  
+  if (!name || !amount) { showToast('Provide name and amount.', true); return; }
   try {
     await fetch('/api/poojas', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
       body: JSON.stringify({ name, amount: Number(amount), order: 0 })
     });
-    
     document.getElementById('newPoojaName').value = '';
     document.getElementById('newPoojaAmount').value = '';
-    showToast('പുതിയ പൂജ ചേർത്തു ✓ (Pooja Added)');
+    showToast('പുതിയ പൂജ ചേർത്തു ✓');
     loadPoojas();
-  } catch (e) {
-    showToast('Failed to add Pooja', true);
-  }
+  } catch (e) {}
 }
 
 async function editPooja(id, name, amount) {
@@ -366,66 +320,40 @@ async function editPooja(id, name, amount) {
       body: JSON.stringify({ name, amount: Number(amount) })
     });
     showToast('Updated successfully ✓');
-  } catch (e) {
-    showToast('Failed to update', true);
-  }
+  } catch (e) {}
 }
 
 async function deletePooja(id) {
-  if (!confirm('Are you sure you want to permanently delete this Pooja?')) return;
-  
+  if (!confirm('Permanently delete this Pooja?')) return;
   try {
-    await fetch(`/api/poojas/${id}`, {
-      method: 'DELETE',
-      headers: { 'Authorization': `Bearer ${token}` }
-    });
+    await fetch(`/api/poojas/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${token}` } });
     showToast('Pooja Removed');
     loadPoojas();
-  } catch (e) {
-    showToast('Failed to delete', true);
-  }
+  } catch (e) {}
 }
 
 async function markDone(id) {
   try {
-    await fetch(`/api/poojas/${id}/done`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
-      body: JSON.stringify({})
-    });
-    showToast('✓ Marked as Done. (Email/Payment triggers will be configured later)');
-  } catch (e) {
-    showToast('Action failed', true);
-  }
+    await fetch(`/api/poojas/${id}/done`, { method: 'PATCH', headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }, body: JSON.stringify({}) });
+    showToast('✓ Marked as Done.');
+  } catch (e) {}
 }
 
-// --- Owner Activity Log Logic ---
 async function loadActivity() {
   try {
-    const res = await fetch('/api/activity', {
-      headers: { 'Authorization': `Bearer ${token}` }
-    });
+    const res = await fetch('/api/activity', { headers: { 'Authorization': `Bearer ${token}` } });
     if (!res.ok) throw new Error();
-    
     const items = await res.json();
     const box = document.getElementById('activityLog');
-    
-    if (items.length === 0) {
-      box.innerHTML = '<p style="color:var(--text-soft);">No activity logged yet.</p>';
-      return;
-    }
+    if (items.length === 0) { box.innerHTML = '<p style="color:var(--text-soft);">No activity logged yet.</p>'; return; }
     
     box.innerHTML = items.map(a => `
       <div class="log-entry">
         <b>${a.user}</b> (${a.role}) <span class="action-tag">${a.action}</span> → ${a.target}
-        <div style="font-size: 11px; margin-top: 4px; opacity: 0.6;">
-          ${new Date(a.timestamp + 'Z').toLocaleString('en-IN')}
-        </div>
+        <div style="font-size: 11px; margin-top: 4px; opacity: 0.6;">${new Date(a.timestamp + 'Z').toLocaleString('en-IN')}</div>
       </div>
     `).join('');
-  } catch (e) {
-    document.getElementById('activityLog').innerHTML = '<p style="color:var(--danger);">Failed to load activity log.</p>';
-  }
+  } catch (e) { document.getElementById('activityLog').innerHTML = '<p style="color:var(--danger);">Failed to load log.</p>'; }
 }
 </script>
 </body>
