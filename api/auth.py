@@ -2,7 +2,7 @@ import os
 import time
 import jwt
 
-JWT_SECRET = os.environ["JWT_SECRET"]
+JWT_SECRET = os.environ.get("JWT_SECRET", "")
 JWT_ALGO = "HS256"
 
 def get_admins():
@@ -22,10 +22,14 @@ def authenticate(username: str, password: str):
     return None
 
 def create_token(username: str, role: str) -> str:
+    if not JWT_SECRET:
+        raise ValueError("JWT_SECRET not configured")
     payload = {"sub": username, "role": role, "iat": int(time.time())}
     return jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGO)
 
 def verify_token(token: str):
+    if not JWT_SECRET:
+        return None
     try:
         return jwt.decode(token, JWT_SECRET, algorithms=[JWT_ALGO])
     except jwt.PyJWTError:
