@@ -1,14 +1,50 @@
-import sys, os
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-
+import sys
+import os
+import traceback
 from datetime import datetime
-from fastapi import FastAPI, HTTPException, Header, Depends
-from mangum import Mangum
+from fastapi import FastAPI, HTTPException, Header, Depends, Request
+from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from bson import ObjectId
-import database
+
+# Ensure Vercel can find your files whether they are in /api or the root folder
+current_dir = os.path.dirname(__file__)
+parent_dir = os.path.dirname(current_dir)
+if current_dir not in sys.path:
+    sys.path.append(current_dir)
+if parent_dir not in sys.path:
+    sys.path.append(parent_dir)
+
 import auth
+import database
 
 app = FastAPI()
+
+# Add CORS so your frontend can communicate without browser blocks
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# ==========================================
+# CRITICAL: GLOBAL ERROR HANDLER
+# If a 500 error happens, this prints the exact cause to the browser!
+# ==========================================
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    print(f"Unhandled Error: {str(exc)}")
+    traceback.print_exc()
+    return JSONResponse(
+        status_code=500,
+        content={
+            "error": "Internal Server Error",
+            "message": str(exc),
+            "type": type(exc).__name__
+        }
+    )
 
 def require_auth(authorization: str = Header(None)):
     if not authorization or not authorization.startswith("Bearer "):
@@ -25,6 +61,7 @@ def require_owner(user=Depends(require_auth)):
     return user
 
 async def log_activity(user, action, target):
+    # Make sure you are using motor (AsyncIOMotorClient) in database.py, not pymongo!
     await database.activity_col.insert_one({
         "user": user["sub"],
         "role": user["role"],
@@ -35,15 +72,21 @@ async def log_activity(user, action, target):
 
 @app.get("/api/health")
 async def health():
-    return {"status": "ok"}
+    return {"status": "ok", "message": "Backend is running!"}
 
 @app.post("/api/login")
 async def login(body: dict):
     username = body.get("username")
     password = body.get("password")
+    
+    if not username or not password:
+        raise HTTPException(400, "Username and password are required")
+        
     role = auth.authenticate(username, password)
     if not role:
         raise HTTPException(401, "Invalid credentials")
+        
+    # If JWT_SECRET is missing in Vercel, auth.create_token will throw an error here!
     token = auth.create_token(username, role)
     return {"token": token, "role": role, "username": username}
 
@@ -113,8 +156,6 @@ async def mark_pooja_done(pooja_id: str, body: dict, user=Depends(require_auth))
     if not pooja:
         raise HTTPException(404, "Pooja not found")
     await log_activity(user, "pooja_done", pooja["name"])
-    # TODO: send email to devotee with details (wire later)
-    # TODO: trigger Razorpay payment confirmation flow (wire later)
     return {"status": "done", "pooja": pooja["name"]}
 
 @app.get("/api/activity")
@@ -132,8 +173,4 @@ async def debug_auth():
         "admin1_user_set": bool(os.environ.get("ADMIN1_USERNAME")),
         "admin1_pass_set": bool(os.environ.get("ADMIN1_PASSWORD")),
         "admin1_role": os.environ.get("ADMIN1_ROLE", "not set"),
-        "admin2_user_set": bool(os.environ.get("ADMIN2_USERNAME")),
-        "admin3_user_set": bool(os.environ.get("ADMIN3_USERNAME")),
     }
-    
-#handler = Mangum(app)
