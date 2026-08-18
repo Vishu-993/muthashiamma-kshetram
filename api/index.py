@@ -136,4 +136,4 @@ async def debug_auth():
         "admin3_user_set": bool(os.environ.get("ADMIN3_USERNAME")),
     }
     
-handler = Mangum(app)
+#handler = Mangum(app)
