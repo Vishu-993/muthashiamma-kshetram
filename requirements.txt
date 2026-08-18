@@ -1,5 +1,4 @@
 fastapi
-mangum
 motor
 dnspython
 pyjwt
