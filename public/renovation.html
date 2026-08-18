@@ -8,7 +8,7 @@
 
 <meta property="og:title" content="ക്ഷേത്ര പുനർനിർമ്മാണം · ശ്രീ മുത്തശ്ശ്യമ്മ ക്ഷേത്രം">
 <meta property="og:description" content="ക്ഷേത്ര പുനർനിർമ്മാണം, തേവാര മഠം, ശ്രീമൂല സ്ഥാനം — സമർപ്പണ വിവരങ്ങൾ.">
-<meta property="og:image" content="https://your-vercel-url.com/app/public/images/main_goddess.jpg">
+<meta property="og:image" content="https://your-vercel-url.com/images/main_goddess.jpg">
 <meta property="og:url" content="https://your-vercel-url.com/renovation">
 <meta property="og:type" content="website">
 
@@ -24,7 +24,7 @@
 
 <div class="topbar">
   <div class="wrap">
-    <span>പൂക്കോം &nbsp;·&nbsp; തലശ്ശേരി &nbsp;·&nbsp; പാനൂർ &nbsp;·&nbsp; കണ്ണൂർ</span>
+    <span data-edit="topbar_location">പൂക്കോം &nbsp;·&nbsp; തലശ്ശേരി &nbsp;·&nbsp; പാനൂർ &nbsp;·&nbsp; കണ്ണൂർ</span>
     <span><a href="tel:9847501188">📞 9847501188</a><span class="sep">|</span><a href="tel:9895124698">9895124698</a></span>
   </div>
 </div>
@@ -37,18 +37,18 @@
         <path d="M20 8c3 4-1 6-1 9a4 4 0 0 0 8 0c0-2-1-3-1-3 2 2 3 5 3 7a9 9 0 1 1-18 0c0-6 5-9 9-13z" fill="#F0D89A"/>
       </svg>
       <span class="name">
-        <span class="mal">മുത്തശ്ശ്യമ്മ</span>
-        <span class="sub">Pookunnath Kattumadam Temple</span>
+        <span class="mal" data-edit="brand_name_ml">മുത്തശ്ശ്യമ്മ</span>
+        <span class="sub" data-edit="brand_name_en">Pookunnath Kattumadam Temple</span>
       </span>
     </a>
     <div class="navlinks" id="navlinks">
-      <a href="/">ഹോം</a>
-      <a href="/history">ചരിത്രം</a>
-      <a href="/renovation" class="active" aria-current="page">പുനരുദ്ധാരണം</a>
-      <a href="/pooja">വഴിപാടുകൾ</a>
-      <a href="/kalari">കളരി</a>
-      <a href="/gallery">ഗാലറി</a>
-      <a href="/contact" class="navcta">ബന്ധപ്പെടാം</a>
+      <a href="/" data-edit="nav_home">ഹോം</a>
+      <a href="/history" data-edit="nav_history">ചരിത്രം</a>
+      <a href="/renovation" class="active" aria-current="page" data-edit="nav_renovation">പുനരുദ്ധാരണം</a>
+      <a href="/pooja" data-edit="nav_pooja">വഴിപാടുകൾ</a>
+      <a href="/kalari" data-edit="nav_kalari">കളരി</a>
+      <a href="/gallery" data-edit="nav_gallery">ഗാലറി</a>
+      <a href="/contact" class="navcta" data-edit="nav_contact">ബന്ധപ്പെടാം</a>
     </div>
     <button class="burger" id="burgerBtn" aria-label="മെനു തുറക്കുക" aria-expanded="false" aria-controls="navlinks">
       <span></span><span></span><span></span>
@@ -57,10 +57,10 @@
   <div class="nav-overlay" id="navOverlay" hidden></div>
   <div class="subnav">
     <div class="subnav-scroll" id="subnav" aria-label="വിഭാഗങ്ങൾ">
-      <a class="pill" data-target="punarudharanam" href="#punarudharanam">ക്ഷേത്ര പുനർനിർമ്മാണം</a>
-      <a class="pill" data-target="thevaramadam" href="#thevaramadam">തേവാര മഠം</a>
-      <a class="pill" data-target="sreemoolam" href="#sreemoolam">ശ്രീമൂല സ്ഥാനം</a>
-      <a class="pill" data-target="orupidimannu" href="#orupidimannu">ഒരുപിടി മണ്ണ്</a>
+      <a class="pill" data-target="punarudharanam" href="#punarudharanam" data-edit="subnav_punarudharanam">ക്ഷേത്ര പുനർനിർമ്മാണം</a>
+      <a class="pill" data-target="thevaramadam" href="#thevaramadam" data-edit="subnav_thevaramadam">തേവാര മഠം</a>
+      <a class="pill" data-target="sreemoolam" href="#sreemoolam" data-edit="subnav_sreemoolam">ശ്രീമൂല സ്ഥാനം</a>
+      <a class="pill" data-target="orupidimannu" href="#orupidimannu" data-edit="subnav_orupidimannu">ഒരുപിടി മണ്ണ്</a>
     </div>
   </div>
 </header>
@@ -69,25 +69,24 @@
   <!-- Page Hero shows the title once -->
   <div class="page-hero reveal in">
     <div class="wrap">
-      <span class="eyebrow">ക്ഷേത്ര പുനർനിർമ്മാണം</span>
-      <h1>ഭക്തർക്കൊപ്പം ഒരു പുതിയ തുടക്കം</h1>
+      <span class="eyebrow" data-edit="renovation_hero_eyebrow">ക്ഷേത്ര പുനർനിർമ്മാണം</span>
+      <h1 data-edit="renovation_hero_title">ഭക്തർക്കൊപ്പം ഒരു പുതിയ തുടക്കം</h1>
     </div>
   </div>
   
 <section id="punarudharanam">
     <div class="wrap">
       <div class="appeal reveal">
-        <!-- Duplicate Title Removed from here -->
-        <div id="dynamic-text-container">
-          <p>എന്നാൽ ക്ഷേത്രം ഇന്ന് പുനരുദ്ധാരണത്തിന്റെ വഴിയിലാണ്. സുമനസ്സുകളായ നാട്ടുകാരുടെയും വിശിഷ്യാ മുത്തശ്ശ്യമ്മയുടെ ഭക്തരായ ആളുകളുടെയും പരിശ്രമത്താൽ ക്ഷേത്രം സ്ഥിതിചെയ്യുന്ന സ്ഥലം ഭാഗികമായി ഏറ്റെടുത്ത് പുനരുദ്ധാരണ പ്രവർത്തികൾ ചെയ്തു വരുന്നു.</p>
-          <p>ക്ഷേത്ര ശ്രീകോവിലിന്റെ പണി ഏകദേശം പൂർത്തിയാക്കാൻ സാധിച്ചിട്ടുണ്ട്. ഒരു വ്യാഴവട്ടം മുൻപ് 2010 ലാണ് നാട്ടുകാരുടെ ആഗ്രഹത്തിന്റെ ഫലമായി പുനരുദ്ധാരണ പ്രവർത്തനങ്ങൾക്ക് തുടക്കമാവുന്നത്. ഈ കാലയളവിൽ ക്ഷേത്ര തിരുമുറ്റത്ത് നടന്ന രണ്ട് അഷ്ടമംഗല്യ പ്രശ്ന ചിന്തയിലും തർക്കങ്ങൾക്ക് വഴിയില്ലാതെ അടിവരയിട്ട് പറഞ്ഞകാര്യം നമ്മളെയെല്ലാം അതീവ വാത്സല്യത്തോടെ സംരക്ഷിച്ച് പോകുന്ന മുത്തശ്ശ്യമ്മയെന്ന ഭക്തവത്സലയായ ദേവി ചൈതന്യത്തെ താമസം വിനാ യഥാവിധി പുനഃപ്രതിഷ്ഠ നടത്തി നാടിനെ സംരക്ഷിക്കണം എന്നാണ്.</p>
-          <p>പാട്ടുപുര സമ്പ്രദായത്തിലാണ് ക്ഷേത്ര ശ്രീകോവിൽ നിർമ്മാണം നടക്കുന്നത്. ഉദ്ദേശിക്കുന്ന രീതിയിൽ ശ്രീകോവിൽ നിർമ്മാണം നടക്കുന്നതോടെ സമീപ പ്രദേശങ്ങളിൽ ഒന്നും തന്നെ ഇല്ലാത്ത ശില്പ ഭംഗിയുള്ള ശ്രീകോവിൽ നമുക്ക് ദർശിക്കാനാവും.</p>
+        <div>
+          <p data-edit="renovation_p1">എന്നാൽ ക്ഷേത്രം ഇന്ന് പുനരുദ്ധാരണത്തിന്റെ വഴിയിലാണ്. സുമനസ്സുകളായ നാട്ടുകാരുടെയും വിശിഷ്യാ മുത്തശ്ശ്യമ്മയുടെ ഭക്തരായ ആളുകളുടെയും പരിശ്രമത്താൽ ക്ഷേത്രം സ്ഥിതിചെയ്യുന്ന സ്ഥലം ഭാഗികമായി ഏറ്റെടുത്ത് പുനരുദ്ധാരണ പ്രവർത്തികൾ ചെയ്തു വരുന്നു.</p>
+          <p data-edit="renovation_p2">ക്ഷേത്ര ശ്രീകോവിലിന്റെ പണി ഏകദേശം പൂർത്തിയാക്കാൻ സാധിച്ചിട്ടുണ്ട്. ഒരു വ്യാഴവട്ടം മുൻപ് 2010 ലാണ് നാട്ടുകാരുടെ ആഗ്രഹത്തിന്റെ ഫലമായി പുനരുദ്ധാരണ പ്രവർത്തനങ്ങൾക്ക് തുടക്കമാവുന്നത്. ഈ കാലയളവിൽ ക്ഷേത്ര തിരുമുറ്റത്ത് നടന്ന രണ്ട് അഷ്ടമംഗല്യ പ്രശ്ന ചിന്തയിലും തർക്കങ്ങൾക്ക് വഴിയില്ലാതെ അടിവരയിട്ട് പറഞ്ഞകാര്യം നമ്മളെയെല്ലാം അതീവ വാത്സല്യത്തോടെ സംരക്ഷിച്ച് പോകുന്ന മുത്തശ്ശ്യമ്മയെന്ന ഭക്തവത്സലയായ ദേവി ചൈതന്യത്തെ താമസം വിനാ യഥാവിധി പുനഃപ്രതിഷ്ഠ നടത്തി നാടിനെ സംരക്ഷിക്കണം എന്നാണ്.</p>
+          <p data-edit="renovation_p3">പാട്ടുപുര സമ്പ്രദായത്തിലാണ് ക്ഷേത്ര ശ്രീകോവിൽ നിർമ്മാണം നടക്കുന്നത്. ഉദ്ദേശിക്കുന്ന രീതിയിൽ ശ്രീകോവിൽ നിർമ്മാണം നടക്കുന്നതോടെ സമീപ പ്രദേശങ്ങളിൽ ഒന്നും തന്നെ ഇല്ലാത്ത ശില്പ ഭംഗിയുള്ള ശ്രീകോവിൽ നമുക്ക് ദർശിക്കാനാവും.</p>
         </div>
         <div class="appeal-right">
-          <img src="/app/public/images/temple_reconstruction.jpg" alt="പുനരുദ്ധാരണം" class="img-fluid img-skeleton" style="border-radius: 50%; width: 200px; height: 200px; border: 4px solid #33080D;" loading="lazy" decoding="async" onload="this.classList.remove('img-skeleton')" onerror="this.remove();">
+          <img src="/images/temple_reconstruction.jpg" alt="പുനരുദ്ധാരണം" class="img-fluid img-skeleton" style="border-radius: 50%; width: 200px; height: 200px; border: 4px solid #33080D;" loading="lazy" decoding="async" onload="this.classList.remove('img-skeleton')" onerror="this.remove();">
         </div>
       </div>
-      <div class="cta-row" style="margin-top:20px;justify-content:center;"><a href="/contact" class="btn btn-primary">നിർമ്മാണ സഹായം നൽകാൻ ബന്ധപ്പെടുക</a></div>
+      <div class="cta-row" style="margin-top:20px;justify-content:center;"><a href="/contact" class="btn btn-primary" data-edit="renovation_cta_btn">നിർമ്മാണ സഹായം നൽകാൻ ബന്ധപ്പെടുക</a></div>
     </div>
   </section>
 </main>
@@ -95,17 +94,17 @@
 <footer>
   <div class="wrap foot-grid">
     <div>
-      <h3>മുത്തശ്ശ്യമ്മ</h3>
-      <p class="fname">ശ്രീ പൂകുന്നത്ത് കാട്ടുമാടം മുത്തശ്ശ്യമ്മ ക്ഷേത്രം · പൂക്കോത്ത് മഠം<br>പൂക്കോം, തലശ്ശേരി, കണ്ണൂർ</p>
+      <h3 data-edit="footer_brand">മുത്തശ്ശ്യമ്മ</h3>
+      <p class="fname" data-edit="footer_address">ശ്രീ പൂകുന്നത്ത് കാട്ടുമാടം മുത്തശ്ശ്യമ്മ ക്ഷേത്രം · പൂക്കോത്ത് മഠം<br>പൂക്കോം, തലശ്ശേരി, കണ്ണൂർ</p>
     </div>
     <div class="foot-links">
-      <a href="/history">ചരിത്രം</a>
-      <a href="/renovation">പുനരുദ്ധാരണം</a>
-      <a href="/kalari">കളരി</a>
-      <a href="/contact">സമ്പർക്കം</a>
+      <a href="/history" data-edit="nav_history">ചരിത്രം</a>
+      <a href="/renovation" data-edit="nav_renovation">പുനരുദ്ധാരണം</a>
+      <a href="/kalari" data-edit="nav_kalari">കളരി</a>
+      <a href="/contact" data-edit="nav_contact">സമ്പർക്കം</a>
     </div>
   </div>
-  <div class="foot-bottom">© 2026 ശ്രീ പൂകുന്നത്ത് കാട്ടുമാടം മുത്തശ്ശ്യമ്മ ക്ഷേത്രം</div>
+  <div class="foot-bottom" data-edit="footer_copyright">© 2026 ശ്രീ പൂകുന്നത്ത് കാട്ടുമാടം മുത്തശ്ശ്യമ്മ ക്ഷേത്രം</div>
 </footer>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
