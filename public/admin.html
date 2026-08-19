@@ -112,6 +112,9 @@
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
   .toast.error { background: var(--danger); color: #fff; }
 
+  .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.2); border-top-color: var(--bg-base); border-radius: 50%; animation: spin 0.6s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
   @media (max-width: 900px) {
     body { overflow: auto; }
     .main-layout { flex-direction: column; overflow: visible; }
@@ -152,6 +155,8 @@
       <div class="nav-item" data-tab="content" onclick="switchPage('history', 'ചരിത്രം (History)')">ചരിത്രം (History)</div>
       <div class="nav-item" data-tab="content" onclick="switchPage('renovation', 'പുനരുദ്ധാരണം (Renovation)')">പുനരുദ്ധാരണം (Renovation)</div>
       <div class="nav-item" data-tab="content" onclick="switchPage('kalari', 'കളരി (Kalari)')">കളരി (Kalari)</div>
+      <div class="nav-item" data-tab="content" onclick="switchPage('gallery', 'ഗാലറി (Gallery)')">ഗാലറി (Gallery)</div>
+      <div class="nav-item" data-tab="content" onclick="switchPage('contact', 'സമ്പർക്കം (Contact)')">സമ്പർക്കം (Contact)</div>
       <div class="nav-item" data-tab="pooja" onclick="showPanel('panel-pooja')">വഴിപാടുകൾ (Poojas)</div>
       <div class="nav-item" id="ownerNav" style="display:none;" data-tab="owner" onclick="showPanel('panel-owner')">Activity Log</div>
     </div>
@@ -235,6 +240,7 @@ function showApp() {
 
 if (token) showApp();
 
+// --- UPGRADED LOGIN FUNCTION WITH ADVANCED ERROR CATCHING ---
 async function login() {
   const u = document.getElementById('username').value.trim();
   const p = document.getElementById('password').value;
@@ -242,23 +248,56 @@ async function login() {
   const btn = document.getElementById('loginBtn');
   errBox.classList.remove('show');
 
-  if (!u || !p) { errBox.textContent = 'Please enter credentials'; errBox.classList.add('show'); return; }
+  if (!u || !p) { 
+    errBox.textContent = 'Please enter credentials'; 
+    errBox.classList.add('show'); 
+    return; 
+  }
 
   btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Logging in...';
+
   try {
     const res = await fetch('/api/login', {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      method: 'POST', 
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: u, password: p })
     });
 
-    if (!res.ok) throw new Error(res.status === 401 ? 'Invalid credentials' : 'Login failed');
+    if (!res.ok) {
+      let errorDetail = `Server Error (${res.status})`;
+      try {
+        const errData = await res.json();
+        errorDetail = errData.detail || errData.message || errData.error || errorDetail;
+      } catch (e) {
+        console.warn("Could not read error JSON.");
+      }
+      throw new Error(errorDetail);
+    }
+
     const data = await res.json();
-    token = data.token; role = data.role; username = data.username;
-    localStorage.setItem('admin_token', token); localStorage.setItem('admin_role', role); localStorage.setItem('admin_username', username);
+    
+    if (!data.token) {
+        throw new Error("Backend did not return an access token.");
+    }
+
+    token = data.token; 
+    role = data.role || 'admin'; 
+    username = data.username || u;
+    
+    localStorage.setItem('admin_token', token); 
+    localStorage.setItem('admin_role', role); 
+    localStorage.setItem('admin_username', username);
     showApp();
+    
   } catch (e) {
-    errBox.textContent = e.message || 'Network error'; errBox.classList.add('show');
-  } finally { btn.disabled = false; }
+    console.error("Login Error:", e);
+    errBox.textContent = e.message || 'Network error — check connection'; 
+    errBox.classList.add('show');
+  } finally { 
+    btn.disabled = false;
+    btn.textContent = 'Sign In';
+  }
 }
 
 function logout() { localStorage.clear(); location.reload(); }
@@ -287,7 +326,6 @@ function switchPage(pageKey, title) {
 }
 
 // --- Explicit Front-End Logging ---
-// This function forces an entry into the Activity Log manually
 async function logAdminAction(actionName, targetName) {
   try {
     await fetch('/api/activity', {
@@ -390,9 +428,7 @@ async function saveCurrentContent() {
     if(res.status === 401) return handleUnauthorized();
     if (!res.ok) throw new Error();
     
-    // Explicitly Log the Save Action
     await logAdminAction("Saved Content", currentPage.toUpperCase());
-    
     showToast(`${currentPage.toUpperCase()} Content Saved ✓`);
   } catch (e) {
     showToast('Failed to save content', true);
@@ -427,7 +463,6 @@ async function addPooja() {
   });
   if(res.status === 401) return handleUnauthorized();
   
-  // Explicitly log adding the pooja
   await logAdminAction("Added Pooja", name);
 
   document.getElementById('newPoojaName').value = ''; document.getElementById('newPoojaAmount').value = '';
@@ -441,9 +476,7 @@ async function editPooja(id, name, amount) {
   });
   if(res.status === 401) return handleUnauthorized();
   
-  // Explicitly log editing the pooja
   await logAdminAction("Edited Pooja", name);
-  
   showToast('Updated ✓');
 }
 
@@ -452,9 +485,7 @@ async function deletePooja(id, name) {
   const res = await fetch('/api/poojas/' + id, { method: 'DELETE', headers: { 'Authorization': 'Bearer ' + token }});
   if(res.status === 401) return handleUnauthorized();
   
-  // Explicitly log deleting the pooja
   await logAdminAction("Deleted Pooja", name || "ID: " + id);
-  
   showToast('Deleted'); loadPoojas();
 }
 
