@@ -7,58 +7,30 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Malayalam:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg-base: #09090b; /* Zinc 950 */
-    --bg-panel: #18181b; /* Zinc 900 */
-    --bg-card: #27272a; /* Zinc 800 */
-    --border: #3f3f46; /* Zinc 700 */
-    --text-main: #f4f4f5; /* Zinc 100 */
-    --text-muted: #a1a1aa; /* Zinc 400 */
-    --accent: #ffffff;
-    --accent-invert: #000000;
-    --danger: #ef4444;
-    --success: #22c55e;
+    --bg-base: #09090b; --bg-panel: #18181b; --bg-card: #27272a;
+    --border: #3f3f46; --text-main: #f4f4f5; --text-muted: #a1a1aa;
+    --accent: #ffffff; --accent-invert: #000000; --danger: #ef4444; --success: #22c55e;
     --shadow-lg: 0 20px 40px rgba(0,0,0,0.8);
     --transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
   }
 
   * { box-sizing: border-box; }
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg-base);
-    color: var(--text-main);
-    margin: 0;
-    min-height: 100vh;
-    overflow: hidden; 
-  }
+  body { font-family: 'Inter', sans-serif; background: var(--bg-base); color: var(--text-main); margin: 0; min-height: 100vh; overflow: hidden; }
   .mal { font-family: 'Noto Serif Malayalam', serif; }
 
   @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
   
   /* --- Login Screen --- */
-  .login-wrap {
-    position: fixed; inset: 0; z-index: 100;
-    background: var(--bg-base); display: flex; align-items: center; justify-content: center;
-    padding: 20px; animation: fadeIn 0.5s ease;
-  }
-  .login-card {
-    background: var(--bg-panel); border: 1px solid var(--border);
-    border-radius: 16px; padding: 48px 40px; max-width: 400px; width: 100%; box-shadow: var(--shadow-lg);
-  }
+  .login-wrap { position: fixed; inset: 0; z-index: 100; background: var(--bg-base); display: flex; align-items: center; justify-content: center; padding: 20px; animation: fadeIn 0.5s ease; }
+  .login-card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 16px; padding: 48px 40px; max-width: 400px; width: 100%; box-shadow: var(--shadow-lg); }
   .login-card h1 { font-size: 24px; margin: 0 0 8px; font-weight: 600; letter-spacing: -0.5px; }
   .login-card p.sub { color: var(--text-muted); font-size: 14px; margin: 0 0 32px; }
   
   label { display: block; font-size: 11px; color: var(--text-muted); margin: 16px 0 8px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
-  input {
-    width: 100%; padding: 14px 16px; border-radius: 10px;
-    border: 1px solid var(--border); background: var(--bg-base);
-    color: var(--text-main); font-size: 15px; outline: none; transition: var(--transition);
-  }
+  input { width: 100%; padding: 14px 16px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg-base); color: var(--text-main); font-size: 15px; outline: none; transition: var(--transition); }
   input:focus { border-color: var(--accent); background: var(--bg-card); box-shadow: 0 0 0 3px rgba(255,255,255,0.1); }
 
-  .btn {
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 24px; border-radius: 10px; border: 1px solid var(--accent);
-    background: var(--accent); color: var(--accent-invert); font-weight: 600; font-size: 14px; cursor: pointer; transition: var(--transition);
-  }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 24px; border-radius: 10px; border: 1px solid var(--accent); background: var(--accent); color: var(--accent-invert); font-weight: 600; font-size: 14px; cursor: pointer; transition: var(--transition); }
   .btn:hover { background: transparent; color: var(--accent); }
   .btn:active { transform: scale(0.97); }
   .btn:disabled { opacity: 0.5; cursor: not-allowed; }
@@ -67,17 +39,12 @@
   .btn-danger:hover { background: var(--danger); color: #fff; }
   .btn-sm { padding: 8px 16px; font-size: 12px; border-radius: 8px; }
 
-  .error-box {
-    margin-top: 16px; padding: 12px; border: 1px solid var(--danger); background: rgba(239, 68, 68, 0.1);
-    border-radius: 8px; color: var(--danger); font-size: 13px; display: none; text-align: center;
-  }
+  .error-box { margin-top: 16px; padding: 12px; border: 1px solid var(--danger); background: rgba(239, 68, 68, 0.1); border-radius: 8px; color: var(--danger); font-size: 13px; display: none; text-align: center; }
   .error-box.show { display: block; }
 
   /* --- Dashboard Layout --- */
   .app { display: none; height: 100vh; flex-direction: column; }
-  .topbar {
-    background: var(--bg-panel); border-bottom: 1px solid var(--border); height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; flex-shrink: 0;
-  }
+  .topbar { background: var(--bg-panel); border-bottom: 1px solid var(--border); height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 24px; flex-shrink: 0; }
   .topbar h1 { font-size: 18px; margin: 0; font-weight: 600; }
   .topbar .who { font-size: 13px; color: var(--text-muted); display: flex; align-items: center; gap: 16px; }
   .role-badge { padding: 4px 10px; border-radius: 20px; font-size: 10px; text-transform: uppercase; background: var(--bg-card); color: var(--text-main); font-weight: 700; border: 1px solid var(--border); }
@@ -144,9 +111,6 @@
   .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--text-main); color: var(--bg-base); font-weight: 600; padding: 14px 28px; border-radius: 30px; font-size: 14px; opacity: 0; pointer-events: none; transition: var(--transition); z-index: 1000; box-shadow: 0 10px 30px rgba(255,255,255,0.1); }
   .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
   .toast.error { background: var(--danger); color: #fff; }
-
-  .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.2); border-top-color: var(--bg-base); border-radius: 50%; animation: spin 0.6s linear infinite; }
-  @keyframes spin { to { transform: rotate(360deg); } }
 
   @media (max-width: 900px) {
     body { overflow: auto; }
@@ -322,6 +286,20 @@ function switchPage(pageKey, title) {
   document.getElementById('live-frame').src = route;
 }
 
+// --- Explicit Front-End Logging ---
+// This function forces an entry into the Activity Log manually
+async function logAdminAction(actionName, targetName) {
+  try {
+    await fetch('/api/activity', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token },
+      body: JSON.stringify({ user: username, role: role, action: actionName, target: targetName })
+    });
+  } catch (err) {
+    console.warn("Could not log activity explicitly", err);
+  }
+}
+
 // Fetch all DB dictionaries
 async function fetchAllContent() {
   const pages = ['index', 'history', 'renovation', 'kalari', 'gallery', 'contact'];
@@ -330,8 +308,6 @@ async function fetchAllContent() {
       const res = await fetch('/api/content/' + page);
       if(res.status === 401) return handleUnauthorized();
       const data = await res.json();
-      
-      // Safety check in case the database is using old string format
       if (data.data && typeof data.data === 'object' && !data.data.text) {
         contentCache[page] = data.data; 
       } else {
@@ -341,7 +317,6 @@ async function fetchAllContent() {
   }
 }
 
-// AUTO-DISCOVERY: Fires when the Iframe loads the front-end page
 function iframeLoaded() {
   const iframe = document.getElementById('live-frame');
   if (!iframe.contentWindow) return;
@@ -359,16 +334,14 @@ function iframeLoaded() {
 
     editableElements.forEach(el => {
       const key = el.getAttribute('data-edit');
-      const originalHTML = el.innerHTML.trim(); // Grab original Malayalam text
+      const originalHTML = el.innerHTML.trim();
       
-      // Inject DB value if it exists, otherwise keep original
       let currentValue = originalHTML;
       if (contentCache[currentPage] && contentCache[currentPage][key]) {
         currentValue = contentCache[currentPage][key];
-        el.innerHTML = currentValue; // Sync to live preview immediately
+        el.innerHTML = currentValue;
       }
 
-      // Generate the Editor Input Box
       const div = document.createElement('div');
       div.className = 'field-group';
       div.innerHTML = `
@@ -387,7 +360,6 @@ function iframeLoaded() {
   }
 }
 
-// Live typing sync
 function syncSingleField(key, value) {
   const iframe = document.getElementById('live-frame');
   if (!iframe.contentWindow) return;
@@ -417,6 +389,10 @@ async function saveCurrentContent() {
     });
     if(res.status === 401) return handleUnauthorized();
     if (!res.ok) throw new Error();
+    
+    // Explicitly Log the Save Action
+    await logAdminAction("Saved Content", currentPage.toUpperCase());
+    
     showToast(`${currentPage.toUpperCase()} Content Saved ✓`);
   } catch (e) {
     showToast('Failed to save content', true);
@@ -435,7 +411,7 @@ async function loadPoojas() {
       <input class="p-name" value="${p.name}" onchange="editPooja('${p._id}', this.value, ${p.amount})">
       <input type="number" class="p-amt" value="${p.amount}" onchange="editPooja('${p._id}', '${p.name}', this.value)">
       <button class="btn btn-sm" onclick="markDone('${p._id}')">Mark Done</button>
-      <button class="btn btn-sm btn-danger" onclick="deletePooja('${p._id}')">Delete</button>
+      <button class="btn btn-sm btn-danger" onclick="deletePooja('${p._id}', '${p.name}')">Delete</button>
     </div>
   `).join('');
 }
@@ -451,6 +427,9 @@ async function addPooja() {
   });
   if(res.status === 401) return handleUnauthorized();
   
+  // Explicitly log adding the pooja
+  await logAdminAction("Added Pooja", name);
+
   document.getElementById('newPoojaName').value = ''; document.getElementById('newPoojaAmount').value = '';
   showToast('Pooja added ✓'); loadPoojas();
 }
@@ -461,13 +440,21 @@ async function editPooja(id, name, amount) {
     body: JSON.stringify({ name, amount: Number(amount) })
   });
   if(res.status === 401) return handleUnauthorized();
+  
+  // Explicitly log editing the pooja
+  await logAdminAction("Edited Pooja", name);
+  
   showToast('Updated ✓');
 }
 
-async function deletePooja(id) {
+async function deletePooja(id, name) {
   if (!confirm('Delete this pooja permanently?')) return;
   const res = await fetch('/api/poojas/' + id, { method: 'DELETE', headers: { 'Authorization': 'Bearer ' + token }});
   if(res.status === 401) return handleUnauthorized();
+  
+  // Explicitly log deleting the pooja
+  await logAdminAction("Deleted Pooja", name || "ID: " + id);
+  
   showToast('Deleted'); loadPoojas();
 }
 
@@ -477,6 +464,8 @@ async function markDone(id) {
     body: JSON.stringify({})
   });
   if(res.status === 401) return handleUnauthorized();
+  
+  await logAdminAction("Marked Done", "Pooja ID: " + id);
   showToast('Marked as completed');
 }
 
