@@ -83,14 +83,14 @@ document.addEventListener("DOMContentLoaded", () => {
     sections.forEach(section => sectionObserver.observe(section));
 
     // ==========================================
-    // DYNAMIC CONTENT INJECTION 
+    // NEW DYNAMIC DICTIONARY INJECTION SYSTEM 
     // ==========================================
     
     async function loadDynamicText() {
         let currentPage = 'index'; 
         const path = window.location.pathname;
 
-        // Updated routing logic for Clean URLs (supporting both formats)
+        // Routing logic for Clean URLs (supporting both formats)
         if (path.includes('/history') || path.includes('history.html')) currentPage = 'history';
         else if (path.includes('/renovation') || path.includes('renovation.html')) currentPage = 'renovation';
         else if (path.includes('/kalari') || path.includes('kalari.html')) currentPage = 'kalari';
@@ -98,28 +98,32 @@ document.addEventListener("DOMContentLoaded", () => {
         else if (path.includes('/contact') || path.includes('contact.html')) currentPage = 'contact';
         else currentPage = 'index'; // Defaults to root
 
-        const contentContainer = document.getElementById('dynamic-text-container');
-        
-        if (contentContainer) {
-            try {
-                const res = await fetch(`/api/content/${currentPage}`);
-                if (res.ok) {
-                    const dbData = await res.json();
-                    if (dbData.data && dbData.data.text) {
-                        const formattedText = dbData.data.text
-                            .split('\n')
-                            .filter(p => p.trim() !== '')
-                            .map(p => `<p style="font-size:16.5px;line-height:1.95;color:var(--ink-soft);margin-bottom:16px;">${p}</p>`)
-                            .join('');
-                        contentContainer.innerHTML = formattedText;
-                    }
+        try {
+            const res = await fetch(`/api/content/${currentPage}`);
+            if (res.ok) {
+                const dbData = await res.json();
+                const content = dbData.data || {};
+
+                // Ensure the content is an object (dictionary format)
+                if (typeof content === 'object') {
+                    // Find ALL elements on the page that have a "data-edit" attribute
+                    // and replace their text with the corrected text from the Admin Panel
+                    Object.keys(content).forEach(key => {
+                        const el = document.querySelector(`[data-edit="${key}"]`);
+                        if (el) {
+                            el.innerHTML = content[key];
+                        }
+                    });
                 }
-            } catch (err) {
-                console.warn("Could not load dynamic text.", err);
             }
+        } catch (err) {
+            console.warn("Could not load dynamic text dictionary.", err);
         }
     }
 
+    // ==========================================
+    // DYNAMIC POOJAS INJECTION
+    // ==========================================
     async function loadDynamicPoojas() {
         const poojaTableBody = document.getElementById('dynamic-pooja-table');
         if (poojaTableBody) {
@@ -127,13 +131,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 const res = await fetch('/api/poojas');
                 if (res.ok) {
                     const poojas = await res.json();
-                    if (poojas.length > 0) {
-                        poojaTableBody.innerHTML = poojas.map(p => `
+                    if (poojas && poojas.length > 0) {
+                        
+                        // FIX: We use insertAdjacentHTML so we APPEND the new poojas 
+                        // to the bottom of the table without deleting the original ones!
+                        const dynamicRows = poojas.map(p => `
                             <tr>
                                 <td>${p.name}</td>
                                 <td>${p.amount}</td>
                             </tr>
                         `).join('');
+                        
+                        poojaTableBody.insertAdjacentHTML('beforeend', dynamicRows);
                     }
                 }
             } catch (err) {
@@ -142,6 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    // Initialize both data fetches
     loadDynamicText();
     loadDynamicPoojas();
 });
