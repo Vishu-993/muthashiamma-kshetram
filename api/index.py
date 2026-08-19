@@ -7,13 +7,10 @@ from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from bson import ObjectId
 
-# Ensure Vercel can find your files whether they are in /api or the root folder
+# Simple directory resolution (No parent_dir hacks needed since files are in /api)
 current_dir = os.path.dirname(__file__)
-parent_dir = os.path.dirname(current_dir)
 if current_dir not in sys.path:
     sys.path.append(current_dir)
-if parent_dir not in sys.path:
-    sys.path.append(parent_dir)
 
 import auth
 import database
@@ -30,8 +27,7 @@ app.add_middleware(
 )
 
 # ==========================================
-# CRITICAL: GLOBAL ERROR HANDLER
-# If a 500 error happens, this prints the exact cause to the browser!
+# GLOBAL ERROR HANDLER
 # ==========================================
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
@@ -61,7 +57,7 @@ def require_owner(user=Depends(require_auth)):
     return user
 
 async def log_activity(user, action, target):
-    # Make sure you are using motor (AsyncIOMotorClient) in database.py, not pymongo!
+    # Make sure you are using motor (AsyncIOMotorClient) in database.py
     await database.activity_col.insert_one({
         "user": user["sub"],
         "role": user["role"],
@@ -86,7 +82,6 @@ async def login(body: dict):
     if not role:
         raise HTTPException(401, "Invalid credentials")
         
-    # If JWT_SECRET is missing in Vercel, auth.create_token will throw an error here!
     token = auth.create_token(username, role)
     return {"token": token, "role": role, "username": username}
 
@@ -105,7 +100,7 @@ async def update_content(page: str, body: dict, user=Depends(require_auth)):
         {"$set": {"data": data, "updated_by": user["sub"], "updated_at": datetime.utcnow()}},
         upsert=True
     )
-    await log_activity(user, "update_content", page)
+    # The frontend already pushes an explicit log, but keeping this as a fallback is good practice
     return {"status": "saved"}
 
 @app.get("/api/poojas")
@@ -126,7 +121,6 @@ async def add_pooja(body: dict, user=Depends(require_auth)):
         "updated_at": datetime.utcnow()
     }
     result = await database.poojas_col.insert_one(doc)
-    await log_activity(user, "add_pooja", body.get("name"))
     return {"_id": str(result.inserted_id)}
 
 @app.put("/api/poojas/{pooja_id}")
@@ -141,13 +135,11 @@ async def edit_pooja(pooja_id: str, body: dict, user=Depends(require_auth)):
             "updated_at": datetime.utcnow()
         }}
     )
-    await log_activity(user, "edit_pooja", pooja_id)
     return {"status": "updated"}
 
 @app.delete("/api/poojas/{pooja_id}")
 async def delete_pooja(pooja_id: str, user=Depends(require_auth)):
     await database.poojas_col.delete_one({"_id": ObjectId(pooja_id)})
-    await log_activity(user, "delete_pooja", pooja_id)
     return {"status": "deleted"}
 
 @app.patch("/api/poojas/{pooja_id}/done")
@@ -155,8 +147,16 @@ async def mark_pooja_done(pooja_id: str, body: dict, user=Depends(require_auth))
     pooja = await database.poojas_col.find_one({"_id": ObjectId(pooja_id)})
     if not pooja:
         raise HTTPException(404, "Pooja not found")
-    await log_activity(user, "pooja_done", pooja["name"])
     return {"status": "done", "pooja": pooja["name"]}
+
+# --- NEW: Added POST route to handle Explicit Logs from Admin Panel ---
+@app.post("/api/activity")
+async def create_activity(body: dict, user=Depends(require_owner)):
+    action = body.get("action")
+    target = body.get("target")
+    if action and target:
+        await log_activity(user, action, target)
+    return {"status": "logged"}
 
 @app.get("/api/activity")
 async def get_activity(user=Depends(require_owner)):
